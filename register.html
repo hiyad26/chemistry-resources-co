@@ -4,383 +4,472 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Create Account | Chemistry Resources Co.</title>
+<title>Create Account — Chemistry Resources Co.</title>
 
 <style>
+:root{
+  --pink:#d94f83;
+  --pink-dark:#a93664;
+  --pink-soft:#f5d2df;
+  --pink-pale:#fff0f5;
+  --cream:#fffaf4;
+  --white:#ffffff;
+  --brown:#3d2930;
+  --muted:#866f77;
+  --border:#ead8dc;
+  --shadow:0 25px 65px rgba(105,48,70,.13);
+}
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-:root{
-  --bg:#07111f;
-  --card:#102238;
-  --text:#f5f9ff;
-  --muted:#9db0c7;
-  --primary:#55d6ff;
-  --green:#55e6a5;
-  --border:rgba(255,255,255,.09);
-}
-
 body{
   min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
-  color:var(--text);
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
-    radial-gradient(circle at 50% 8%,rgba(85,214,255,.13),transparent 32%),
-    radial-gradient(circle at 10% 80%,rgba(139,124,255,.08),transparent 30%),
-    var(--bg);
-  display:flex;
-  flex-direction:column;
+    radial-gradient(circle at 15% 15%,rgba(217,79,131,.12),transparent 28%),
+    linear-gradient(145deg,#fffaf4,#fff1ec);
+  color:var(--brown);
 }
 
-header{
-  border-bottom:1px solid var(--border);
-  background:rgba(7,17,31,.88);
-  backdrop-filter:blur(18px);
+a{
+  color:inherit;
+  text-decoration:none;
 }
 
-.nav{
-  max-width:1200px;
-  width:100%;
-  margin:auto;
-  padding:15px 20px;
+button,
+input{
+  font:inherit;
+}
+
+/* =========================
+   ATOMIC STRUCTURE
+========================= */
+
+.atom{
+  position:relative;
+  width:150px;
+  height:150px;
+}
+
+.atom .nucleus{
+  position:absolute;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:var(--pink);
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:
+    0 0 0 9px rgba(217,79,131,.12),
+    0 0 35px rgba(217,79,131,.28);
+}
+
+.atom .orbit{
+  position:absolute;
+  inset:12px 0;
+  border:3px solid var(--pink);
+  border-radius:50%;
+}
+
+.atom .orbit.one{
+  transform:rotate(60deg);
+}
+
+.atom .orbit.two{
+  transform:rotate(-60deg);
+}
+
+.atom .electron{
+  position:absolute;
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  background:var(--pink-dark);
+}
+
+.atom .e1{
+  top:5px;
+  left:69px;
+}
+
+.atom .e2{
+  right:5px;
+  bottom:35px;
+}
+
+.atom .e3{
+  left:5px;
+  bottom:35px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.topbar{
+  height:76px;
+  padding:0 6%;
   display:flex;
   align-items:center;
   justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  background:rgba(255,250,244,.9);
+  backdrop-filter:blur(15px);
 }
 
-.logo{
+.brand{
   display:flex;
   align-items:center;
-  gap:10px;
-  color:white;
-  text-decoration:none;
+  gap:12px;
+  font-weight:900;
+  font-size:17px;
+}
+
+.brand-atom{
+  width:44px;
+  height:44px;
+}
+
+.brand-atom .orbit{
+  inset:5px 1px;
+  border-width:2px;
+}
+
+.brand-atom .nucleus{
+  width:10px;
+  height:10px;
+}
+
+.brand-atom .electron{
+  width:5px;
+  height:5px;
+}
+
+.brand-atom .e1{
+  top:1px;
+  left:20px;
+}
+
+.brand-atom .e2{
+  right:1px;
+  bottom:10px;
+}
+
+.brand-atom .e3{
+  left:1px;
+  bottom:10px;
+}
+
+.back-link{
+  color:var(--pink-dark);
+  font-size:14px;
   font-weight:800;
 }
 
-.logo-atom{
-  width:38px;
-  height:38px;
-  border:2px solid var(--primary);
-  border-radius:50%;
-  position:relative;
-  display:grid;
-  place-items:center;
-  box-shadow:0 0 18px rgba(85,214,255,.3);
+.back-link:hover{
+  text-decoration:underline;
 }
 
-.logo-atom:before,
-.logo-atom:after{
-  content:"";
-  position:absolute;
-  width:48px;
-  height:18px;
-  border:1px solid rgba(85,214,255,.7);
-  border-radius:50%;
-}
+/* =========================
+   PAGE
+========================= */
 
-.logo-atom:before{
-  transform:rotate(60deg);
-}
-
-.logo-atom:after{
-  transform:rotate(-60deg);
-}
-
-.logo-core{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--primary);
-  box-shadow:0 0 12px var(--primary);
-}
-
-.back{
-  color:var(--muted);
-  text-decoration:none;
-  font-size:14px;
-}
-
-.back:hover{
-  color:var(--primary);
-}
-
-main{
-  flex:1;
-  display:flex;
-  justify-content:center;
-  align-items:center;
+.page{
+  min-height:calc(100vh - 76px);
   padding:45px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.wrapper{
-  width:100%;
-  max-width:480px;
+.layout{
+  width:1080px;
+  max-width:100%;
+  display:grid;
+  grid-template-columns:1fr 450px;
+  gap:65px;
+  align-items:center;
 }
+
+/* =========================
+   INTRO
+========================= */
+
+.intro{
+  padding:20px 0;
+}
+
+.intro .atom{
+  margin-bottom:25px;
+}
+
+.eyebrow{
+  color:var(--pink-dark);
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+.intro h1{
+  font-size:clamp(42px,5vw,64px);
+  line-height:1;
+  letter-spacing:-.05em;
+  margin-bottom:20px;
+}
+
+.intro h1 span{
+  color:var(--pink);
+}
+
+.intro p{
+  max-width:530px;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.75;
+}
+
+/* =========================
+   CARD
+========================= */
 
 .card{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(16,34,56,.98),
-      rgba(9,25,43,.98)
-    );
+  background:var(--white);
   border:1px solid var(--border);
-  border-radius:24px;
+  border-radius:27px;
   padding:34px;
-  box-shadow:0 25px 80px rgba(0,0,0,.3);
+  box-shadow:var(--shadow);
 }
 
-.atom{
-  width:68px;
-  height:68px;
-  margin:0 auto 20px;
-  border:2px solid var(--primary);
-  border-radius:50%;
-  position:relative;
-  display:grid;
-  place-items:center;
-  box-shadow:0 0 25px rgba(85,214,255,.25);
-}
-
-.atom:before,
-.atom:after{
-  content:"";
-  position:absolute;
-  width:82px;
-  height:28px;
-  border:1px solid rgba(85,214,255,.6);
-  border-radius:50%;
-}
-
-.atom:before{
-  transform:rotate(60deg);
-}
-
-.atom:after{
-  transform:rotate(-60deg);
-}
-
-.atom-core{
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  background:var(--primary);
-  box-shadow:0 0 18px var(--primary);
-}
-
-h1{
-  text-align:center;
-  font-size:31px;
-  margin-bottom:7px;
-}
-
-.subtitle{
-  text-align:center;
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:28px;
-}
-
-.form-group{
-  margin-bottom:17px;
-}
-
-label{
-  display:block;
-  font-size:13px;
-  font-weight:700;
+.card h2{
+  font-size:29px;
+  letter-spacing:-.025em;
   margin-bottom:8px;
 }
 
-input{
-  width:100%;
-  padding:13px 14px;
-  border-radius:11px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.045);
-  color:white;
-  outline:none;
+.subtitle{
+  color:var(--muted);
   font-size:14px;
+  line-height:1.6;
+  margin-bottom:24px;
 }
 
-input::placeholder{
-  color:#71849b;
+.form-group{
+  margin-bottom:15px;
 }
 
-input:focus{
-  border-color:rgba(85,214,255,.65);
-  box-shadow:0 0 0 3px rgba(85,214,255,.08);
+.form-group label{
+  display:block;
+  font-size:13px;
+  font-weight:800;
+  margin-bottom:7px;
 }
 
-.password-box{
+.input-wrap{
   position:relative;
 }
 
-.password-box input{
-  padding-right:65px;
+.input-wrap input{
+  width:100%;
+  height:49px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:#fffdfb;
+  color:var(--brown);
+  padding:0 14px;
+  outline:none;
 }
 
-.show{
+.input-wrap input:focus{
+  border-color:var(--pink);
+  box-shadow:0 0 0 4px rgba(217,79,131,.10);
+}
+
+.password-input{
+  padding-right:72px!important;
+}
+
+.show-password{
   position:absolute;
-  right:10px;
-  top:50%;
-  transform:translateY(-50%);
+  right:8px;
+  top:7px;
+  height:35px;
+  padding:0 9px;
   border:0;
-  background:none;
-  color:var(--primary);
-  font-size:12px;
-  font-weight:700;
+  border-radius:9px;
+  background:var(--pink-pale);
+  color:var(--pink-dark);
+  font-size:11px;
+  font-weight:900;
 }
 
-.password-strength{
-  height:4px;
-  background:rgba(255,255,255,.07);
+.strength{
+  margin-top:7px;
+  height:5px;
   border-radius:10px;
-  margin-top:8px;
+  background:#f0e5e8;
   overflow:hidden;
 }
 
-.password-strength span{
-  display:block;
-  width:0;
+.strength-bar{
   height:100%;
+  width:0;
+  background:var(--pink);
   transition:.25s;
 }
 
-.hint{
-  color:#71849b;
-  font-size:11px;
-  margin-top:6px;
+.strength-text{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:10px;
 }
 
 .terms{
   display:flex;
   align-items:flex-start;
   gap:8px;
-  margin:20px 0;
   color:var(--muted);
   font-size:11px;
   line-height:1.5;
+  margin:18px 0;
 }
 
 .terms input{
-  width:15px;
-  height:15px;
   margin-top:2px;
-  accent-color:var(--primary);
+  accent-color:var(--pink);
 }
 
 .terms a{
-  color:var(--primary);
+  color:var(--pink-dark);
+  font-weight:800;
 }
 
-.create-btn{
+.register-btn{
   width:100%;
-  padding:14px;
+  height:52px;
   border:0;
-  border-radius:12px;
-  background:var(--primary);
-  color:#04111c;
+  border-radius:14px;
+  background:var(--pink);
+  color:white;
   font-weight:900;
-  font-size:15px;
+  box-shadow:0 10px 24px rgba(217,79,131,.22);
   cursor:pointer;
-  transition:.2s;
 }
 
-.create-btn:hover{
-  background:#7be2ff;
-  transform:translateY(-1px);
-}
-
-.message{
-  display:none;
-  padding:11px 13px;
-  border-radius:10px;
-  margin-bottom:17px;
-  font-size:12px;
-}
-
-.message.error{
-  display:block;
-  background:rgba(255,80,80,.08);
-  border:1px solid rgba(255,80,80,.2);
-  color:#ff9b9b;
-}
-
-.message.success{
-  display:block;
-  background:rgba(85,230,165,.08);
-  border:1px solid rgba(85,230,165,.2);
-  color:#7ff0bd;
+.register-btn:hover{
+  background:var(--pink-dark);
 }
 
 .divider{
   display:flex;
   align-items:center;
   gap:12px;
-  color:#71849b;
+  margin:22px 0;
+  color:#ad989f;
   font-size:11px;
-  margin:25px 0;
 }
 
-.divider:before,
-.divider:after{
+.divider::before,
+.divider::after{
   content:"";
   height:1px;
   flex:1;
   background:var(--border);
 }
 
-.login{
+.login-text{
   text-align:center;
   color:var(--muted);
   font-size:13px;
 }
 
-.login a{
-  color:var(--primary);
-  font-weight:700;
-  text-decoration:none;
+.login-text a{
+  color:var(--pink-dark);
+  font-weight:900;
 }
 
-.login a:hover{
-  text-decoration:underline;
+.error{
+  display:none;
+  background:#fff0f3;
+  color:#a93664;
+  border:1px solid #f1cbd7;
+  border-radius:11px;
+  padding:10px 12px;
+  font-size:12px;
+  margin-bottom:14px;
 }
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-  padding:25px 20px;
   text-align:center;
-  color:#71849b;
+  padding:20px;
+  color:var(--muted);
   font-size:12px;
-  border-top:1px solid var(--border);
-  background:#050d17;
 }
 
-@media(max-width:500px){
+/* =========================
+   MOBILE
+========================= */
 
-  .nav{
-    padding:13px 16px;
+@media(max-width:820px){
+
+  .topbar{
+    padding:0 18px;
   }
 
-  .logo span{
+  .brand{
     font-size:14px;
   }
 
-  main{
-    padding:30px 15px;
+  .layout{
+    grid-template-columns:1fr;
+    max-width:500px;
+    gap:28px;
   }
+
+  .intro{
+    text-align:center;
+  }
+
+  .intro .atom{
+    margin:0 auto 24px;
+  }
+
+  .intro p{
+    margin:auto;
+  }
+
+  .page{
+    padding:38px 18px;
+  }
+}
+
+@media(max-width:480px){
 
   .card{
-    padding:26px 21px;
-    border-radius:20px;
+    padding:24px 20px;
+    border-radius:22px;
   }
 
-  h1{
-    font-size:28px;
+  .intro h1{
+    font-size:42px;
+  }
+
+  .intro p{
+    font-size:15px;
+  }
+
+  .back-link{
+    font-size:12px;
   }
 }
 </style>
@@ -388,360 +477,443 @@ footer{
 
 <body>
 
-<header>
+<header class="topbar">
 
-<nav class="nav">
+  <a href="index.html" class="brand">
 
-<a href="index.html" class="logo">
+    <div class="atom brand-atom">
+      <div class="nucleus"></div>
+      <div class="orbit one"></div>
+      <div class="orbit two"></div>
+      <div class="orbit"></div>
+      <div class="electron e1"></div>
+      <div class="electron e2"></div>
+      <div class="electron e3"></div>
+    </div>
 
-<div class="logo-atom">
-<div class="logo-core"></div>
-</div>
+    <span>Chemistry Resources Co.</span>
 
-<span>Chemistry Resources Co.</span>
+  </a>
 
-</a>
-
-<a href="login.html" class="back">
-← Login
-</a>
-
-</nav>
+  <a href="index.html" class="back-link">
+    ← Back to home
+  </a>
 
 </header>
 
 
-<main>
+<main class="page">
 
-<div class="wrapper">
+  <div class="layout">
 
-<div class="card">
+    <section class="intro">
 
-<div class="atom">
+      <div class="atom">
 
-<div class="atom-core"></div>
+        <div class="nucleus"></div>
+        <div class="orbit one"></div>
+        <div class="orbit two"></div>
+        <div class="orbit"></div>
+        <div class="electron e1"></div>
+        <div class="electron e2"></div>
+        <div class="electron e3"></div>
 
-</div>
+      </div>
 
-<h1>Create your account</h1>
+      <div class="eyebrow">
+        Join Chemistry Resources Co.
+      </div>
 
-<p class="subtitle">
-Join Chemistry Resources Co. and keep your resources in one place.
-</p>
+      <h1>
+        Build your<br>
+        <span>chemistry library.</span>
+      </h1>
 
+      <p>
+        Create your account and keep your chemistry notes,
+        worksheets, study guides and resources in one place.
+      </p>
 
-<div id="message" class="message"></div>
-
-
-<form id="registerForm">
-
-
-<div class="form-group">
-
-<label for="name">
-Full name
-</label>
-
-<input
-type="text"
-id="name"
-placeholder="Your name"
-autocomplete="name"
-required
->
-
-</div>
+    </section>
 
 
-<div class="form-group">
+    <section class="card">
 
-<label for="email">
-Email address
-</label>
+      <h2>Create account</h2>
 
-<input
-type="email"
-id="email"
-placeholder="you@example.com"
-autocomplete="email"
-required
->
-
-</div>
+      <p class="subtitle">
+        Start building your personal chemistry resource library.
+      </p>
 
 
-<div class="form-group">
-
-<label for="password">
-Password
-</label>
-
-<div class="password-box">
-
-<input
-type="password"
-id="password"
-placeholder="Create a password"
-autocomplete="new-password"
-required
->
-
-<button
-type="button"
-class="show"
-onclick="togglePassword('password',this)"
->
-Show
-</button>
-
-</div>
-
-<div class="password-strength">
-<span id="strengthBar"></span>
-</div>
-
-<div class="hint">
-Use at least 8 characters.
-</div>
-
-</div>
+      <div class="error" id="errorMessage"></div>
 
 
-<div class="form-group">
+      <form id="registerForm">
 
-<label for="confirmPassword">
-Confirm password
-</label>
+        <div class="form-group">
 
-<div class="password-box">
+          <label for="name">
+            Full name
+          </label>
 
-<input
-type="password"
-id="confirmPassword"
-placeholder="Enter your password again"
-autocomplete="new-password"
-required
->
+          <div class="input-wrap">
 
-<button
-type="button"
-class="show"
-onclick="togglePassword('confirmPassword',this)"
->
-Show
-</button>
+            <input
+              type="text"
+              id="name"
+              placeholder="Your full name"
+              autocomplete="name"
+              required
+            >
 
-</div>
+          </div>
 
-</div>
+        </div>
 
 
-<label class="terms">
+        <div class="form-group">
 
-<input type="checkbox" id="terms">
+          <label for="email">
+            Email address
+          </label>
 
-<span>
-I agree to the Chemistry Resources Co.
-<a href="#">Terms of Service</a>
-and
-<a href="#">Privacy Policy</a>.
-</span>
+          <div class="input-wrap">
 
-</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
 
+          </div>
 
-<button type="submit" class="create-btn">
-Create Account
-</button>
-
-
-</form>
-
-
-<div class="divider">
-OR
-</div>
+        </div>
 
 
-<div class="login">
+        <div class="form-group">
 
-Already have an account?
-<a href="login.html">Sign in</a>
+          <label for="password">
+            Password
+          </label>
 
-</div>
+          <div class="input-wrap">
+
+            <input
+              type="password"
+              id="password"
+              class="password-input"
+              placeholder="Create a password"
+              autocomplete="new-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="show-password"
+              id="showPassword"
+            >
+              Show
+            </button>
+
+          </div>
+
+          <div class="strength">
+            <div class="strength-bar" id="strengthBar"></div>
+          </div>
+
+          <div class="strength-text" id="strengthText">
+            Enter a password
+          </div>
+
+        </div>
 
 
-</div>
+        <div class="form-group">
 
-</div>
+          <label for="confirmPassword">
+            Confirm password
+          </label>
+
+          <div class="input-wrap">
+
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Confirm your password"
+              autocomplete="new-password"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <label class="terms">
+
+          <input
+            type="checkbox"
+            id="terms"
+            required
+          >
+
+          <span>
+            I agree to the
+            <a href="#" onclick="showTerms(event)">
+              Terms & Conditions
+            </a>
+            and understand that this is currently a front-end account prototype.
+          </span>
+
+        </label>
+
+
+        <button
+          type="submit"
+          class="register-btn"
+        >
+          Create Account
+        </button>
+
+      </form>
+
+
+      <div class="divider">
+        OR
+      </div>
+
+
+      <div class="login-text">
+
+        Already have an account?
+
+        <a href="login.html">
+          Sign in
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
 
 </main>
 
 
 <footer>
-
-© 2026 Chemistry Resources Co. — Learn chemistry. Understand everything.
-
+  © 2026 Chemistry Resources Co. — Learn chemistry. Understand everything.
 </footer>
 
 
 <script>
 
-const form=document.getElementById("registerForm");
-const message=document.getElementById("message");
-const password=document.getElementById("password");
-const strengthBar=document.getElementById("strengthBar");
+/* =========================
+   SHOW / HIDE PASSWORD
+========================= */
+
+const password =
+  document.getElementById("password");
+
+const showPassword =
+  document.getElementById("showPassword");
 
 
-function togglePassword(id,button){
+showPassword.addEventListener("click", () => {
 
-const input=document.getElementById(id);
+  if(password.type === "password"){
 
-if(input.type==="password"){
+    password.type = "text";
+    showPassword.textContent = "Hide";
 
-input.type="text";
-button.textContent="Hide";
+  }else{
 
-}else{
+    password.type = "password";
+    showPassword.textContent = "Show";
 
-input.type="password";
-button.textContent="Show";
-
-}
-
-}
-
-
-password.addEventListener("input",function(){
-
-const value=password.value;
-let strength=0;
-
-if(value.length>=8) strength++;
-if(value.length>=12) strength++;
-if(/[A-Z]/.test(value)) strength++;
-if(/[0-9]/.test(value)) strength++;
-if(/[^A-Za-z0-9]/.test(value)) strength++;
-
-if(strength<=1){
-
-strengthBar.style.width="25%";
-
-}else if(strength<=3){
-
-strengthBar.style.width="60%";
-
-}else{
-
-strengthBar.style.width="100%";
-
-}
+  }
 
 });
 
 
-function showMessage(text,type){
+/* =========================
+   PASSWORD STRENGTH
+========================= */
 
-message.textContent=text;
-message.className="message "+type;
+const strengthBar =
+  document.getElementById("strengthBar");
 
-}
-
-
-form.addEventListener("submit",function(event){
-
-event.preventDefault();
-
-const name=document.getElementById("name").value.trim();
-const email=document.getElementById("email").value.trim();
-const pass=password.value;
-const confirm=document.getElementById("confirmPassword").value;
-const terms=document.getElementById("terms").checked;
+const strengthText =
+  document.getElementById("strengthText");
 
 
-if(!name || !email || !pass || !confirm){
+password.addEventListener("input", () => {
 
-showMessage(
-"Please complete all fields.",
-"error"
-);
+  const value = password.value;
 
-return;
+  let score = 0;
 
-}
-
-
-if(pass.length<8){
-
-showMessage(
-"Your password must contain at least 8 characters.",
-"error"
-);
-
-return;
-
-}
+  if(value.length >= 6) score++;
+  if(value.length >= 10) score++;
+  if(/[A-Z]/.test(value)) score++;
+  if(/[0-9]/.test(value)) score++;
+  if(/[^A-Za-z0-9]/.test(value)) score++;
 
 
-if(pass!==confirm){
+  const widths = [
+    "0%",
+    "20%",
+    "40%",
+    "60%",
+    "80%",
+    "100%"
+  ];
 
-showMessage(
-"Passwords do not match.",
-"error"
-);
-
-return;
-
-}
-
-
-if(!terms){
-
-showMessage(
-"Please agree to the Terms of Service and Privacy Policy.",
-"error"
-);
-
-return;
-
-}
+  strengthBar.style.width =
+    widths[score];
 
 
-/*
- Temporary front-end account.
+  const labels = [
+    "Enter a password",
+    "Very weak",
+    "Weak",
+    "Okay",
+    "Strong",
+    "Very strong"
+  ];
 
- Real secure registration, password hashing,
- database storage and email verification will
- be connected later.
-*/
-
-const user={
-name:name,
-email:email,
-loggedIn:true
-};
-
-localStorage.setItem(
-"chemistryUser",
-JSON.stringify(user)
-);
-
-showMessage(
-"Account created successfully!",
-"success"
-);
-
-
-setTimeout(function(){
-
-window.location.href="account.html";
-
-},1200);
+  strengthText.textContent =
+    labels[score];
 
 });
+
+
+/* =========================
+   REGISTER
+========================= */
+
+document
+  .getElementById("registerForm")
+  .addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+
+    const name =
+      document.getElementById("name")
+      .value
+      .trim();
+
+    const email =
+      document.getElementById("email")
+      .value
+      .trim();
+
+    const passwordValue =
+      document.getElementById("password")
+      .value;
+
+    const confirmPassword =
+      document.getElementById("confirmPassword")
+      .value;
+
+    const terms =
+      document.getElementById("terms")
+      .checked;
+
+    const error =
+      document.getElementById("errorMessage");
+
+
+    error.style.display = "none";
+
+
+    if(!name || !email || !passwordValue || !confirmPassword){
+
+      error.textContent =
+        "Please complete all fields.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+
+    if(passwordValue.length < 6){
+
+      error.textContent =
+        "Your password must be at least 6 characters.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+
+    if(passwordValue !== confirmPassword){
+
+      error.textContent =
+        "The passwords do not match.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+
+    if(!terms){
+
+      error.textContent =
+        "Please accept the Terms & Conditions.";
+
+      error.style.display = "block";
+
+      return;
+    }
+
+
+    /*
+      Front-end prototype registration.
+
+      Real secure authentication should be connected
+      to a backend before production.
+    */
+
+    localStorage.setItem(
+      "chemistryUser",
+      JSON.stringify({
+        name:name,
+        email:email,
+        loggedIn:true
+      })
+    );
+
+
+    window.location.href =
+      "account.html";
+
+  });
+
+
+/* =========================
+   TERMS
+========================= */
+
+function showTerms(event){
+
+  event.preventDefault();
+
+  alert(
+    "Chemistry Resources Co. is currently using a front-end account prototype. Secure authentication and full Terms & Conditions will be connected before production."
+  );
+
+}
 
 </script>
 
 </body>
 </html>
 ```
+
