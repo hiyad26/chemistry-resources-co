@@ -1,0 +1,641 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login | Chemistry Resources Co.</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#07111f;
+  --card:#102238;
+  --text:#f5f9ff;
+  --muted:#9db0c7;
+  --primary:#55d6ff;
+  --accent:#8b7cff;
+  --border:rgba(255,255,255,.09);
+}
+
+body{
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% 10%,rgba(85,214,255,.13),transparent 32%),
+    radial-gradient(circle at 15% 80%,rgba(139,124,255,.08),transparent 30%),
+    var(--bg);
+  display:flex;
+  flex-direction:column;
+}
+
+/* NAV */
+
+header{
+  border-bottom:1px solid var(--border);
+  background:rgba(7,17,31,.88);
+  backdrop-filter:blur(18px);
+}
+
+.nav{
+  max-width:1200px;
+  width:100%;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:white;
+  text-decoration:none;
+  font-weight:800;
+}
+
+.logo-atom{
+  width:38px;
+  height:38px;
+  border:2px solid var(--primary);
+  border-radius:50%;
+  position:relative;
+  display:grid;
+  place-items:center;
+  box-shadow:0 0 18px rgba(85,214,255,.3);
+}
+
+.logo-atom:before,
+.logo-atom:after{
+  content:"";
+  position:absolute;
+  width:48px;
+  height:18px;
+  border:1px solid rgba(85,214,255,.7);
+  border-radius:50%;
+}
+
+.logo-atom:before{
+  transform:rotate(60deg);
+}
+
+.logo-atom:after{
+  transform:rotate(-60deg);
+}
+
+.logo-core{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--primary);
+  box-shadow:0 0 12px var(--primary);
+}
+
+.back{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:14px;
+}
+
+.back:hover{
+  color:var(--primary);
+}
+
+/* MAIN */
+
+main{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:50px 20px;
+}
+
+.login-wrapper{
+  width:100%;
+  max-width:440px;
+}
+
+.login-card{
+  background:
+    linear-gradient(
+      145deg,
+      rgba(16,34,56,.98),
+      rgba(9,25,43,.98)
+    );
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:35px;
+  box-shadow:0 25px 80px rgba(0,0,0,.3);
+}
+
+.atom-icon{
+  width:72px;
+  height:72px;
+  margin:0 auto 22px;
+  border-radius:50%;
+  border:2px solid var(--primary);
+  position:relative;
+  display:grid;
+  place-items:center;
+  box-shadow:
+    0 0 25px rgba(85,214,255,.25),
+    inset 0 0 20px rgba(85,214,255,.08);
+}
+
+.atom-icon:before,
+.atom-icon:after{
+  content:"";
+  position:absolute;
+  width:85px;
+  height:30px;
+  border:1px solid rgba(85,214,255,.6);
+  border-radius:50%;
+}
+
+.atom-icon:before{
+  transform:rotate(60deg);
+}
+
+.atom-icon:after{
+  transform:rotate(-60deg);
+}
+
+.atom-core{
+  width:17px;
+  height:17px;
+  background:var(--primary);
+  border-radius:50%;
+  box-shadow:0 0 18px var(--primary);
+}
+
+h1{
+  text-align:center;
+  font-size:32px;
+  margin-bottom:8px;
+  letter-spacing:-.7px;
+}
+
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:30px;
+}
+
+/* FORM */
+
+.form-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+input{
+  width:100%;
+  padding:14px 15px;
+  border-radius:11px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.045);
+  color:white;
+  outline:none;
+  font-size:15px;
+  transition:.2s;
+}
+
+input::placeholder{
+  color:#71849b;
+}
+
+input:focus{
+  border-color:rgba(85,214,255,.65);
+  box-shadow:0 0 0 3px rgba(85,214,255,.08);
+}
+
+.password-row{
+  position:relative;
+}
+
+.password-row input{
+  padding-right:70px;
+}
+
+.show-password{
+  position:absolute;
+  right:10px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  color:var(--primary);
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.form-options{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:5px 0 22px;
+}
+
+.remember{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.remember input{
+  width:15px;
+  height:15px;
+  accent-color:var(--primary);
+}
+
+.forgot{
+  color:var(--primary);
+  font-size:12px;
+  text-decoration:none;
+}
+
+.forgot:hover{
+  text-decoration:underline;
+}
+
+.login-btn{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  background:var(--primary);
+  color:#04111c;
+  font-weight:900;
+  font-size:15px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.login-btn:hover{
+  background:#7be2ff;
+  transform:translateY(-1px);
+}
+
+.divider{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#71849b;
+  font-size:11px;
+  margin:25px 0;
+}
+
+.divider:before,
+.divider:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:var(--border);
+}
+
+.register{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.register a{
+  color:var(--primary);
+  font-weight:700;
+  text-decoration:none;
+}
+
+.register a:hover{
+  text-decoration:underline;
+}
+
+/* MESSAGE */
+
+.message{
+  display:none;
+  padding:11px 13px;
+  border-radius:10px;
+  margin-bottom:17px;
+  font-size:12px;
+}
+
+.message.error{
+  display:block;
+  background:rgba(255,80,80,.08);
+  border:1px solid rgba(255,80,80,.2);
+  color:#ff9b9b;
+}
+
+.message.success{
+  display:block;
+  background:rgba(85,230,165,.08);
+  border:1px solid rgba(85,230,165,.2);
+  color:#7ff0bd;
+}
+
+/* FOOTER */
+
+footer{
+  padding:25px 20px;
+  text-align:center;
+  color:#71849b;
+  font-size:12px;
+  border-top:1px solid var(--border);
+  background:#050d17;
+}
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+  .nav{
+    padding:13px 16px;
+  }
+
+  .logo span{
+    font-size:14px;
+  }
+
+  main{
+    padding:35px 15px;
+  }
+
+  .login-card{
+    padding:27px 21px;
+    border-radius:20px;
+  }
+
+  h1{
+    font-size:29px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav class="nav">
+
+<a href="index.html" class="logo">
+
+<div class="logo-atom">
+<div class="logo-core"></div>
+</div>
+
+<span>Chemistry Resources Co.</span>
+
+</a>
+
+<a href="index.html" class="back">
+← Back to Home
+</a>
+
+</nav>
+
+</header>
+
+
+<main>
+
+<div class="login-wrapper">
+
+<div class="login-card">
+
+
+<div class="atom-icon">
+
+<div class="atom-core"></div>
+
+</div>
+
+
+<h1>Welcome back</h1>
+
+<p class="subtitle">
+Sign in to your Chemistry Resources Co. account
+</p>
+
+
+<div id="message" class="message"></div>
+
+
+<form id="loginForm">
+
+<div class="form-group">
+
+<label for="email">
+Email address
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="you@example.com"
+required
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="password">
+Password
+</label>
+
+<div class="password-row">
+
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+required
+>
+
+<button
+type="button"
+class="show-password"
+onclick="togglePassword()"
+>
+Show
+</button>
+
+</div>
+
+</div>
+
+
+<div class="form-options">
+
+<label class="remember">
+
+<input type="checkbox" id="remember">
+
+<span>Remember me</span>
+
+</label>
+
+<a href="#" class="forgot" onclick="forgotPassword(event)">
+Forgot password?
+</a>
+
+</div>
+
+
+<button type="submit" class="login-btn">
+Sign In
+</button>
+
+</form>
+
+
+<div class="divider">
+OR
+</div>
+
+
+<div class="register">
+
+Don't have an account?
+<a href="register.html">Create an account</a>
+
+</div>
+
+
+</div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+© 2026 Chemistry Resources Co. — Learn chemistry. Understand everything.
+
+</footer>
+
+
+<script>
+
+const form=document.getElementById("loginForm");
+const message=document.getElementById("message");
+
+
+function togglePassword(){
+
+const password=document.getElementById("password");
+const button=document.querySelector(".show-password");
+
+if(password.type==="password"){
+
+password.type="text";
+button.textContent="Hide";
+
+}else{
+
+password.type="password";
+button.textContent="Show";
+
+}
+
+}
+
+
+function showMessage(text,type){
+
+message.textContent=text;
+
+message.className="message "+type;
+
+}
+
+
+form.addEventListener("submit",function(event){
+
+event.preventDefault();
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+
+if(!email || !password){
+
+showMessage(
+"Please enter your email and password.",
+"error"
+);
+
+return;
+
+}
+
+
+/*
+  Temporary front-end login.
+
+  Real secure authentication will be connected
+  later with the account/database system.
+*/
+
+localStorage.setItem(
+"chemistryUser",
+JSON.stringify({
+  email:email,
+  loggedIn:true
+})
+);
+
+showMessage(
+"Login successful. Your account system will be connected next.",
+"success"
+);
+
+setTimeout(function(){
+
+window.location.href="account.html";
+
+},1200);
+
+});
+
+
+function forgotPassword(event){
+
+event.preventDefault();
+
+showMessage(
+"Password recovery will be connected with the account system.",
+"success"
+);
+
+}
+
+</script>
+
+</body>
+</html>
+```
