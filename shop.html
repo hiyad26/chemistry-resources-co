@@ -1,74 +1,28 @@
 ```html
-<!--
-  SHOP CATEGORY FIX
-
-  Add this code immediately before your existing
-  renderProducts(); / initial shop rendering code.
-
-  It makes links such as:
-  shop.html?category=atomic
-  shop.html?category=bonding
-  shop.html?category=organic
-  shop.html?category=calculations
-  automatically select the correct category.
--->
-
 <script>
-(function(){
+(function () {
 
-  const params = new URLSearchParams(
-    window.location.search
+  const params = new URLSearchParams(window.location.search);
+  const category = params.get("category");
+
+  if (!category) return;
+
+  const categoryButton = document.querySelector(
+    `[data-category="${category}"]`
   );
 
-  const category =
-    params.get("category");
+  if (categoryButton) {
 
-  if(!category) return;
+    // Remove active state from all category buttons
+    document.querySelectorAll("[data-category]").forEach(button => {
+      button.classList.remove("active");
+    });
 
-  /*
-    Your existing category buttons should use:
-    data-category="atomic"
-    data-category="bonding"
-    data-category="organic"
-    data-category="calculations"
-    data-category="other"
-  */
-
-  const categoryButton =
-    document.querySelector(
-      `[data-category="${category}"]`
-    );
-
-  if(categoryButton){
-
-    /*
-      Remove the active state from
-      the currently selected category.
-    */
-
-    document
-      .querySelectorAll("[data-category]")
-      .forEach(button => {
-
-        button.classList.remove("active");
-
-      });
-
-
-    /*
-      Activate the category from the URL.
-    */
-
+    // Activate the category from the URL
     categoryButton.classList.add("active");
 
-
-    /*
-      Trigger the same click behavior
-      already used by the Shop filters.
-    */
-
+    // Run the existing category filter
     categoryButton.click();
-
   }
 
 })();
