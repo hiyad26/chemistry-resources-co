@@ -9,27 +9,21 @@
 
   <style>
     :root{
-      --cream:#fffaf5;
-      --cream2:#fff3ea;
-      --cream3:#fce8df;
-
-      --pink:#e85d8f;
-      --pink-dark:#c83f72;
-      --pink-light:#f8a8c2;
-      --pink-soft:#fde1eb;
-
-      --text:#3b2630;
-      --muted:#876d77;
-
+      --pink:#d94f83;
+      --pink-dark:#a93664;
+      --pink-soft:#f5d2df;
+      --pink-pale:#fff0f5;
+      --cream:#fffaf4;
+      --cream-2:#f8eee4;
       --white:#ffffff;
-
-      --green:#4c9b72;
-      --red:#d94d67;
-
-      --border:rgba(190,105,135,.18);
-
-      --shadow:0 18px 50px rgba(151,82,108,.12);
-      --shadow-hover:0 22px 55px rgba(151,82,108,.18);
+      --brown:#3d2930;
+      --muted:#866f77;
+      --border:#ead8dc;
+      --green:#3b9b73;
+      --red:#d94f64;
+      --gold:#c58b38;
+      --shadow:0 18px 45px rgba(105,48,70,.10);
+      --shadow-lg:0 28px 70px rgba(105,48,70,.15);
     }
 
     *{
@@ -45,27 +39,23 @@
     body{
       font-family:
         Inter,
+        ui-sans-serif,
+        system-ui,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
-        Arial,
         sans-serif;
-
       background:
-        radial-gradient(
-          circle at 8% 0%,
-          rgba(248,168,194,.22),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 92% 8%,
-          rgba(232,93,143,.10),
-          transparent 28%
-        ),
-        var(--cream);
-
-      color:var(--text);
+        radial-gradient(circle at 10% 10%, rgba(217,79,131,.13), transparent 30%),
+        radial-gradient(circle at 90% 20%, rgba(245,210,223,.55), transparent 28%),
+        linear-gradient(180deg, #fffaf7 0%, #fff8f2 100%);
+      color:var(--brown);
       min-height:100vh;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
     button,
@@ -79,239 +69,179 @@
       cursor:pointer;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
+    /* =========================
+       NAVBAR
+    ========================== */
 
-    /* =====================================
-       NAVIGATION
-       ===================================== */
-
-    .nav{
+    .navbar{
       position:sticky;
       top:0;
       z-index:100;
+      background:rgba(255,250,244,.90);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(234,216,220,.85);
+    }
 
-      height:74px;
-
+    .nav-inner{
+      width:min(1180px, calc(100% - 32px));
+      margin:auto;
+      min-height:74px;
       display:flex;
       align-items:center;
       justify-content:space-between;
-
-      padding:0 6%;
-
-      background:rgba(255,250,245,.92);
-
-      backdrop-filter:blur(18px);
-
-      border-bottom:1px solid var(--border);
+      gap:20px;
     }
 
     .brand{
       display:flex;
       align-items:center;
       gap:11px;
-
       font-weight:800;
-      font-size:18px;
-
+      letter-spacing:-.03em;
       white-space:nowrap;
     }
 
-    /* ATOMIC LOGO */
+    .brand-text{
+      font-size:16px;
+    }
 
-    .logo-atom{
+    .brand-mark{
+      width:40px;
+      height:40px;
+      border-radius:50%;
       position:relative;
-
-      width:42px;
-      height:42px;
-
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at center, var(--pink) 0 22%, transparent 23%),
+        transparent;
+      flex:none;
     }
 
-    .logo-core{
-      width:10px;
-      height:10px;
-
-      border-radius:50%;
-
-      background:var(--pink);
-
-      box-shadow:
-        0 0 0 5px rgba(232,93,143,.10);
-
-      z-index:5;
-    }
-
-    .logo-atom::before,
-    .logo-atom::after{
+    .brand-mark::before,
+    .brand-mark::after{
       content:"";
-
       position:absolute;
-
-      width:38px;
-      height:15px;
-
-      border:1.7px solid var(--pink);
-
+      inset:7px 2px;
+      border:1.5px solid var(--pink);
       border-radius:50%;
-
-      opacity:.9;
+      transform:rotate(55deg);
     }
 
-    .logo-atom::before{
-      transform:rotate(45deg);
+    .brand-mark::after{
+      transform:rotate(-55deg);
     }
 
-    .logo-atom::after{
-      transform:rotate(-45deg);
-    }
-
-    .logo-electron{
+    .brand-mark span{
       position:absolute;
-
       width:6px;
       height:6px;
-
       border-radius:50%;
-
-      background:var(--pink-dark);
-
-      z-index:6;
-    }
-
-    .logo-electron.one{
-      top:8px;
-      right:8px;
-    }
-
-    .logo-electron.two{
-      bottom:8px;
-      left:8px;
+      background:var(--pink);
+      top:4px;
+      left:17px;
+      box-shadow:
+        0 28px 0 var(--pink),
+        14px 7px 0 var(--pink);
     }
 
     .nav-links{
       display:flex;
-      gap:27px;
-
-      color:var(--muted);
-
-      font-size:14px;
+      align-items:center;
+      gap:5px;
     }
 
     .nav-links a{
-      transition:.2s;
+      padding:9px 12px;
+      border-radius:10px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:700;
+      transition:.2s ease;
     }
 
     .nav-links a:hover{
+      background:var(--pink-pale);
       color:var(--pink-dark);
     }
 
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap:8px;
-    }
-
-    .nav-btn{
-      border:1px solid var(--border);
-
-      background:var(--white);
-
-      color:var(--text);
-
-      padding:9px 13px;
-
-      border-radius:10px;
-
-      font-size:13px;
-
-      transition:.2s;
-    }
-
-    .nav-btn:hover{
-      border-color:rgba(232,93,143,.35);
+    .nav-links .active{
       color:var(--pink-dark);
-      background:var(--pink-soft);
+      background:var(--pink-pale);
     }
 
-    /* =====================================
+    /* =========================
        MAIN
-       ===================================== */
+    ========================== */
 
     .container{
-      width:min(1200px,92%);
+      width:min(1180px, calc(100% - 32px));
       margin:auto;
     }
 
-    main{
-      padding:45px 0 80px;
-    }
-
-    .page-header{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-
-      gap:20px;
-
-      margin-bottom:24px;
+    .hero{
+      padding:48px 0 25px;
     }
 
     .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:var(--pink-pale);
       color:var(--pink-dark);
-
-      font-size:11px;
+      font-size:12px;
       font-weight:800;
-
-      letter-spacing:1.5px;
-
+      letter-spacing:.08em;
       text-transform:uppercase;
+      border:1px solid var(--pink-soft);
+      margin-bottom:16px;
+    }
 
-      margin-bottom:8px;
+    .eyebrow-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--pink);
+      box-shadow:0 0 0 4px rgba(217,79,131,.10);
     }
 
     h1{
-      font-size:clamp(30px,5vw,48px);
-
-      line-height:1.05;
-
-      letter-spacing:-1px;
-
-      margin-bottom:10px;
+      font-size:clamp(32px,5vw,52px);
+      line-height:1.02;
+      letter-spacing:-.045em;
+      margin-bottom:14px;
     }
 
-    .subtitle{
+    .hero-copy{
+      max-width:680px;
       color:var(--muted);
-
-      max-width:700px;
-
-      line-height:1.65;
+      line-height:1.75;
+      font-size:16px;
     }
 
-    .header-actions{
+    .hero-actions{
       display:flex;
-      gap:10px;
       flex-wrap:wrap;
+      gap:10px;
+      margin-top:22px;
     }
 
-    /* =====================================
+    /* =========================
        BUTTONS
-       ===================================== */
+    ========================== */
 
     .btn{
       border:none;
-
-      border-radius:11px;
-
+      border-radius:12px;
       padding:12px 17px;
-
       font-weight:800;
-
       transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
     }
 
     .btn:hover{
@@ -319,709 +249,557 @@
     }
 
     .btn-primary{
-      background:
-        linear-gradient(
-          135deg,
-          var(--pink),
-          var(--pink-dark)
-        );
-
       color:white;
-
-      box-shadow:
-        0 10px 25px
-        rgba(200,63,114,.16);
+      background:linear-gradient(135deg,var(--pink),var(--pink-dark));
+      box-shadow:0 10px 24px rgba(169,54,100,.20);
     }
 
     .btn-secondary{
-      background:var(--white);
-
+      background:white;
+      color:var(--brown);
       border:1px solid var(--border);
-
-      color:var(--pink-dark);
-    }
-
-    .btn-secondary:hover{
-      background:var(--pink-soft);
     }
 
     .btn-danger{
-      background:rgba(217,77,103,.08);
-
-      border:1px solid rgba(217,77,103,.22);
-
+      background:#fff0f2;
       color:var(--red);
-    }
-
-    .btn-danger:hover{
-      background:rgba(217,77,103,.13);
+      border:1px solid #f4ccd4;
     }
 
     .btn-small{
       padding:9px 12px;
+      border-radius:9px;
       font-size:13px;
     }
 
-    /* =====================================
+    /* =========================
        WARNING
-       ===================================== */
+    ========================== */
 
     .warning{
+      margin:22px 0 28px;
+      padding:17px 18px;
+      border-radius:15px;
+      border:1px solid #efd9b7;
+      background:#fff8eb;
       display:flex;
-
-      gap:12px;
-
       align-items:flex-start;
-
-      padding:16px 18px;
-
-      margin-bottom:26px;
-
-      border-radius:14px;
-
-      background:rgba(232,93,143,.06);
-
-      border:1px solid rgba(232,93,143,.15);
-
-      color:var(--muted);
-
-      line-height:1.5;
-
-      font-size:14px;
-    }
-
-    .warning strong{
-      color:var(--text);
+      gap:13px;
+      color:#73582e;
     }
 
     .warning-icon{
-      font-size:20px;
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      background:#f7dfb3;
+      display:grid;
+      place-items:center;
       flex:none;
+      font-size:16px;
     }
 
-    /* =====================================
+    .warning strong{
+      display:block;
+      margin-bottom:4px;
+      color:#62491f;
+    }
+
+    .warning p{
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    /* =========================
        STATS
-       ===================================== */
+    ========================== */
 
     .stats{
       display:grid;
-
-      grid-template-columns:
-        repeat(3,1fr);
-
-      gap:16px;
-
+      grid-template-columns:repeat(3,1fr);
+      gap:15px;
       margin-bottom:30px;
     }
 
     .stat{
-      position:relative;
-
-      overflow:hidden;
-
-      background:
-        linear-gradient(
-          145deg,
-          var(--white),
-          var(--cream2)
-        );
-
+      background:rgba(255,255,255,.78);
       border:1px solid var(--border);
-
       border-radius:18px;
-
-      padding:22px;
-
+      padding:20px;
       box-shadow:var(--shadow);
-    }
-
-    .stat::after{
-      content:"";
-
-      position:absolute;
-
-      width:100px;
-      height:100px;
-
-      right:-40px;
-      top:-40px;
-
-      border:1px solid rgba(232,93,143,.12);
-
-      border-radius:50%;
     }
 
     .stat-label{
       color:var(--muted);
-
       font-size:13px;
-
-      margin-bottom:9px;
+      font-weight:700;
+      margin-bottom:8px;
     }
 
     .stat-value{
       font-size:30px;
-
-      font-weight:850;
+      font-weight:900;
+      letter-spacing:-.04em;
+      color:var(--brown);
     }
 
-    .stat-value span{
-      color:var(--pink-dark);
+    .stat-note{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:12px;
     }
 
-    /* =====================================
+    /* =========================
        TOOLBAR
-       ===================================== */
+    ========================== */
+
+    .section-heading{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:20px;
+      margin-bottom:16px;
+    }
+
+    .section-heading h2{
+      font-size:24px;
+      letter-spacing:-.03em;
+    }
+
+    .section-heading p{
+      color:var(--muted);
+      font-size:13px;
+      margin-top:4px;
+    }
 
     .toolbar{
       display:flex;
-
-      align-items:center;
-
-      justify-content:space-between;
-
-      gap:14px;
-
-      margin-bottom:20px;
-
+      gap:10px;
+      margin-bottom:18px;
       flex-wrap:wrap;
     }
 
-    .search-box{
+    .search-wrap{
+      flex:1 1 280px;
       position:relative;
-
-      flex:1;
-
-      min-width:240px;
     }
 
-    .search-box input{
-      width:100%;
-
-      background:var(--white);
-
-      border:1px solid var(--border);
-
-      color:var(--text);
-
-      padding:13px 16px 13px 42px;
-
-      border-radius:12px;
-
-      outline:none;
-    }
-
-    .search-box input:focus{
-      border-color:rgba(232,93,143,.45);
-
-      box-shadow:
-        0 0 0 3px
-        rgba(232,93,143,.07);
-    }
-
-    .search-icon{
+    .search-wrap span{
       position:absolute;
-
-      left:15px;
+      left:13px;
       top:50%;
-
       transform:translateY(-50%);
-
       color:var(--muted);
     }
 
-    .toolbar-actions{
-      display:flex;
-
-      gap:9px;
-
-      flex-wrap:wrap;
+    .search-input{
+      width:100%;
+      border:1px solid var(--border);
+      background:white;
+      border-radius:12px;
+      padding:12px 14px 12px 39px;
+      outline:none;
+      color:var(--brown);
     }
 
-    /* =====================================
+    .search-input:focus{
+      border-color:var(--pink);
+      box-shadow:0 0 0 4px rgba(217,79,131,.10);
+    }
+
+    /* =========================
        RESOURCE GRID
-       ===================================== */
+    ========================== */
 
-    .resource-grid{
+    .resources-grid{
       display:grid;
-
-      grid-template-columns:
-        repeat(2,1fr);
-
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:18px;
+      padding-bottom:60px;
     }
 
     .resource-card{
-      position:relative;
-
-      background:
-        linear-gradient(
-          145deg,
-          var(--white),
-          var(--cream2)
-        );
-
+      background:rgba(255,255,255,.88);
       border:1px solid var(--border);
-
       border-radius:20px;
-
       padding:20px;
-
       box-shadow:var(--shadow);
-
-      transition:.2s;
+      position:relative;
+      overflow:hidden;
     }
 
-    .resource-card:hover{
-      transform:translateY(-2px);
-
-      box-shadow:var(--shadow-hover);
-
-      border-color:
-        rgba(232,93,143,.28);
+    .resource-card::before{
+      content:"";
+      position:absolute;
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      background:var(--pink-pale);
+      right:-55px;
+      top:-60px;
+      z-index:0;
     }
 
-    .resource-top{
+    .resource-card > *{
+      position:relative;
+      z-index:1;
+    }
+
+    .resource-card.full-pack{
+      border-color:#e8c88e;
+      background:
+        linear-gradient(145deg,rgba(255,250,244,.96),rgba(255,247,231,.96));
+    }
+
+    .resource-card.full-pack::before{
+      background:#fff0cf;
+    }
+
+    .card-top{
       display:flex;
-
-      align-items:center;
-
       justify-content:space-between;
-
-      gap:14px;
-
-      margin-bottom:20px;
-    }
-
-    .resource-title-wrap{
-      display:flex;
-
-      align-items:center;
-
-      gap:13px;
-
-      min-width:0;
+      gap:15px;
+      align-items:flex-start;
+      margin-bottom:17px;
     }
 
     .resource-icon{
-      width:50px;
-      height:50px;
-
+      width:48px;
+      height:48px;
       border-radius:14px;
-
-      background:var(--pink-soft);
-
-      border:1px solid rgba(232,93,143,.16);
-
-      display:flex;
-
-      align-items:center;
-      justify-content:center;
-
+      background:var(--pink-pale);
+      display:grid;
+      place-items:center;
       font-size:24px;
+      border:1px solid var(--pink-soft);
+    }
 
-      flex:none;
+    .full-pack .resource-icon{
+      background:#fff0cf;
+      border-color:#efd49d;
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:6px 9px;
+      border-radius:999px;
+      background:var(--pink-pale);
+      color:var(--pink-dark);
+      font-size:10px;
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+
+    .full-pack .badge{
+      background:#fff0cf;
+      color:#94651d;
     }
 
     .resource-id{
       color:var(--muted);
-
       font-size:11px;
-
-      margin-top:4px;
-
+      margin-top:6px;
       word-break:break-all;
     }
 
-    .full-pack-label{
-      display:inline-flex;
-
-      margin-top:7px;
-
-      padding:4px 8px;
-
-      border-radius:20px;
-
-      background:var(--pink-soft);
-
-      color:var(--pink-dark);
-
-      font-size:9px;
-
-      font-weight:800;
-
-      letter-spacing:.6px;
+    .field-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
     }
 
-    /* =====================================
-       FIELDS
-       ===================================== */
-
     .field{
-      margin-bottom:14px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
     }
 
     .field label{
-      display:block;
-
+      font-size:11px;
+      font-weight:800;
       color:var(--muted);
-
-      font-size:12px;
-
-      margin-bottom:7px;
-
-      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.06em;
     }
 
     .field input,
     .field select,
     .field textarea{
       width:100%;
-
-      background:rgba(255,255,255,.8);
-
       border:1px solid var(--border);
-
       border-radius:10px;
-
-      color:var(--text);
-
-      padding:11px 12px;
-
+      background:#fffdfb;
+      color:var(--brown);
       outline:none;
+      padding:10px 11px;
+    }
+
+    .field textarea{
+      min-height:78px;
+      resize:vertical;
+      line-height:1.5;
     }
 
     .field input:focus,
     .field select:focus,
     .field textarea:focus{
-      border-color:rgba(232,93,143,.45);
-
-      box-shadow:
-        0 0 0 3px
-        rgba(232,93,143,.05);
+      border-color:var(--pink);
+      box-shadow:0 0 0 3px rgba(217,79,131,.09);
     }
 
-    .field select option{
-      background:var(--white);
-
-      color:var(--text);
+    .price-input{
+      position:relative;
     }
 
-    .field textarea{
-      min-height:100px;
-
-      resize:vertical;
-
-      line-height:1.5;
+    .price-symbol{
+      position:absolute;
+      left:11px;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--pink-dark);
+      font-weight:900;
+      pointer-events:none;
     }
 
-    .two-fields{
-      display:grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap:12px;
+    .price-input input{
+      padding-left:28px;
     }
 
-    .resource-actions{
+    .currency-note{
+      font-size:10px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .card-actions{
       display:flex;
-
-      justify-content:space-between;
-
-      gap:10px;
-
-      margin-top:18px;
-
-      padding-top:16px;
-
+      justify-content:flex-end;
+      gap:8px;
+      margin-top:16px;
+      padding-top:15px;
       border-top:1px solid var(--border);
     }
 
-    /* =====================================
-       EMPTY
-       ===================================== */
+    /* =========================
+       EMPTY STATE
+    ========================== */
 
     .empty{
-      display:none;
-
+      grid-column:1 / -1;
+      padding:45px 20px;
       text-align:center;
-
-      padding:60px 20px;
-
       border:1px dashed var(--border);
-
       border-radius:18px;
-
-      color:var(--muted);
-
-      background:rgba(255,255,255,.35);
+      background:rgba(255,255,255,.65);
     }
 
     .empty-icon{
-      font-size:42px;
-
-      margin-bottom:12px;
+      font-size:34px;
+      margin-bottom:10px;
     }
 
     .empty h3{
-      color:var(--text);
-
-      margin-bottom:8px;
+      margin-bottom:5px;
     }
 
-    /* =====================================
+    .empty p{
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* =========================
        MODAL
-       ===================================== */
+    ========================== */
 
-    .modal-backdrop{
+    .modal-overlay{
       position:fixed;
-
       inset:0;
-
-      z-index:200;
-
-      background:rgba(80,35,50,.35);
-
-      backdrop-filter:blur(8px);
-
+      z-index:300;
+      background:rgba(61,41,48,.45);
+      backdrop-filter:blur(7px);
       display:none;
-
       align-items:center;
-
       justify-content:center;
-
       padding:20px;
     }
 
-    .modal-backdrop.show{
+    .modal-overlay.show{
       display:flex;
     }
 
     .modal{
-      width:min(600px,100%);
-
+      width:min(620px,100%);
       max-height:90vh;
-
       overflow:auto;
-
       background:var(--cream);
-
       border:1px solid var(--border);
-
-      border-radius:20px;
-
-      padding:24px;
-
-      box-shadow:
-        0 30px 100px
-        rgba(80,35,50,.25);
+      border-radius:22px;
+      box-shadow:var(--shadow-lg);
     }
 
     .modal-header{
+      padding:20px 22px;
       display:flex;
-
-      align-items:center;
-
       justify-content:space-between;
-
-      margin-bottom:22px;
+      align-items:center;
+      border-bottom:1px solid var(--border);
     }
 
     .modal-header h2{
       font-size:22px;
+      letter-spacing:-.03em;
     }
 
-    .close{
+    .close-btn{
       width:36px;
       height:36px;
-
-      border-radius:9px;
-
-      border:1px solid var(--border);
-
-      background:var(--white);
-
+      border:none;
+      border-radius:10px;
+      background:var(--pink-pale);
       color:var(--pink-dark);
-
       font-size:20px;
+    }
+
+    .modal-body{
+      padding:22px;
+    }
+
+    .modal-form{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .modal-form .full{
+      grid-column:1 / -1;
     }
 
     .modal-actions{
       display:flex;
-
       justify-content:flex-end;
-
-      gap:10px;
-
+      gap:9px;
       margin-top:20px;
+      padding-top:18px;
+      border-top:1px solid var(--border);
     }
 
-    /* =====================================
+    /* =========================
        TOAST
-       ===================================== */
+    ========================== */
 
     .toast{
       position:fixed;
-
       left:50%;
-      bottom:24px;
-
-      transform:
-        translate(-50%,20px);
-
-      background:var(--text);
-
-      border:1px solid
-        rgba(255,255,255,.08);
-
+      bottom:22px;
+      transform:translate(-50%,20px);
+      background:#3d2930;
       color:white;
-
-      padding:13px 18px;
-
+      padding:12px 17px;
       border-radius:12px;
-
-      box-shadow:
-        0 15px 50px
-        rgba(80,35,50,.25);
-
+      box-shadow:var(--shadow-lg);
+      font-size:13px;
+      font-weight:700;
       opacity:0;
-
       pointer-events:none;
-
       transition:.25s ease;
-
       z-index:500;
-
-      max-width:90%;
-
-      text-align:center;
-
-      font-size:14px;
     }
 
     .toast.show{
       opacity:1;
-
-      transform:
-        translate(-50%,0);
+      transform:translate(-50%,0);
     }
 
-    /* =====================================
-       FOOTER
-       ===================================== */
-
-    footer{
-      border-top:1px solid var(--border);
-
-      padding:30px 0;
-
-      color:var(--muted);
-
-      font-size:13px;
-
-      text-align:center;
-
-      background:var(--cream2);
-    }
-
-    /* =====================================
-       MOBILE
-       ===================================== */
+    /* =========================
+       RESPONSIVE
+    ========================== */
 
     @media(max-width:800px){
-
-      .nav{
-        padding:0 4%;
+      .nav-inner{
+        min-height:68px;
       }
 
       .nav-links{
         display:none;
       }
 
-      .brand{
-        font-size:15px;
-      }
-
-      .logo-atom{
-        width:36px;
-        height:36px;
-      }
-
-      .logo-atom::before,
-      .logo-atom::after{
-        width:33px;
-      }
-
-      .page-header{
-        align-items:flex-start;
-
-        flex-direction:column;
+      .hero{
+        padding-top:34px;
       }
 
       .stats{
         grid-template-columns:1fr;
       }
 
-      .resource-grid{
+      .resources-grid{
         grid-template-columns:1fr;
       }
     }
 
-    @media(max-width:520px){
-
-      main{
-        padding-top:32px;
+    @media(max-width:560px){
+      .container,
+      .nav-inner{
+        width:min(100% - 22px,1180px);
       }
 
-      .container{
-        width:94%;
+      .brand-text{
+        font-size:14px;
       }
 
-      .nav-actions .account-btn{
-        display:none;
+      .brand-mark{
+        width:36px;
+        height:36px;
       }
 
-      .header-actions{
-        width:100%;
+      .hero h1{
+        font-size:36px;
       }
 
-      .header-actions .btn{
-        flex:1;
-      }
-
-      .two-fields{
-        grid-template-columns:1fr;
-
-        gap:0;
-      }
-
-      .toolbar{
-        align-items:stretch;
-      }
-
-      .search-box{
-        min-width:100%;
-      }
-
-      .toolbar-actions{
-        width:100%;
-      }
-
-      .toolbar-actions .btn{
-        flex:1;
-      }
-
-      .resource-actions{
+      .hero-actions{
         flex-direction:column;
       }
 
-      .resource-actions .btn{
+      .hero-actions .btn{
         width:100%;
       }
 
-      .modal{
-        padding:18px;
+      .section-heading{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .toolbar{
+        flex-direction:column;
+      }
+
+      .toolbar .btn{
+        width:100%;
+      }
+
+      .field-grid,
+      .modal-form{
+        grid-template-columns:1fr;
+      }
+
+      .field.full,
+      .modal-form .full{
+        grid-column:auto;
+      }
+
+      .card-actions{
+        flex-direction:column;
+      }
+
+      .card-actions .btn{
+        width:100%;
+      }
+
+      .warning{
+        align-items:flex-start;
       }
     }
   </style>
@@ -1029,311 +807,183 @@
 
 <body>
 
-  <!-- =====================================
-       NAVIGATION
-       ===================================== -->
+  <!-- =========================
+       NAVBAR
+  ========================== -->
 
-  <nav class="nav">
+  <nav class="navbar">
+    <div class="nav-inner">
 
-    <a href="index.html" class="brand">
+      <a href="index.html" class="brand">
+        <div class="brand-mark">
+          <span></span>
+        </div>
+        <span class="brand-text">Chemistry Resources Co.</span>
+      </a>
 
-      <div class="logo-atom">
-
-        <div class="logo-core"></div>
-
-        <div class="logo-electron one"></div>
-
-        <div class="logo-electron two"></div>
-
+      <div class="nav-links">
+        <a href="admin.html" class="active">Dashboard</a>
+        <a href="shop.html">Shop</a>
+        <a href="account.html">Account</a>
+        <a href="shop.html">View Shop</a>
+        <a href="#" onclick="logout(); return false;">Logout</a>
       </div>
 
-      Chemistry Resources Co.
-
-    </a>
-
-
-    <div class="nav-links">
-
-      <a href="admin.html">
-        Dashboard
-      </a>
-
-      <a href="shop.html">
-        Shop
-      </a>
-
-      <a href="account.html">
-        Account
-      </a>
-
     </div>
-
-
-    <div class="nav-actions">
-
-      <a
-        href="shop.html"
-        class="nav-btn"
-      >
-        View Shop
-      </a>
-
-      <button
-        class="nav-btn account-btn"
-        onclick="logout()"
-      >
-        Logout
-      </button>
-
-    </div>
-
   </nav>
 
 
-  <!-- =====================================
-       MAIN
-       ===================================== -->
+  <main class="container">
 
-  <main>
+    <!-- =========================
+         HERO
+    ========================== -->
 
-    <div class="container">
+    <section class="hero">
+
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Administration
+      </div>
+
+      <h1>Manage your chemistry resources.</h1>
+
+      <p class="hero-copy">
+        Control your resource catalog, prices, categories, labels and descriptions
+        from one simple dashboard. All prices are stored in USD and can be edited
+        whenever you need.
+      </p>
+
+      <div class="hero-actions">
+        <a href="shop.html" class="btn btn-primary">
+          View Shop →
+        </a>
+
+        <button class="btn btn-secondary" onclick="openAddModal()">
+          + Add Resource
+        </button>
+      </div>
+
+    </section>
 
 
-      <!-- HEADER -->
+    <!-- =========================
+         WARNING
+    ========================== -->
 
-      <section class="page-header">
+    <div class="warning">
+
+      <div class="warning-icon">⚠️</div>
+
+      <div>
+        <strong>Prototype Admin Mode</strong>
+
+        <p>
+          Your catalog is currently stored in this browser using localStorage.
+          This is suitable for testing the website, but before accepting real
+          payments we will connect the site to a secure database and proper
+          administrator authentication.
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         STATS
+    ========================== -->
+
+    <section class="stats">
+
+      <div class="stat">
+        <div class="stat-label">Total Resources</div>
+        <div class="stat-value" id="totalResources">0</div>
+        <div class="stat-note">Items currently in your catalog</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Average Price</div>
+        <div class="stat-value" id="averagePrice">$0.00</div>
+        <div class="stat-note">Average resource price</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Catalog Value</div>
+        <div class="stat-value" id="catalogValue">$0.00</div>
+        <div class="stat-note">Combined listed resource prices</div>
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         RESOURCE SECTION
+    ========================== -->
+
+    <section>
+
+      <div class="section-heading">
 
         <div>
-
-          <div class="eyebrow">
-            ⚛️ Administration
-          </div>
-
-          <h1>
-            Admin Dashboard
-          </h1>
-
-          <p class="subtitle">
-            Manage your Chemistry Resources Co. catalog,
-            individual USD prices, categories, descriptions
-            and resource details.
-          </p>
-
-        </div>
-
-
-        <div class="header-actions">
-
-          <a
-            href="shop.html"
-            class="btn btn-secondary"
-          >
-            View Shop
-          </a>
-
-          <button
-            class="btn btn-primary"
-            onclick="openAddModal()"
-          >
-            + Add Resource
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- WARNING -->
-
-      <div class="warning">
-
-        <div class="warning-icon">
-          ⚠️
-        </div>
-
-        <div>
-
-          <strong>
-            Prototype admin mode.
-          </strong>
-
-          <br>
-
-          Your catalog changes are currently stored
-          in this browser using localStorage.
-          Real database storage and secure admin
-          authentication will be connected later.
-
+          <h2>Resource Catalog</h2>
+          <p>Edit each resource individually, including its USD price.</p>
         </div>
 
       </div>
 
-
-      <!-- STATS -->
-
-      <section class="stats">
-
-        <div class="stat">
-
-          <div class="stat-label">
-            Total Resources
-          </div>
-
-          <div
-            class="stat-value"
-            id="totalResources"
-          >
-            0
-          </div>
-
-        </div>
-
-
-        <div class="stat">
-
-          <div class="stat-label">
-            Average Price
-          </div>
-
-          <div class="stat-value">
-
-            $
-
-            <span id="averagePrice">
-              0.00
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="stat">
-
-          <div class="stat-label">
-            Catalog Value
-          </div>
-
-          <div class="stat-value">
-
-            $
-
-            <span id="catalogValue">
-              0.00
-            </span>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- TOOLBAR -->
 
       <div class="toolbar">
 
-        <div class="search-box">
-
-          <span class="search-icon">
-            ⌕
-          </span>
+        <div class="search-wrap">
+          <span>⌕</span>
 
           <input
-            type="search"
             id="searchInput"
+            class="search-input"
+            type="search"
             placeholder="Search resources..."
-            oninput="renderResources()"
+            autocomplete="off"
           >
-
         </div>
 
+        <button class="btn btn-secondary" onclick="restoreStarterCatalog()">
+          ↻ Restore Starter Catalog
+        </button>
 
-        <div class="toolbar-actions">
-
-          <button
-            class="btn btn-primary btn-small"
-            onclick="openAddModal()"
-          >
-            + Add Resource
-          </button>
-
-
-          <button
-            class="btn btn-secondary btn-small"
-            onclick="resetDemoData()"
-          >
-            Restore Starter Catalog
-          </button>
-
-        </div>
+        <button class="btn btn-primary" onclick="openAddModal()">
+          + Add Resource
+        </button>
 
       </div>
 
 
-      <!-- RESOURCE LIST -->
+      <div id="resourcesGrid" class="resources-grid"></div>
 
-      <section
-        id="resourceGrid"
-        class="resource-grid"
-      ></section>
-
-
-      <div
-        id="emptyState"
-        class="empty"
-      >
-
-        <div class="empty-icon">
-          🔎
-        </div>
-
-        <h3>
-          No resources found
-        </h3>
-
-        <p>
-          Try another search or add a new resource.
-        </p>
-
-      </div>
-
-
-    </div>
+    </section>
 
   </main>
 
 
-  <footer>
-
-    Chemistry Resources Co.
-    •
-    Admin Dashboard
-
-  </footer>
-
-
-  <!-- =====================================
+  <!-- =========================
        ADD RESOURCE MODAL
-       ===================================== -->
+  ========================== -->
 
   <div
-    class="modal-backdrop"
     id="addModal"
+    class="modal-overlay"
+    onclick="handleModalBackground(event)"
   >
 
     <div class="modal">
 
-
       <div class="modal-header">
 
-        <h2>
-          Add Resource
-        </h2>
+        <h2>Add Resource</h2>
 
         <button
-          class="close"
+          class="close-btn"
           onclick="closeAddModal()"
+          aria-label="Close"
         >
           ×
         </button>
@@ -1341,1621 +991,842 @@
       </div>
 
 
-      <form
-        id="addResourceForm"
-        onsubmit="addResource(event)"
-      >
+      <div class="modal-body">
+
+        <form id="addForm" onsubmit="addResource(event)">
+
+          <div class="modal-form">
+
+            <div class="field full">
+              <label for="addName">Resource Name</label>
+              <input id="addName" required placeholder="Example: Electrolysis Notes">
+            </div>
 
 
-        <div class="field">
+            <div class="field">
+              <label for="addCategory">Category</label>
 
-          <label>
-            Resource Name
-          </label>
-
-          <input
-            type="text"
-            id="addName"
-            placeholder="Example: Electrolysis Notes"
-            required
-          >
-
-        </div>
+              <select id="addCategory" required>
+                <option value="atomic">Atomic Structure</option>
+                <option value="bonding">Chemical Bonding</option>
+                <option value="organic">Organic Chemistry</option>
+                <option value="calculations">Calculations</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
 
-        <div class="two-fields">
+            <div class="field">
+              <label for="addPrice">Price — USD</label>
+
+              <div class="price-input">
+                <span class="price-symbol">$</span>
+                <input
+                  id="addPrice"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="2.00"
+                  required
+                >
+              </div>
+
+            </div>
 
 
-          <div class="field">
+            <div class="field">
+              <label for="addTag">Tag</label>
+              <input id="addTag" placeholder="NOTES">
+            </div>
 
-            <label>
-              Category
-            </label>
 
-            <select id="addCategory">
+            <div class="field">
+              <label for="addType">Resource Type</label>
+              <input id="addType" placeholder="Study Notes">
+            </div>
 
-              <option value="atomic">
-                Atomic Structure
-              </option>
 
-              <option value="bonding">
-                Chemical Bonding
-              </option>
+            <div class="field">
+              <label for="addIcon">Icon / Emoji</label>
+              <input id="addIcon" value="🧪" maxlength="4">
+            </div>
 
-              <option value="organic">
-                Organic Chemistry
-              </option>
 
-              <option value="calculations">
-                Calculations
-              </option>
+            <div class="field full">
+              <label for="addDescription">Description</label>
 
-              <option value="other">
-                Other
-              </option>
-
-            </select>
+              <textarea
+                id="addDescription"
+                placeholder="Short description of this resource..."
+              ></textarea>
+            </div>
 
           </div>
 
 
-          <div class="field">
+          <div class="modal-actions">
 
-            <label>
-              Price (USD)
-            </label>
-
-            <input
-              type="number"
-              id="addPrice"
-              min="0"
-              step="0.01"
-              placeholder="2.00"
-              required
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeAddModal()"
             >
+              Cancel
+            </button>
 
-          </div>
-
-
-        </div>
-
-
-        <div class="two-fields">
-
-
-          <div class="field">
-
-            <label>
-              Tag
-            </label>
-
-            <input
-              type="text"
-              id="addTag"
-              placeholder="NEW"
+            <button
+              type="submit"
+              class="btn btn-primary"
             >
+              Add Resource
+            </button>
 
           </div>
 
+        </form>
 
-          <div class="field">
-
-            <label>
-              Type
-            </label>
-
-            <input
-              type="text"
-              id="addType"
-              placeholder="Study Notes"
-            >
-
-          </div>
-
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Icon / Emoji
-          </label>
-
-          <input
-            type="text"
-            id="addIcon"
-            placeholder="⚛️"
-            maxlength="10"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Description
-          </label>
-
-          <textarea
-            id="addDescription"
-            placeholder="Describe what students will receive..."
-            required
-          ></textarea>
-
-        </div>
-
-
-        <div class="modal-actions">
-
-          <button
-            type="button"
-            class="btn btn-secondary"
-            onclick="closeAddModal()"
-          >
-            Cancel
-          </button>
-
-
-          <button
-            type="submit"
-            class="btn btn-primary"
-          >
-            Add Resource
-          </button>
-
-        </div>
-
-
-      </form>
+      </div>
 
     </div>
 
   </div>
 
 
-  <!-- TOAST -->
+  <!-- =========================
+       TOAST
+  ========================== -->
 
-  <div
-    id="toast"
-    class="toast"
-  ></div>
+  <div id="toast" class="toast"></div>
 
 
   <script>
 
-    /* =====================================
+    /* ==========================================
        STORAGE
-       ===================================== */
+    ========================================== */
 
-    const STORAGE_KEY =
-      "chemistryResources";
+    const STORAGE_KEY = "chemistryResources";
 
 
-    /* =====================================
+    /* ==========================================
        STARTER CATALOG
-       ===================================== */
+    ========================================== */
 
-    const demoResources = [
+    const starterResources = [
 
       {
-        id:"atomic-notes",
-
-        name:"Atomic Structure Notes",
-
-        category:"atomic",
-
-        categoryLabel:"Atomic Structure",
-
-        price:2.00,
-
-        tag:"POPULAR",
-
-        type:"Study Notes",
-
-        icon:"⚛️",
-
+        id: "atomic-notes",
+        name: "Atomic Structure Notes",
+        category: "atomic",
+        price: 2.00,
+        tag: "POPULAR",
+        type: "Study Notes",
+        icon: "⚛️",
         description:
-          "Clear and easy-to-understand notes covering protons, neutrons, electrons, isotopes, electron configuration and atomic structure."
+          "Clear and exam-focused notes covering the key ideas of atomic structure."
       },
 
-
       {
-        id:"atomic-worksheet",
-
-        name:"Atomic Structure Worksheet",
-
-        category:"atomic",
-
-        categoryLabel:"Atomic Structure",
-
-        price:1.50,
-
-        tag:"WORKSHEET",
-
-        type:"Worksheet",
-
-        icon:"📝",
-
+        id: "atomic-worksheet",
+        name: "Atomic Structure Worksheet",
+        category: "atomic",
+        price: 1.50,
+        tag: "WORKSHEET",
+        type: "Worksheet",
+        icon: "📝",
         description:
-          "Practice questions designed to help students master atomic structure, isotopes, electron arrangement and related concepts."
+          "Practice questions designed to reinforce atomic structure concepts."
       },
 
-
       {
-        id:"bonding-notes",
-
-        name:"Chemical Bonding Notes",
-
-        category:"bonding",
-
-        categoryLabel:"Chemical Bonding",
-
-        price:2.50,
-
-        tag:"NOTES",
-
-        type:"Study Notes",
-
-        icon:"🔗",
-
+        id: "bonding-notes",
+        name: "Chemical Bonding Notes",
+        category: "bonding",
+        price: 2.50,
+        tag: "NOTES",
+        type: "Study Notes",
+        icon: "🔗",
         description:
-          "Understand ionic, covalent and metallic bonding with simple explanations, diagrams and examples."
+          "Understand ionic, covalent and metallic bonding with simple explanations."
       },
 
-
       {
-        id:"bonding-worksheet",
-
-        name:"Chemical Bonding Worksheet",
-
-        category:"bonding",
-
-        categoryLabel:"Chemical Bonding",
-
-        price:1.75,
-
-        tag:"WORKSHEET",
-
-        type:"Worksheet",
-
-        icon:"📝",
-
+        id: "bonding-worksheet",
+        name: "Chemical Bonding Worksheet",
+        category: "bonding",
+        price: 1.75,
+        tag: "WORKSHEET",
+        type: "Worksheet",
+        icon: "📝",
         description:
-          "Practice questions covering ionic, covalent and metallic bonding, structures, properties and exam-style questions."
+          "Focused practice questions covering the main chemical bonding concepts."
       },
 
-
       {
-        id:"organic-notes",
-
-        name:"Organic Chemistry Notes",
-
-        category:"organic",
-
-        categoryLabel:"Organic Chemistry",
-
-        price:3.00,
-
-        tag:"NOTES",
-
-        type:"Study Notes",
-
-        icon:"🧪",
-
+        id: "organic-notes",
+        name: "Organic Chemistry Notes",
+        category: "organic",
+        price: 3.00,
+        tag: "NOTES",
+        type: "Study Notes",
+        icon: "🧪",
         description:
-          "Clear IGCSE-level notes covering hydrocarbons, homologous series, functional groups and important organic reactions."
+          "A student-friendly introduction to the important IGCSE organic chemistry topics."
       },
 
-
       {
-        id:"organic-worksheet",
-
-        name:"Organic Chemistry Worksheet",
-
-        category:"organic",
-
-        categoryLabel:"Organic Chemistry",
-
-        price:2.00,
-
-        tag:"WORKSHEET",
-
-        type:"Worksheet",
-
-        icon:"📝",
-
+        id: "organic-worksheet",
+        name: "Organic Chemistry Worksheet",
+        category: "organic",
+        price: 2.00,
+        tag: "WORKSHEET",
+        type: "Worksheet",
+        icon: "📝",
         description:
-          "Practice questions for hydrocarbons, alkanes, alkenes, functional groups and organic reactions."
+          "Practice questions covering hydrocarbons, reactions and organic chemistry basics."
       },
 
-
       {
-        id:"calculations",
-
-        name:"Chemistry Calculations Guide",
-
-        category:"calculations",
-
-        categoryLabel:"Calculations",
-
-        price:3.50,
-
-        tag:"GUIDE",
-
-        type:"Study Guide",
-
-        icon:"📊",
-
+        id: "calculations",
+        name: "Chemistry Calculations Guide",
+        category: "calculations",
+        price: 3.50,
+        tag: "CALCULATIONS",
+        type: "Study Guide",
+        icon: "📊",
         description:
-          "A practical guide to chemistry calculations including relative formula mass, moles, equations, concentrations and percentage yield."
+          "A practical guide to the calculations students need for IGCSE Chemistry."
       },
 
-
       {
-        id:"exam-guide",
-
-        name:"Chemistry Exam Study Guide",
-
-        category:"other",
-
-        categoryLabel:"Other",
-
-        price:4.00,
-
-        tag:"STUDY GUIDE",
-
-        type:"Study Guide",
-
-        icon:"📚",
-
+        id: "exam-guide",
+        name: "Chemistry Exam Study Guide",
+        category: "other",
+        price: 4.00,
+        tag: "STUDY GUIDE",
+        type: "Study Guide",
+        icon: "📚",
         description:
-          "A compact IGCSE Chemistry revision guide containing key concepts, formulas, exam tips and important reminders."
+          "Exam-focused revision guidance to help students prepare more effectively."
       },
 
-
       {
-        id:"revision-pack",
-
-        name:"Chemistry Revision Pack",
-
-        category:"other",
-
-        categoryLabel:"Other",
-
-        price:6.00,
-
-        tag:"REVISION PACK",
-
-        type:"Resource Pack",
-
-        icon:"📚",
-
+        id: "revision-pack",
+        name: "Chemistry Revision Pack",
+        category: "other",
+        price: 6.00,
+        tag: "REVISION PACK",
+        type: "Resource Pack",
+        icon: "📖",
         description:
-          "A larger chemistry revision collection designed for students preparing for their IGCSE Chemistry examinations."
+          "A compact collection of revision materials for IGCSE Chemistry preparation."
       },
 
-
       {
-        id:"full-pack",
-
-        name:"Complete IGCSE Chemistry Pack",
-
-        category:"other",
-
-        categoryLabel:"Full Pack",
-
-        price:25.00,
-
-        tag:"FULL PACK",
-
-        type:"Complete Resource Pack",
-
-        icon:"⚛️",
-
+        id: "full-pack",
+        name: "Complete IGCSE Chemistry Full Pack",
+        category: "other",
+        price: 25.00,
+        tag: "FULL PACK",
+        type: "Complete Pack",
+        icon: "🎓",
         description:
-          "The complete IGCSE Chemistry resource collection, bringing together notes, worksheets, calculation practice, revision material and study guides in one pack."
-      },
-
-
-      {
-        id:"mole-practice",
-
-        name:"Mole Calculations Practice",
-
-        category:"calculations",
-
-        categoryLabel:"Calculations",
-
-        price:2.00,
-
-        tag:"PRACTICE",
-
-        type:"Practice Sheet",
-
-        icon:"📊",
-
-        description:
-          "Step-by-step practice for mole calculations, molar mass, equations and common chemistry calculation questions."
+          "The complete IGCSE Chemistry resource collection in one affordable pack."
       }
 
     ];
 
 
-    /* =====================================
+    /* ==========================================
        CATEGORY LABELS
-       ===================================== */
+    ========================================== */
 
     const categoryLabels = {
-
-      atomic:
-        "Atomic Structure",
-
-      bonding:
-        "Chemical Bonding",
-
-      organic:
-        "Organic Chemistry",
-
-      calculations:
-        "Calculations",
-
-      other:
-        "Other"
-
+      atomic: "Atomic Structure",
+      bonding: "Chemical Bonding",
+      organic: "Organic Chemistry",
+      calculations: "Calculations",
+      other: "Other"
     };
 
 
-    /* =====================================
+    /* ==========================================
        GET RESOURCES
-       ===================================== */
+    ========================================== */
 
     function getResources(){
 
-      const saved =
-        localStorage.getItem(
-          STORAGE_KEY
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if(!saved){
+
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(starterResources)
         );
 
+        return structuredClone(starterResources);
+      }
 
-      if(saved){
+      try{
 
-        try{
+        const resources = JSON.parse(saved);
 
-          const parsed =
-            JSON.parse(saved);
-
-
-          if(Array.isArray(parsed)){
-
-            return parsed;
-
-          }
-
-        }catch(error){
-
-          console.log(
-            "Could not read saved resources."
-          );
-
+        if(Array.isArray(resources)){
+          return resources;
         }
+
+      }catch(error){
+
+        console.error("Could not read resource catalog:", error);
 
       }
 
-
       localStorage.setItem(
-
         STORAGE_KEY,
-
-        JSON.stringify(
-          demoResources
-        )
-
+        JSON.stringify(starterResources)
       );
 
-
-      return JSON.parse(
-        JSON.stringify(
-          demoResources
-        )
-      );
-
+      return structuredClone(starterResources);
     }
 
 
-    /* =====================================
+    /* ==========================================
        SAVE RESOURCES
-       ===================================== */
+    ========================================== */
 
     function saveResources(resources){
 
       localStorage.setItem(
-
         STORAGE_KEY,
-
-        JSON.stringify(
-          resources
-        )
-
+        JSON.stringify(resources)
       );
 
     }
 
 
-    /* =====================================
-       CREATE ID
-       ===================================== */
+    /* ==========================================
+       ESCAPE HTML
+    ========================================== */
+
+    function escapeHtml(value){
+
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+    }
+
+
+    /* ==========================================
+       CREATE UNIQUE ID
+    ========================================== */
 
     function createId(name){
 
-      let base =
-        name
-          .toLowerCase()
-          .trim()
-          .replace(
-            /[^a-z0-9]+/g,
-            "-"
-          )
-          .replace(
-            /^-+|-+$/g,
-            ""
-          );
+      const base = String(name)
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"")
+        .slice(0,50);
 
+      let id = base || "resource";
 
-      if(!base){
+      const resources = getResources();
 
-        base =
-          "resource";
+      let counter = 2;
 
-      }
+      while(resources.some(resource => resource.id === id)){
 
-
-      const resources =
-        getResources();
-
-
-      let id =
-        base;
-
-
-      let number =
-        2;
-
-
-      while(
-        resources.some(
-          resource =>
-            resource.id === id
-        )
-      ){
-
-        id =
-          base +
-          "-" +
-          number;
-
-        number++;
+        id = `${base}-${counter}`;
+        counter++;
 
       }
-
 
       return id;
 
     }
 
 
-    /* =====================================
-       ESCAPE HTML
-       ===================================== */
-
-    function escapeHtml(value){
-
-      return String(
-        value ?? ""
-      )
-
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-
-      .replace(
-        /</g,
-        "&lt;"
-      )
-
-      .replace(
-        />/g,
-        "&gt;"
-      )
-
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-    }
-
-
-    /* =====================================
+    /* ==========================================
        RENDER
-       ===================================== */
+    ========================================== */
 
     function renderResources(){
 
-      const resources =
-        getResources();
+      const grid = document.getElementById("resourcesGrid");
+
+      if(!grid) return;
+
+      const resources = getResources();
+
+      const query = (
+        document.getElementById("searchInput")?.value || ""
+      )
+        .trim()
+        .toLowerCase();
 
 
-      const search =
-        document
-          .getElementById(
-            "searchInput"
-          )
-          .value
-          .trim()
+      const filtered = resources.filter(resource => {
+
+        if(!query) return true;
+
+        const text = [
+          resource.name,
+          resource.category,
+          categoryLabels[resource.category],
+          resource.tag,
+          resource.type,
+          resource.description,
+          resource.id
+        ]
+          .join(" ")
           .toLowerCase();
 
+        return text.includes(query);
 
-      const filtered =
-        resources.filter(
-          resource => {
-
-            const text = [
-
-              resource.name,
-
-              resource.categoryLabel,
-
-              resource.category,
-
-              resource.tag,
-
-              resource.type,
-
-              resource.description
-
-            ]
-
-            .join(" ")
-
-            .toLowerCase();
+      });
 
 
-            return text.includes(
-              search
-            );
+      if(filtered.length === 0){
 
-          }
-        );
+        grid.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">🔍</div>
+            <h3>No resources found</h3>
+            <p>Try a different search term.</p>
+          </div>
+        `;
 
+        updateStats(resources);
 
-      const grid =
-        document.getElementById(
-          "resourceGrid"
-        );
-
-
-      const empty =
-        document.getElementById(
-          "emptyState"
-        );
-
-
-      grid.innerHTML =
-        "";
-
-
-      if(
-        filtered.length === 0
-      ){
-
-        empty.style.display =
-          "block";
-
-      }else{
-
-        empty.style.display =
-          "none";
-
-
-        filtered.forEach(
-          resource => {
-
-            grid.appendChild(
-              createResourceCard(
-                resource
-              )
-            );
-
-          }
-        );
-
+        return;
       }
 
 
-      updateStats(
-        resources
-      );
+      grid.innerHTML = filtered
+        .map(createResourceCard)
+        .join("");
+
+
+      updateStats(resources);
 
     }
 
 
-    /* =====================================
+    /* ==========================================
        RESOURCE CARD
-       ===================================== */
+    ========================================== */
 
-    function createResourceCard(
-      resource
-    ){
+    function createResourceCard(resource){
 
-      const card =
-        document.createElement(
-          "article"
-        );
+      const isFullPack = resource.id === "full-pack";
 
+      return `
 
-      card.className =
-        "resource-card";
+        <article
+          class="resource-card ${isFullPack ? "full-pack" : ""}"
+          data-id="${escapeHtml(resource.id)}"
+        >
 
-
-      const isFullPack =
-        resource.id ===
-        "full-pack";
-
-
-      card.innerHTML = `
-
-        <div class="resource-top">
-
-          <div class="resource-title-wrap">
-
-            <div class="resource-icon">
-
-              ${escapeHtml(
-                resource.icon ||
-                "⚛️"
-              )}
-
-            </div>
-
+          <div class="card-top">
 
             <div>
 
-              <strong>
-
-                ${escapeHtml(
-                  resource.name
-                )}
-
-              </strong>
-
+              <div class="resource-icon">
+                ${escapeHtml(resource.icon || "🧪")}
+              </div>
 
               <div class="resource-id">
+                ID: ${escapeHtml(resource.id)}
+              </div>
 
-                ID:
-                ${escapeHtml(
-                  resource.id
-                )}
+            </div>
+
+
+            <span class="badge">
+              ${escapeHtml(resource.tag || "RESOURCE")}
+            </span>
+
+          </div>
+
+
+          <div class="field-grid">
+
+            <div class="field full">
+              <label>Resource Name</label>
+
+              <input
+                id="name-${escapeHtml(resource.id)}"
+                value="${escapeHtml(resource.name)}"
+              >
+            </div>
+
+
+            <div class="field">
+              <label>Category</label>
+
+              <select id="category-${escapeHtml(resource.id)}">
+
+                ${Object.entries(categoryLabels)
+                  .map(([value,label]) => `
+                    <option
+                      value="${escapeHtml(value)}"
+                      ${resource.category === value ? "selected" : ""}
+                    >
+                      ${escapeHtml(label)}
+                    </option>
+                  `)
+                  .join("")}
+
+              </select>
+            </div>
+
+
+            <div class="field">
+              <label>Price — USD</label>
+
+              <div class="price-input">
+
+                <span class="price-symbol">$</span>
+
+                <input
+                  id="price-${escapeHtml(resource.id)}"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value="${Number(resource.price || 0).toFixed(2)}"
+                >
 
               </div>
 
+              <div class="currency-note">
+                Customers will see this price in USD.
+              </div>
 
-              ${
-                isFullPack
-                  ? `
-                    <div class="full-pack-label">
-                      COMPLETE PACK
-                    </div>
-                  `
-                  : ""
-              }
+            </div>
+
+
+            <div class="field">
+              <label>Tag</label>
+
+              <input
+                id="tag-${escapeHtml(resource.id)}"
+                value="${escapeHtml(resource.tag || "")}"
+                placeholder="NOTES"
+              >
+
+            </div>
+
+
+            <div class="field">
+              <label>Resource Type</label>
+
+              <input
+                id="type-${escapeHtml(resource.id)}"
+                value="${escapeHtml(resource.type || "")}"
+                placeholder="Study Notes"
+              >
+
+            </div>
+
+
+            <div class="field">
+              <label>Icon / Emoji</label>
+
+              <input
+                id="icon-${escapeHtml(resource.id)}"
+                value="${escapeHtml(resource.icon || "🧪")}"
+                maxlength="4"
+              >
+
+            </div>
+
+
+            <div class="field full">
+
+              <label>Description</label>
+
+              <textarea
+                id="description-${escapeHtml(resource.id)}"
+              >${escapeHtml(resource.description || "")}</textarea>
 
             </div>
 
           </div>
 
-        </div>
 
+          <div class="card-actions">
 
-        <div class="field">
-
-          <label>
-            Resource Name
-          </label>
-
-          <input
-            class="edit-name"
-            type="text"
-            value="${escapeHtml(
-              resource.name
-            )}"
-          >
-
-        </div>
-
-
-        <div class="two-fields">
-
-          <div class="field">
-
-            <label>
-              Category
-            </label>
-
-            <select
-              class="edit-category"
+            <button
+              class="btn btn-danger btn-small"
+              onclick="deleteResource('${escapeHtml(resource.id)}')"
             >
+              Delete
+            </button>
 
-              <option
-                value="atomic"
-                ${
-                  resource.category ===
-                  "atomic"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Atomic Structure
-              </option>
-
-              <option
-                value="bonding"
-                ${
-                  resource.category ===
-                  "bonding"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Chemical Bonding
-              </option>
-
-              <option
-                value="organic"
-                ${
-                  resource.category ===
-                  "organic"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Organic Chemistry
-              </option>
-
-              <option
-                value="calculations"
-                ${
-                  resource.category ===
-                  "calculations"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Calculations
-              </option>
-
-              <option
-                value="other"
-                ${
-                  resource.category ===
-                  "other"
-                    ? "selected"
-                    : ""
-                }
-              >
-                Other
-              </option>
-
-            </select>
+            <button
+              class="btn btn-primary btn-small"
+              onclick="saveResource('${escapeHtml(resource.id)}')"
+            >
+              Save Changes
+            </button>
 
           </div>
 
-
-          <div class="field">
-
-            <label>
-              Price (USD)
-            </label>
-
-            <input
-              class="edit-price"
-              type="number"
-              min="0"
-              step="0.01"
-              value="${Number(
-                resource.price || 0
-              ).toFixed(2)}"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="two-fields">
-
-          <div class="field">
-
-            <label>
-              Tag
-            </label>
-
-            <input
-              class="edit-tag"
-              type="text"
-              value="${escapeHtml(
-                resource.tag || ""
-              )}"
-              placeholder="POPULAR"
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              Type
-            </label>
-
-            <input
-              class="edit-type"
-              type="text"
-              value="${escapeHtml(
-                resource.type || ""
-              )}"
-              placeholder="Study Notes"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Icon / Emoji
-          </label>
-
-          <input
-            class="edit-icon"
-            type="text"
-            maxlength="10"
-            value="${escapeHtml(
-              resource.icon ||
-              "⚛️"
-            )}"
-          >
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Description
-          </label>
-
-          <textarea
-            class="edit-description"
-          >${escapeHtml(
-            resource.description ||
-            ""
-          )}</textarea>
-
-        </div>
-
-
-        <div class="resource-actions">
-
-          <button
-            class="btn btn-danger btn-small"
-            onclick="deleteResource(
-              '${escapeHtml(
-                resource.id
-              )}'
-            )"
-          >
-            Delete
-          </button>
-
-
-          <button
-            class="btn btn-primary btn-small save-resource"
-          >
-            Save Changes
-          </button>
-
-        </div>
+        </article>
 
       `;
-
-
-      card
-        .querySelector(
-          ".save-resource"
-        )
-        .addEventListener(
-          "click",
-          function(){
-
-            saveResource(
-              resource.id,
-              card
-            );
-
-          }
-        );
-
-
-      return card;
 
     }
 
 
-    /* =====================================
-       SAVE RESOURCE
-       ===================================== */
+    /* ==========================================
+       SAVE ONE RESOURCE
+    ========================================== */
 
-    function saveResource(
-      id,
-      card
-    ){
+    function saveResource(id){
 
-      const resources =
-        getResources();
+      const resources = getResources();
 
-
-      const index =
-        resources.findIndex(
-          resource =>
-            resource.id === id
-        );
-
+      const index = resources.findIndex(
+        resource => resource.id === id
+      );
 
       if(index === -1){
 
-        showToast(
-          "Resource not found."
-        );
+        showToast("Resource not found.");
 
         return;
-
       }
 
 
-      const name =
-        card
-          .querySelector(
-            ".edit-name"
-          )
-          .value
-          .trim();
+      const resource = resources[index];
 
+
+      const name =
+        document.getElementById(`name-${id}`).value.trim();
 
       const category =
-        card
-          .querySelector(
-            ".edit-category"
-          )
-          .value;
-
+        document.getElementById(`category-${id}`).value;
 
       const price =
         parseFloat(
-          card
-            .querySelector(
-              ".edit-price"
-            )
-            .value
+          document.getElementById(`price-${id}`).value
         );
 
-
       const tag =
-        card
-          .querySelector(
-            ".edit-tag"
-          )
-          .value
-          .trim();
-
+        document.getElementById(`tag-${id}`).value.trim();
 
       const type =
-        card
-          .querySelector(
-            ".edit-type"
-          )
-          .value
-          .trim();
-
+        document.getElementById(`type-${id}`).value.trim();
 
       const icon =
-        card
-          .querySelector(
-            ".edit-icon"
-          )
-          .value
-          .trim();
-
+        document.getElementById(`icon-${id}`).value.trim();
 
       const description =
-        card
-          .querySelector(
-            ".edit-description"
-          )
-          .value
-          .trim();
+        document.getElementById(`description-${id}`).value.trim();
 
 
       if(!name){
 
-        showToast(
-          "Please enter a resource name."
-        );
+        showToast("Please enter a resource name.");
 
         return;
-
       }
 
 
-      if(
-        isNaN(price) ||
-        price < 0
-      ){
+      if(Number.isNaN(price) || price < 0){
 
-        showToast(
-          "Please enter a valid USD price."
-        );
+        showToast("Please enter a valid USD price.");
 
         return;
-
       }
 
 
-      if(!description){
-
-        showToast(
-          "Please enter a description."
-        );
-
-        return;
-
-      }
-
-
-      resources[index].name =
-        name;
+      resources[index] = {
+        ...resource,
+        name,
+        category,
+        price,
+        tag,
+        type,
+        icon,
+        description
+      };
 
 
-      resources[index].category =
-        category;
-
-
-      resources[index].categoryLabel =
-        categoryLabels[
-          category
-        ] ||
-        "Other";
-
-
-      /*
-        Full Pack keeps its special
-        category label.
-      */
-
-      if(
-        id === "full-pack"
-      ){
-
-        resources[index].categoryLabel =
-          "Full Pack";
-
-      }
-
-
-      resources[index].price =
-        Number(
-          price.toFixed(2)
-        );
-
-
-      resources[index].tag =
-        tag;
-
-
-      resources[index].type =
-        type;
-
-
-      resources[index].icon =
-        icon ||
-        "⚛️";
-
-
-      resources[index].description =
-        description;
-
-
-      saveResources(
-        resources
-      );
-
+      saveResources(resources);
 
       renderResources();
 
-
-      showToast(
-        "Resource saved successfully."
-      );
+      showToast("Resource saved successfully.");
 
     }
 
 
-    /* =====================================
-       DELETE
-       ===================================== */
+    /* ==========================================
+       DELETE RESOURCE
+    ========================================== */
 
-    function deleteResource(
-      id
-    ){
+    function deleteResource(id){
 
-      const resources =
-        getResources();
-
+      const resources = getResources();
 
       const resource =
-        resources.find(
-          item =>
-            item.id === id
-        );
+        resources.find(item => item.id === id);
+
+      if(!resource) return;
 
 
-      if(!resource){
-
-        return;
-
-      }
-
-
-      const confirmed =
-        confirm(
-          `Delete "${resource.name}"?\n\nThis will remove it from the catalog stored in this browser.`
-        );
-
-
-      if(!confirmed){
-
-        return;
-
-      }
-
-
-      const updated =
-        resources.filter(
-          item =>
-            item.id !== id
-        );
-
-
-      saveResources(
-        updated
+      const confirmed = confirm(
+        `Delete "${resource.name}" from your catalog?`
       );
 
+      if(!confirmed) return;
+
+
+      const updated = resources.filter(
+        item => item.id !== id
+      );
+
+
+      saveResources(updated);
 
       renderResources();
 
-
-      showToast(
-        "Resource deleted."
-      );
+      showToast("Resource deleted.");
 
     }
 
 
-    /* =====================================
+    /* ==========================================
        ADD RESOURCE
-       ===================================== */
+    ========================================== */
 
-    function addResource(
-      event
-    ){
+    function addResource(event){
 
       event.preventDefault();
 
 
-      const resources =
-        getResources();
-
-
       const name =
-        document
-          .getElementById(
-            "addName"
-          )
-          .value
-          .trim();
-
+        document.getElementById("addName").value.trim();
 
       const category =
-        document
-          .getElementById(
-            "addCategory"
-          )
-          .value;
-
+        document.getElementById("addCategory").value;
 
       const price =
         parseFloat(
-          document
-            .getElementById(
-              "addPrice"
-            )
-            .value
+          document.getElementById("addPrice").value
         );
 
-
       const tag =
-        document
-          .getElementById(
-            "addTag"
-          )
-          .value
-          .trim();
-
+        document.getElementById("addTag").value.trim();
 
       const type =
-        document
-          .getElementById(
-            "addType"
-          )
-          .value
-          .trim();
-
+        document.getElementById("addType").value.trim();
 
       const icon =
-        document
-          .getElementById(
-            "addIcon"
-          )
-          .value
-          .trim();
-
+        document.getElementById("addIcon").value.trim();
 
       const description =
-        document
-          .getElementById(
-            "addDescription"
-          )
-          .value
-          .trim();
+        document.getElementById("addDescription").value.trim();
 
 
       if(!name){
 
-        showToast(
-          "Please enter a resource name."
-        );
+        showToast("Please enter a resource name.");
 
         return;
-
       }
 
 
-      if(
-        isNaN(price) ||
-        price < 0
-      ){
+      if(Number.isNaN(price) || price < 0){
 
-        showToast(
-          "Please enter a valid USD price."
-        );
+        showToast("Please enter a valid USD price.");
 
         return;
-
       }
 
 
-      if(!description){
-
-        showToast(
-          "Please enter a description."
-        );
-
-        return;
-
-      }
+      const resources = getResources();
 
 
       const newResource = {
 
-        id:
-          createId(
-            name
-          ),
+        id: createId(name),
 
-        name:
-          name,
+        name,
 
-        category:
-          category,
+        category,
 
-        categoryLabel:
-          categoryLabels[
-            category
-          ] ||
-          "Other",
+        price,
 
-        price:
-          Number(
-            price.toFixed(2)
-          ),
+        tag: tag || "NEW",
 
-        tag:
-          tag ||
-          "NEW",
+        type: type || "Resource",
 
-        type:
-          type ||
-          "Digital Resource",
-
-        icon:
-          icon ||
-          "⚛️",
+        icon: icon || "🧪",
 
         description:
-          description
+          description ||
+          "Chemistry learning resource."
 
       };
 
 
-      resources.push(
-        newResource
-      );
+      resources.push(newResource);
 
+      saveResources(resources);
 
-      saveResources(
-        resources
-      );
-
+      renderResources();
 
       closeAddModal();
 
+      document.getElementById("addForm").reset();
 
-      document
-        .getElementById(
-          "addResourceForm"
-        )
-        .reset();
+      document.getElementById("addPrice").value = "2.00";
 
+      document.getElementById("addIcon").value = "🧪";
 
-      renderResources();
-
-
-      showToast(
-        "New resource added."
-      );
+      showToast("New resource added.");
 
     }
 
 
-    /* =====================================
-       MODAL
-       ===================================== */
-
-    function openAddModal(){
-
-      document
-        .getElementById(
-          "addModal"
-        )
-        .classList.add(
-          "show"
-        );
-
-
-      setTimeout(
-        function(){
-
-          document
-            .getElementById(
-              "addName"
-            )
-            .focus();
-
-        },
-        100
-      );
-
-    }
-
-
-    function closeAddModal(){
-
-      document
-        .getElementById(
-          "addModal"
-        )
-        .classList.remove(
-          "show"
-        );
-
-    }
-
-
-    document
-      .getElementById(
-        "addModal"
-      )
-      .addEventListener(
-        "click",
-        function(event){
-
-          if(
-            event.target ===
-            this
-          ){
-
-            closeAddModal();
-
-          }
-
-        }
-      );
-
-
-    /* =====================================
+    /* ==========================================
        RESTORE STARTER CATALOG
-       ===================================== */
+    ========================================== */
 
-    function resetDemoData(){
+    function restoreStarterCatalog(){
 
-      const confirmed =
-        confirm(
-          "Restore the complete starter catalog?\n\nThis will replace your current browser catalog with the starter resources and prices."
-        );
+      const confirmed = confirm(
+        "Restore the complete starter catalog? This will replace your current catalog with the 10 starter resources."
+      );
 
-
-      if(!confirmed){
-
-        return;
-
-      }
+      if(!confirmed) return;
 
 
       saveResources(
-        JSON.parse(
-          JSON.stringify(
-            demoResources
-          )
-        )
+        structuredClone(starterResources)
       );
-
 
       renderResources();
 
-
-      showToast(
-        "Starter catalog restored."
-      );
+      showToast("Starter catalog restored.");
 
     }
 
 
-    /* =====================================
+    /* ==========================================
        STATS
-       ===================================== */
+    ========================================== */
 
-    function updateStats(
-      resources
-    ){
+    function updateStats(resources){
 
       const total =
         resources.length;
@@ -2963,128 +1834,163 @@
 
       const totalValue =
         resources.reduce(
-          function(
-            sum,
-            resource
-          ){
-
-            return sum +
-              Number(
-                resource.price ||
-                0
-              );
-
-          },
+          (sum, resource) =>
+            sum + (Number(resource.price) || 0),
           0
         );
 
 
       const average =
-        total > 0
+        total
           ? totalValue / total
           : 0;
 
 
-      document
-        .getElementById(
-          "totalResources"
-        )
+      document.getElementById("totalResources")
+        .textContent = total;
+
+
+      document.getElementById("averagePrice")
         .textContent =
-          total;
+          `$${average.toFixed(2)}`;
 
 
-      document
-        .getElementById(
-          "averagePrice"
-        )
+      document.getElementById("catalogValue")
         .textContent =
-          average.toFixed(2);
-
-
-      document
-        .getElementById(
-          "catalogValue"
-        )
-        .textContent =
-          totalValue.toFixed(2);
+          `$${totalValue.toFixed(2)}`;
 
     }
 
 
-    /* =====================================
+    /* ==========================================
+       MODAL
+    ========================================== */
+
+    function openAddModal(){
+
+      document
+        .getElementById("addModal")
+        .classList.add("show");
+
+      setTimeout(() => {
+
+        document
+          .getElementById("addName")
+          .focus();
+
+      },100);
+
+    }
+
+
+    function closeAddModal(){
+
+      document
+        .getElementById("addModal")
+        .classList.remove("show");
+
+    }
+
+
+    function handleModalBackground(event){
+
+      if(
+        event.target ===
+        document.getElementById("addModal")
+      ){
+
+        closeAddModal();
+
+      }
+
+    }
+
+
+    /* ==========================================
        TOAST
-       ===================================== */
+    ========================================== */
 
     let toastTimer;
 
 
-    function showToast(
-      message
-    ){
+    function showToast(message){
 
       const toast =
-        document.getElementById(
-          "toast"
-        );
+        document.getElementById("toast");
 
 
-      toast.textContent =
-        message;
+      toast.textContent = message;
+
+      toast.classList.add("show");
 
 
-      toast.classList.add(
-        "show"
-      );
+      clearTimeout(toastTimer);
 
 
-      clearTimeout(
-        toastTimer
-      );
+      toastTimer = setTimeout(() => {
 
+        toast.classList.remove("show");
 
-      toastTimer =
-        setTimeout(
-          function(){
-
-            toast.classList.remove(
-              "show"
-            );
-
-          },
-          2500
-        );
+      },2500);
 
     }
 
 
-    /* =====================================
+    /* ==========================================
        LOGOUT
-       ===================================== */
+    ========================================== */
 
     function logout(){
 
-      localStorage.removeItem(
-        "chemistryUser"
-      );
+      localStorage.removeItem("chemistryUser");
 
-
-      window.location.href =
-        "login.html";
+      window.location.href = "login.html";
 
     }
 
 
-    /* =====================================
-       LIVE SYNC
-       ===================================== */
+    /* ==========================================
+       SEARCH
+    ========================================== */
+
+    document
+      .getElementById("searchInput")
+      .addEventListener(
+        "input",
+        renderResources
+      );
+
+
+    /* ==========================================
+       ESCAPE KEY
+    ========================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if(
+          event.key === "Escape"
+        ){
+
+          closeAddModal();
+
+        }
+
+      }
+    );
+
+
+    /* ==========================================
+       CROSS-TAB UPDATE
+    ========================================== */
 
     window.addEventListener(
       "storage",
-      function(event){
+      event => {
 
         if(
-          event.key ===
-          STORAGE_KEY
+          event.key === STORAGE_KEY
         ){
 
           renderResources();
@@ -3095,15 +2001,13 @@
     );
 
 
-    /* =====================================
+    /* ==========================================
        INITIAL LOAD
-       ===================================== */
+    ========================================== */
 
     document.addEventListener(
       "DOMContentLoaded",
-      function(){
-
-        getResources();
+      () => {
 
         renderResources();
 
@@ -3115,5 +2019,6 @@
 </body>
 </html>
 ```
+
 
 
