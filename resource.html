@@ -1,0 +1,914 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Atomic Structure Notes | Chemistry Resources Co.</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --bg:#07111f;
+  --bg2:#0c1a2c;
+  --card:#102238;
+  --text:#f5f9ff;
+  --muted:#9db0c7;
+  --primary:#55d6ff;
+  --accent:#8b7cff;
+  --green:#55e6a5;
+  --border:rgba(255,255,255,.09);
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:
+    radial-gradient(circle at 80% 5%,rgba(85,214,255,.12),transparent 30%),
+    radial-gradient(circle at 15% 40%,rgba(139,124,255,.08),transparent 30%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+button{
+  font:inherit;
+  cursor:pointer;
+}
+
+/* NAVIGATION */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(7,17,31,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav{
+  max-width:1200px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+.logo-atom{
+  width:38px;
+  height:38px;
+  border:2px solid var(--primary);
+  border-radius:50%;
+  position:relative;
+  display:grid;
+  place-items:center;
+  box-shadow:0 0 18px rgba(85,214,255,.3);
+}
+
+.logo-atom:before,
+.logo-atom:after{
+  content:"";
+  position:absolute;
+  width:48px;
+  height:18px;
+  border:1px solid rgba(85,214,255,.7);
+  border-radius:50%;
+}
+
+.logo-atom:before{
+  transform:rotate(60deg);
+}
+
+.logo-atom:after{
+  transform:rotate(-60deg);
+}
+
+.logo-core{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--primary);
+  box-shadow:0 0 12px var(--primary);
+}
+
+.nav-links{
+  display:flex;
+  gap:25px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.nav-links a:hover{
+  color:var(--primary);
+}
+
+.nav-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.cart-btn,
+.account-btn{
+  padding:9px 13px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  color:white;
+}
+
+.account-btn{
+  background:var(--primary);
+  color:#04111c;
+  border:0;
+  font-weight:700;
+}
+
+.mobile-menu{
+  display:none;
+  background:none;
+  border:0;
+  color:white;
+  font-size:25px;
+}
+
+/* MAIN */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:55px 20px 90px;
+}
+
+.breadcrumbs{
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:30px;
+}
+
+.breadcrumbs a:hover{
+  color:var(--primary);
+}
+
+/* PRODUCT */
+
+.product{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:55px;
+  align-items:center;
+}
+
+.preview{
+  min-height:520px;
+  border:1px solid var(--border);
+  border-radius:25px;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(85,214,255,.16),transparent 38%),
+    linear-gradient(145deg,#112e48,#091728);
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.preview-label{
+  position:absolute;
+  top:20px;
+  left:20px;
+  background:rgba(85,214,255,.12);
+  color:var(--primary);
+  border:1px solid rgba(85,214,255,.25);
+  padding:7px 11px;
+  border-radius:9px;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+
+.big-atom{
+  width:290px;
+  height:290px;
+  position:relative;
+  display:grid;
+  place-items:center;
+}
+
+.orbit{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border:1px solid rgba(85,214,255,.45);
+  border-radius:50%;
+}
+
+.orbit.one{
+  transform:rotate(60deg);
+}
+
+.orbit.two{
+  transform:rotate(-60deg);
+}
+
+.orbit.three{
+  transform:rotate(90deg);
+}
+
+.nucleus{
+  width:95px;
+  height:95px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:
+    radial-gradient(circle at 35% 30%,#d5f7ff,var(--primary) 40%,#11607b);
+  box-shadow:
+    0 0 35px rgba(85,214,255,.6),
+    0 0 90px rgba(85,214,255,.15);
+  z-index:5;
+}
+
+.nucleus span{
+  font-size:24px;
+  font-weight:900;
+}
+
+.electron{
+  position:absolute;
+  width:13px;
+  height:13px;
+  background:white;
+  border-radius:50%;
+  box-shadow:0 0 8px white,0 0 20px var(--primary);
+}
+
+.e1{
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.e2{
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.e3{
+  left:18px;
+  top:50%;
+}
+
+.e4{
+  right:18px;
+  top:50%;
+}
+
+/* DETAILS */
+
+.tag{
+  display:inline-block;
+  padding:7px 11px;
+  border-radius:8px;
+  background:rgba(85,214,255,.1);
+  border:1px solid rgba(85,214,255,.25);
+  color:var(--primary);
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:17px;
+}
+
+.details h1{
+  font-size:clamp(38px,5vw,58px);
+  line-height:1.05;
+  letter-spacing:-2px;
+  margin-bottom:17px;
+}
+
+.description{
+  color:var(--muted);
+  font-size:16px;
+  margin-bottom:25px;
+}
+
+.price{
+  font-size:38px;
+  font-weight:900;
+  margin-bottom:22px;
+}
+
+.price small{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:normal;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:25px;
+}
+
+.buy{
+  border:0;
+  padding:14px 21px;
+  border-radius:12px;
+  background:var(--primary);
+  color:#04111c;
+  font-weight:900;
+}
+
+.cart{
+  padding:13px 19px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  color:white;
+  font-weight:700;
+}
+
+.buy:hover{
+  background:#7be2ff;
+}
+
+.meta{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+}
+
+.meta-item{
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:rgba(255,255,255,.025);
+}
+
+.meta-item span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:3px;
+}
+
+.meta-item strong{
+  font-size:14px;
+}
+
+/* DESCRIPTION SECTION */
+
+.info-section{
+  margin-top:80px;
+}
+
+.info-section h2{
+  font-size:30px;
+  margin-bottom:18px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+}
+
+.info-card{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:18px;
+  padding:25px;
+}
+
+.info-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.info-card ul{
+  list-style:none;
+}
+
+.info-card li{
+  color:var(--muted);
+  padding:9px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.info-card li:last-child{
+  border-bottom:0;
+}
+
+.info-card li:before{
+  content:"✓";
+  color:var(--green);
+  font-weight:bold;
+  margin-right:9px;
+}
+
+/* RELATED */
+
+.related{
+  margin-top:80px;
+}
+
+.related h2{
+  font-size:30px;
+  margin-bottom:25px;
+}
+
+.related-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.related-card{
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:17px;
+  padding:20px;
+}
+
+.related-icon{
+  height:120px;
+  border-radius:12px;
+  background:
+    radial-gradient(circle,rgba(85,214,255,.18),transparent 50%),
+    #0a192b;
+  display:grid;
+  place-items:center;
+  font-size:45px;
+  margin-bottom:17px;
+}
+
+.related-card h3{
+  font-size:17px;
+  margin-bottom:6px;
+}
+
+.related-card p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.related-price{
+  margin-top:14px;
+  font-weight:900;
+  font-size:19px;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translateX(-50%);
+  background:#102238;
+  border:1px solid rgba(85,214,255,.4);
+  color:white;
+  padding:13px 18px;
+  border-radius:12px;
+  z-index:5000;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+/* FOOTER */
+
+footer{
+  border-top:1px solid var(--border);
+  background:#050d17;
+  padding:30px 20px;
+  text-align:center;
+  color:#71849b;
+  font-size:12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+
+  .product{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+
+  .preview{
+    min-height:430px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .related-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:650px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .account-btn{
+    display:none;
+  }
+
+  .mobile-menu{
+    display:block;
+  }
+
+  .container{
+    padding:40px 17px 65px;
+  }
+
+  .details h1{
+    font-size:40px;
+  }
+
+  .preview{
+    min-height:350px;
+  }
+
+  .big-atom{
+    width:240px;
+    height:240px;
+  }
+
+  .nucleus{
+    width:78px;
+    height:78px;
+  }
+
+  .meta{
+    grid-template-columns:1fr;
+  }
+
+  .related-grid{
+    grid-template-columns:1fr;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<nav class="nav">
+
+<a href="index.html" class="logo">
+
+<div class="logo-atom">
+<div class="logo-core"></div>
+</div>
+
+<span>Chemistry Resources Co.</span>
+
+</a>
+
+<div class="nav-links">
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="shop.html">Resources</a>
+</div>
+
+<div class="nav-actions">
+
+<button class="cart-btn" onclick="showToast('Your cart is currently empty.')">
+🛒 <span id="cartCount">0</span>
+</button>
+
+<button class="account-btn" onclick="showToast('Account system coming next.')">
+Account
+</button>
+
+<button class="mobile-menu" onclick="showToast('Mobile navigation coming next.')">
+☰
+</button>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<main class="container">
+
+<div class="breadcrumbs">
+
+<a href="index.html">Home</a>
+&nbsp; / &nbsp;
+<a href="shop.html">Shop</a>
+&nbsp; / &nbsp;
+Atomic Structure Notes
+
+</div>
+
+
+<section class="product">
+
+
+<!-- PREVIEW -->
+
+<div class="preview">
+
+<div class="preview-label">
+PDF Resource
+</div>
+
+<div class="big-atom">
+
+<div class="orbit one"></div>
+<div class="orbit two"></div>
+<div class="orbit three"></div>
+
+<div class="electron e1"></div>
+<div class="electron e2"></div>
+<div class="electron e3"></div>
+<div class="electron e4"></div>
+
+<div class="nucleus">
+<span>⚛</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DETAILS -->
+
+<div class="details">
+
+<div class="tag">
+⚛️ ATOMIC STRUCTURE
+</div>
+
+<h1>
+Atomic Structure Notes
+</h1>
+
+<p class="description">
+A clear and easy-to-understand set of chemistry notes
+covering the fundamentals of atomic structure. Perfect
+for students who want a simple way to review the topic.
+</p>
+
+
+<div class="price">
+$2.00
+<small>USD</small>
+</div>
+
+
+<div class="actions">
+
+<button class="buy" onclick="buyNow()">
+Buy Now
+</button>
+
+<button class="cart" onclick="addToCart()">
+🛒 Add to Cart
+</button>
+
+</div>
+
+
+<div class="meta">
+
+<div class="meta-item">
+<span>FORMAT</span>
+<strong>PDF</strong>
+</div>
+
+<div class="meta-item">
+<span>RESOURCE TYPE</span>
+<strong>Study Notes</strong>
+</div>
+
+<div class="meta-item">
+<span>TOPIC</span>
+<strong>Atomic Structure</strong>
+</div>
+
+<div class="meta-item">
+<span>ACCESS</span>
+<strong>Digital Download</strong>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- WHAT'S INCLUDED -->
+
+<section class="info-section">
+
+<h2>What's Included?</h2>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<p>
+This resource is designed to give you a strong foundation
+in atomic structure without unnecessary complexity.
+Use it for studying, revision or exam preparation.
+</p>
+
+<br>
+
+<p>
+The final downloadable resource will contain professionally
+organized chemistry material that you can access from
+your account after purchase.
+</p>
+
+</div>
+
+
+<div class="info-card">
+
+<ul>
+
+<li>Atomic structure fundamentals</li>
+<li>Protons, neutrons and electrons</li>
+<li>Atomic number</li>
+<li>Mass number</li>
+<li>Isotopes</li>
+<li>Ions and electron arrangement</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RELATED -->
+
+<section class="related">
+
+<h2>You May Also Like</h2>
+
+<div class="related-grid">
+
+
+<div class="related-card">
+
+<div class="related-icon">
+📝
+</div>
+
+<h3>Atomic Structure Worksheet</h3>
+
+<p>
+Practice questions to test your understanding.
+</p>
+
+<div class="related-price">
+$1.50
+</div>
+
+</div>
+
+
+<div class="related-card">
+
+<div class="related-icon">
+🔗
+</div>
+
+<h3>Chemical Bonding Notes</h3>
+
+<p>
+Understand ionic, covalent and metallic bonding.
+</p>
+
+<div class="related-price">
+$2.50
+</div>
+
+</div>
+
+
+<div class="related-card">
+
+<div class="related-icon">
+📚
+</div>
+
+<h3>Chemistry Exam Study Guide</h3>
+
+<p>
+A compact guide for chemistry exam preparation.
+</p>
+
+<div class="related-price">
+$4.00
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+© 2026 Chemistry Resources Co. — Learn chemistry. Understand everything.
+
+</footer>
+
+
+<script>
+
+let cartCount=0;
+
+
+function addToCart(){
+
+cartCount++;
+
+document.getElementById("cartCount").textContent=cartCount;
+
+showToast("Atomic Structure Notes added to your cart!");
+
+}
+
+
+function buyNow(){
+
+showToast("Checkout and payment will be connected next.");
+
+}
+
+
+function showToast(message){
+
+const old=document.querySelector(".toast");
+
+if(old){
+old.remove();
+}
+
+const toast=document.createElement("div");
+
+toast.className="toast";
+
+toast.textContent=message;
+
+document.body.appendChild(toast);
+
+setTimeout(function(){
+
+toast.remove();
+
+},2500);
+
+}
+
+</script>
+
+</body>
+</html>
+```
