@@ -4,42 +4,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Shop | Chemistry Resources Co.</title>
+<title>Shop — Chemistry Resources Co.</title>
 
 <style>
+:root{
+  --bg:#07111f;
+  --bg2:#0c1a2c;
+  --card:#102238;
+  --text:#f5f9ff;
+  --muted:#9db0c7;
+  --primary:#55d6ff;
+  --accent:#8b7cff;
+  --green:#55e6a5;
+  --red:#ff7070;
+  --border:rgba(255,255,255,.09);
+}
+
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
 
-:root{
-  --bg:#07111f;
-  --card:#102238;
-  --card2:#0c1a2c;
-  --text:#f5f9ff;
-  --muted:#9db0c7;
-  --primary:#55d6ff;
-  --accent:#8b7cff;
-  --border:rgba(255,255,255,.09);
-}
-
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at 80% 5%,rgba(85,214,255,.12),transparent 30%),
+    radial-gradient(circle at 20% 0%,rgba(85,214,255,.10),transparent 30%),
+    radial-gradient(circle at 90% 20%,rgba(139,124,255,.10),transparent 30%),
     var(--bg);
   color:var(--text);
   min-height:100vh;
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-button,input,select{
+button,
+input,
+select{
   font:inherit;
 }
 
@@ -47,33 +46,38 @@ button{
   cursor:pointer;
 }
 
-/* NAV */
+a{
+  color:inherit;
+  text-decoration:none;
+}
 
-header{
+/* NAV */
+.nav{
   position:sticky;
   top:0;
-  z-index:1000;
+  z-index:100;
+  background:rgba(7,17,31,.82);
   backdrop-filter:blur(18px);
-  background:rgba(7,17,31,.88);
   border-bottom:1px solid var(--border);
 }
 
-.nav{
+.nav-inner{
   max-width:1200px;
   margin:auto;
-  padding:15px 20px;
+  min-height:72px;
+  padding:0 22px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:20px;
 }
 
-.logo{
+.brand{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
   font-weight:800;
-  white-space:nowrap;
+  font-size:18px;
 }
 
 .logo-atom{
@@ -84,16 +88,16 @@ header{
   position:relative;
   display:grid;
   place-items:center;
-  box-shadow:0 0 18px rgba(85,214,255,.3);
+  box-shadow:0 0 18px rgba(85,214,255,.2);
 }
 
 .logo-atom:before,
 .logo-atom:after{
   content:"";
   position:absolute;
-  width:48px;
-  height:18px;
-  border:1px solid rgba(85,214,255,.7);
+  width:27px;
+  height:13px;
+  border:1.5px solid var(--primary);
   border-radius:50%;
 }
 
@@ -108,1174 +112,1304 @@ header{
 .logo-core{
   width:8px;
   height:8px;
-  border-radius:50%;
   background:var(--primary);
+  border-radius:50%;
   box-shadow:0 0 12px var(--primary);
 }
 
 .nav-links{
   display:flex;
-  gap:25px;
+  align-items:center;
+  gap:24px;
+}
+
+.nav-links a{
   color:var(--muted);
   font-size:14px;
 }
 
 .nav-links a:hover{
-  color:var(--primary);
+  color:var(--text);
 }
 
 .nav-actions{
   display:flex;
-  gap:10px;
   align-items:center;
+  gap:10px;
 }
 
-.cart-btn,
-.account-btn{
+.nav-btn{
   border:1px solid var(--border);
   background:rgba(255,255,255,.04);
-  color:white;
-  padding:9px 13px;
-  border-radius:10px;
+  color:var(--text);
+  padding:10px 14px;
+  border-radius:12px;
 }
 
-.account-btn{
+.nav-btn:hover{
+  border-color:rgba(85,214,255,.35);
+}
+
+.cart-btn{
+  position:relative;
+}
+
+.cart-count{
+  position:absolute;
+  top:-7px;
+  right:-7px;
+  min-width:19px;
+  height:19px;
+  padding:0 5px;
+  border-radius:50px;
   background:var(--primary);
-  color:#04111c;
-  border:0;
-  font-weight:700;
+  color:#03101c;
+  font-size:11px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.mobile-menu{
-  display:none;
-  background:none;
-  border:0;
-  color:white;
-  font-size:25px;
-}
-
-/* PAGE */
-
-.page{
+/* MAIN */
+.container{
   max-width:1200px;
   margin:auto;
-  padding:55px 20px 90px;
+  padding:55px 22px 80px;
 }
 
-.page-title{
-  text-align:center;
-  margin-bottom:40px;
+.page-head{
+  margin-bottom:32px;
 }
 
-.page-title .eyebrow{
+.eyebrow{
   color:var(--primary);
   font-size:13px;
-  font-weight:bold;
+  font-weight:800;
   text-transform:uppercase;
-  letter-spacing:1px;
+  letter-spacing:1.5px;
+  margin-bottom:10px;
 }
 
-.page-title h1{
-  font-size:clamp(38px,6vw,60px);
-  margin:10px 0;
-  letter-spacing:-2px;
+.page-head h1{
+  font-size:clamp(34px,6vw,54px);
+  line-height:1.05;
+  margin-bottom:12px;
 }
 
-.page-title p{
+.page-head p{
+  max-width:650px;
   color:var(--muted);
-  max-width:600px;
-  margin:auto;
+  line-height:1.7;
 }
 
 /* CONTROLS */
-
 .controls{
   display:flex;
   gap:12px;
-  margin-bottom:30px;
   flex-wrap:wrap;
+  margin-bottom:22px;
 }
 
-.search{
+.search-box{
   flex:1;
   min-width:220px;
   position:relative;
 }
 
-.search input{
+.search-box input{
   width:100%;
-  padding:14px 17px;
-  border-radius:12px;
+  background:var(--card);
   border:1px solid var(--border);
-  background:var(--card2);
-  color:white;
+  color:var(--text);
+  border-radius:14px;
+  padding:14px 16px 14px 44px;
   outline:none;
 }
 
-.search input:focus{
-  border-color:rgba(85,214,255,.6);
+.search-box input:focus{
+  border-color:rgba(85,214,255,.55);
 }
 
-.filter{
-  padding:14px 15px;
-  border-radius:12px;
-  border:1px solid var(--border);
-  background:var(--card2);
-  color:white;
-  outline:none;
-}
-
-/* CATEGORY BUTTONS */
-
-.categories{
-  display:flex;
-  gap:9px;
-  overflow-x:auto;
-  padding-bottom:20px;
-  margin-bottom:15px;
-}
-
-.category-btn{
-  white-space:nowrap;
-  padding:9px 14px;
-  border-radius:999px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.035);
+.search-icon{
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
   color:var(--muted);
 }
 
-.category-btn.active,
-.category-btn:hover{
-  background:rgba(85,214,255,.12);
-  border-color:rgba(85,214,255,.4);
-  color:var(--primary);
-}
-
-/* PRODUCTS */
-
-.products{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.product{
-  overflow:hidden;
-  border-radius:20px;
-  border:1px solid var(--border);
+.sort-select{
   background:var(--card);
-  transition:.2s;
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:0 15px;
+  min-height:48px;
+  outline:none;
 }
 
-.product:hover{
-  transform:translateY(-4px);
+/* FILTERS */
+.filters{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding-bottom:7px;
+  margin-bottom:30px;
+  scrollbar-width:none;
+}
+
+.filters::-webkit-scrollbar{
+  display:none;
+}
+
+.filter{
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.035);
+  color:var(--muted);
+  padding:10px 14px;
+  border-radius:999px;
+}
+
+.filter:hover,
+.filter.active{
+  background:rgba(85,214,255,.12);
+  color:var(--primary);
   border-color:rgba(85,214,255,.35);
 }
 
-.product-image{
-  height:190px;
-  position:relative;
+/* PRODUCTS */
+.products{
   display:grid;
-  place-items:center;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.product{
+  background:linear-gradient(180deg,rgba(16,34,56,.98),rgba(10,25,42,.98));
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  transition:.2s ease;
+}
+
+.product:hover{
+  transform:translateY(-3px);
+  border-color:rgba(85,214,255,.28);
+  box-shadow:0 18px 50px rgba(0,0,0,.2);
+}
+
+.product-top{
+  height:165px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   background:
-    radial-gradient(circle at 50% 40%,rgba(85,214,255,.2),transparent 38%),
-    linear-gradient(145deg,#112e48,#091728);
+    radial-gradient(circle at center,rgba(85,214,255,.12),transparent 55%),
+    rgba(255,255,255,.025);
+  position:relative;
+}
+
+.product-icon{
+  font-size:58px;
+  filter:drop-shadow(0 0 18px rgba(85,214,255,.18));
 }
 
 .tag{
   position:absolute;
-  top:14px;
-  left:14px;
-  padding:5px 9px;
+  top:13px;
+  left:13px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.6px;
+  padding:7px 9px;
   border-radius:8px;
   background:rgba(85,214,255,.12);
-  border:1px solid rgba(85,214,255,.25);
   color:var(--primary);
-  font-size:11px;
-  font-weight:bold;
-}
-
-.atom{
-  width:105px;
-  height:105px;
-  border:1px solid rgba(85,214,255,.55);
-  border-radius:50%;
-  position:relative;
-  display:grid;
-  place-items:center;
-}
-
-.atom:before,
-.atom:after{
-  content:"";
-  position:absolute;
-  inset:12px;
-  border:1px solid rgba(139,124,255,.65);
-  border-radius:50%;
-}
-
-.atom-core{
-  width:28px;
-  height:28px;
-  background:var(--primary);
-  border-radius:50%;
-  box-shadow:0 0 25px rgba(85,214,255,.75);
-  z-index:2;
+  border:1px solid rgba(85,214,255,.2);
 }
 
 .product-body{
-  padding:22px;
+  padding:20px;
 }
 
-.product-body h2{
+.category{
+  color:var(--primary);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.product h3{
   font-size:19px;
-  margin-bottom:7px;
+  margin-bottom:9px;
 }
 
-.product-body p{
+.description{
   color:var(--muted);
   font-size:13px;
-  min-height:45px;
-}
-
-.product-info{
-  margin-top:15px;
-  display:flex;
-  gap:7px;
-  flex-wrap:wrap;
-}
-
-.badge{
-  font-size:11px;
-  color:var(--muted);
-  background:rgba(255,255,255,.05);
-  padding:5px 8px;
-  border-radius:7px;
+  line-height:1.6;
+  min-height:42px;
 }
 
 .product-bottom{
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-top:20px;
+  justify-content:space-between;
   gap:10px;
+  margin-top:18px;
 }
 
 .price{
   font-size:22px;
-  font-weight:900;
+  font-weight:800;
 }
 
-.actions{
+.product-actions{
   display:flex;
   gap:7px;
 }
 
-.details-btn{
-  padding:9px 11px;
-  border-radius:9px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.04);
-  color:white;
-}
-
-.add-btn{
-  padding:9px 12px;
-  border-radius:9px;
+.btn{
   border:0;
-  background:var(--primary);
-  color:#04111c;
-  font-weight:800;
+  border-radius:10px;
+  padding:10px 12px;
+  font-weight:700;
+  transition:.2s;
 }
 
-/* EMPTY */
+.btn-primary{
+  background:var(--primary);
+  color:#03101c;
+}
 
-.empty{
+.btn-primary:hover{
+  filter:brightness(1.08);
+}
+
+.btn-secondary{
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.btn-secondary:hover{
+  border-color:rgba(85,214,255,.35);
+}
+
+.no-results{
   display:none;
   text-align:center;
-  padding:70px 20px;
+  padding:60px 20px;
   color:var(--muted);
+  border:1px dashed var(--border);
+  border-radius:18px;
 }
 
-.empty strong{
-  display:block;
-  color:white;
-  font-size:20px;
-  margin-bottom:7px;
-}
-
-/* CART */
-
-.cart-panel{
+/* CART DRAWER */
+.overlay{
   position:fixed;
-  right:-420px;
-  top:0;
-  width:min(400px,100%);
-  height:100vh;
-  background:#0a1727;
-  border-left:1px solid var(--border);
-  z-index:2000;
-  transition:.3s;
-  padding:25px;
-  overflow:auto;
+  inset:0;
+  background:rgba(0,0,0,.58);
+  z-index:200;
+  display:none;
 }
 
-.cart-panel.open{
+.overlay.show{
+  display:block;
+}
+
+.cart-drawer{
+  position:fixed;
+  z-index:201;
+  top:0;
+  right:-430px;
+  width:min(430px,100%);
+  height:100vh;
+  background:#091728;
+  border-left:1px solid var(--border);
+  transition:right .25s ease;
+  display:flex;
+  flex-direction:column;
+}
+
+.cart-drawer.open{
   right:0;
 }
 
-.cart-header{
+.cart-head{
+  padding:20px;
+  border-bottom:1px solid var(--border);
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  margin-bottom:25px;
+  justify-content:space-between;
+}
+
+.cart-head h2{
+  font-size:20px;
 }
 
 .close-cart{
-  background:none;
   border:0;
-  color:white;
-  font-size:25px;
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  width:38px;
+  height:38px;
+  border-radius:10px;
+}
+
+.cart-items{
+  flex:1;
+  overflow:auto;
+  padding:15px;
+}
+
+.cart-empty{
+  padding:60px 20px;
+  text-align:center;
+  color:var(--muted);
 }
 
 .cart-item{
-  padding:15px 0;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:14px 0;
   border-bottom:1px solid var(--border);
 }
 
-.cart-item strong{
-  display:block;
+.cart-item-icon{
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  background:rgba(85,214,255,.08);
+  display:grid;
+  place-items:center;
+  font-size:22px;
 }
 
-.cart-item span{
-  color:var(--muted);
+.cart-item-info{
+  flex:1;
+}
+
+.cart-item-name{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:5px;
+}
+
+.cart-item-price{
+  color:var(--primary);
   font-size:13px;
 }
 
+.remove-item{
+  border:0;
+  background:transparent;
+  color:var(--red);
+  font-size:12px;
+}
+
+.cart-footer{
+  padding:18px;
+  border-top:1px solid var(--border);
+}
+
 .cart-total{
-  margin-top:25px;
   display:flex;
   justify-content:space-between;
-  font-size:20px;
-  font-weight:bold;
+  margin-bottom:14px;
+  font-size:18px;
+  font-weight:800;
 }
 
 .checkout{
   width:100%;
-  margin-top:20px;
   padding:14px;
   border:0;
-  border-radius:11px;
+  border-radius:12px;
   background:var(--primary);
-  color:#04111c;
-  font-weight:900;
+  color:#03101c;
+  font-weight:800;
 }
 
 .clear-cart{
   width:100%;
-  margin-top:10px;
-  padding:12px;
+  margin-top:8px;
+  padding:11px;
   border:1px solid var(--border);
-  border-radius:11px;
+  border-radius:12px;
   background:transparent;
-  color:white;
+  color:var(--muted);
 }
 
 /* TOAST */
-
 .toast{
   position:fixed;
   left:50%;
-  bottom:25px;
-  transform:translateX(-50%);
-  background:#102238;
-  border:1px solid rgba(85,214,255,.4);
-  color:white;
-  padding:13px 18px;
+  bottom:24px;
+  transform:translate(-50%,20px);
+  background:#13263d;
+  border:1px solid rgba(85,214,255,.25);
+  color:var(--text);
+  padding:12px 17px;
   border-radius:12px;
-  z-index:5000;
-  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  z-index:500;
+  box-shadow:0 15px 40px rgba(0,0,0,.25);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
 }
 
 /* FOOTER */
-
 footer{
   border-top:1px solid var(--border);
-  background:#050d17;
-  padding:30px 20px;
+  padding:30px 22px;
+  color:var(--muted);
   text-align:center;
-  color:#71849b;
-  font-size:12px;
+  font-size:13px;
 }
 
-/* RESPONSIVE */
-
+/* MOBILE */
 @media(max-width:900px){
-
   .products{
     grid-template-columns:repeat(2,1fr);
   }
 
-}
-
-@media(max-width:650px){
-
   .nav-links{
     display:none;
   }
+}
 
-  .account-btn{
+@media(max-width:600px){
+  .nav-inner{
+    min-height:64px;
+    padding:0 14px;
+  }
+
+  .brand span{
     display:none;
   }
 
-  .mobile-menu{
-    display:block;
+  .logo-atom{
+    width:35px;
+    height:35px;
   }
 
-  .page{
-    padding:40px 17px 70px;
+  .nav-actions{
+    margin-left:auto;
+  }
+
+  .nav-btn{
+    padding:9px 10px;
+  }
+
+  .container{
+    padding:38px 14px 65px;
   }
 
   .products{
     grid-template-columns:1fr;
   }
 
-  .controls{
-    display:block;
+  .product-top{
+    height:150px;
   }
 
-  .filter{
-    width:100%;
-    margin-top:10px;
+  .product-bottom{
+    align-items:flex-end;
   }
 
-  .page-title h1{
-    font-size:40px;
+  .product-actions{
+    flex-wrap:wrap;
+    justify-content:flex-end;
   }
-
 }
 </style>
 </head>
 
 <body>
 
-<header>
-
 <nav class="nav">
+  <div class="nav-inner">
 
-<a href="index.html" class="logo">
-  <div class="logo-atom">
-    <div class="logo-core"></div>
+    <a href="index.html" class="brand">
+      <div class="logo-atom">
+        <div class="logo-core"></div>
+      </div>
+      <span>Chemistry Resources Co.</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="shop.html#categories">Categories</a>
+    </div>
+
+    <div class="nav-actions">
+
+      <button class="nav-btn cart-btn" onclick="openCart()">
+        🛒 Cart
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+
+      <button class="nav-btn" onclick="goToAccount()">
+        👤 Account
+      </button>
+
+    </div>
   </div>
-  <span>Chemistry Resources Co.</span>
-</a>
-
-<div class="nav-links">
-  <a href="index.html">Home</a>
-  <a href="shop.html">Shop</a>
-  <a href="index.html#categories">Categories</a>
-</div>
-
-<div class="nav-actions">
-
-<button class="cart-btn" onclick="openCart()">
-🛒 <span id="cartCount">0</span>
-</button>
-
-<button class="account-btn" onclick="showToast('Account system coming next.')">
-Account
-</button>
-
-<button class="mobile-menu" onclick="showToast('Mobile navigation coming next.')">
-☰
-</button>
-
-</div>
-
 </nav>
 
-</header>
 
+<main class="container">
 
-<main class="page">
+  <section class="page-head">
+    <div class="eyebrow">⚛️ Chemistry Marketplace</div>
 
-<section class="page-title">
+    <h1>Shop Chemistry Resources</h1>
 
-<div class="eyebrow">⚛️ Chemistry Resources</div>
+    <p>
+      Find notes, worksheets, study guides and practice resources
+      designed to make chemistry easier to understand.
+    </p>
+  </section>
 
-<h1>Explore the Collection</h1>
 
-<p>
-Find chemistry notes, worksheets, study guides and other
-digital resources designed for effective learning.
-</p>
+  <section class="controls">
 
-</section>
+    <div class="search-box">
+      <span class="search-icon">⌕</span>
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Search chemistry resources..."
+        oninput="filterProducts()"
+      >
+    </div>
 
+    <select
+      id="sortSelect"
+      class="sort-select"
+      onchange="filterProducts()"
+    >
+      <option value="default">Sort: Featured</option>
+      <option value="low">Price: Low to High</option>
+      <option value="high">Price: High to Low</option>
+      <option value="az">Name: A–Z</option>
+    </select>
 
-<!-- SEARCH -->
+  </section>
 
-<div class="controls">
 
-<div class="search">
-<input
-  type="search"
-  id="searchInput"
-  placeholder="Search chemistry resources..."
-  oninput="filterProducts()">
-</div>
+  <section class="filters" id="categories">
 
-<select class="filter" id="sortSelect" onchange="sortProducts()">
-<option value="featured">Sort: Featured</option>
-<option value="low">Price: Low to High</option>
-<option value="high">Price: High to Low</option>
-<option value="az">Name: A to Z</option>
-</select>
+    <button class="filter active" data-category="all">
+      All Resources
+    </button>
 
-</div>
+    <button class="filter" data-category="atomic">
+      ⚛️ Atomic Structure
+    </button>
 
+    <button class="filter" data-category="bonding">
+      🔗 Chemical Bonding
+    </button>
 
-<!-- CATEGORIES -->
+    <button class="filter" data-category="organic">
+      🧪 Organic Chemistry
+    </button>
 
-<div class="categories">
+    <button class="filter" data-category="calculations">
+      📊 Calculations
+    </button>
 
-<button class="category-btn active" onclick="setCategory('all',this)">
-All Resources
-</button>
+  </section>
 
-<button class="category-btn" onclick="setCategory('atomic',this)">
-⚛️ Atomic Structure
-</button>
 
-<button class="category-btn" onclick="setCategory('bonding',this)">
-🔗 Chemical Bonding
-</button>
+  <section class="products" id="products"></section>
 
-<button class="category-btn" onclick="setCategory('organic',this)">
-🧪 Organic Chemistry
-</button>
-
-<button class="category-btn" onclick="setCategory('calculations',this)">
-📊 Calculations
-</button>
-
-</div>
-
-
-<!-- PRODUCTS -->
-
-<section class="products" id="productGrid">
-
-
-<article
-class="product"
-data-name="Atomic Structure Notes"
-data-category="atomic"
-data-price="2">
-
-<div class="product-image">
-
-<span class="tag">POPULAR</span>
-
-<div class="atom">
-<div class="atom-core"></div>
-</div>
-
-</div>
-
-<div class="product-body">
-
-<h2>Atomic Structure Notes</h2>
-
-<p>
-Clear and concise notes covering atoms, particles,
-isotopes, ions and electron arrangements.
-</p>
-
-<div class="product-info">
-<span class="badge">PDF</span>
-<span class="badge">Notes</span>
-<span class="badge">Atomic Structure</span>
-</div>
-
-<div class="product-bottom">
-
-<div class="price">$2.00</div>
-
-<div class="actions">
-<button class="details-btn"
-onclick="viewResource('Atomic Structure Notes')">
-View
-</button>
-
-<button class="add-btn"
-onclick="addToCart('Atomic Structure Notes',2)">
-Add
-</button>
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-<article
-class="product"
-data-name="Atomic Structure Worksheet"
-data-category="atomic"
-data-price="1.5">
-
-<div class="product-image">
-
-<span class="tag">WORKSHEET</span>
-
-<div class="atom">
-<div class="atom-core"></div>
-</div>
-
-</div>
-
-<div class="product-body">
-
-<h2>Atomic Structure Worksheet</h2>
-
-<p>
-Practice questions covering protons, neutrons,
-electrons, isotopes and ions.
-</p>
-
-<div class="product-info">
-<span class="badge">PDF</span>
-<span class="badge">Worksheet</span>
-<span class="badge">Practice</span>
-</div>
-
-<div class="product-bottom">
-
-<div class="price">$1.50</div>
-
-<div class="actions">
-<button class="details-btn"
-onclick="viewResource('Atomic Structure Worksheet')">
-View
-</button>
-
-<button class="add-btn"
-onclick="addToCart('Atomic Structure Worksheet',1.5)">
-Add
-</button>
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-<article
-class="product"
-data-name="Chemistry Exam Study Guide"
-data-category="calculations"
-data-price="4">
-
-<div class="product-image">
-
-<span class="tag">STUDY GUIDE</span>
-
-<div class="atom">
-<div class="atom-core"></div>
-</div>
-
-</div>
-
-<div class="product-body">
-
-<h2>Chemistry Exam Study Guide</h2>
-
-<p>
-A compact guide covering important chemistry concepts
-for exam preparation.
-</p>
-
-<div class="product-info">
-<span class="badge">PDF</span>
-<span class="badge">Study Guide</span>
-<span class="badge">Exam Prep</span>
-</div>
-
-<div class="product-bottom">
-
-<div class="price">$4.00</div>
-
-<div class="actions">
-<button class="details-btn"
-onclick="viewResource('Chemistry Exam Study Guide')">
-View
-</button>
-
-<button class="add-btn"
-onclick="addToCart('Chemistry Exam Study Guide',4)">
-Add
-</button>
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-<article
-class="product"
-data-name="Chemical Bonding Notes"
-data-category="bonding"
-data-price="2.5">
-
-<div class="product-image">
-
-<span class="tag">NOTES</span>
-
-<div class="atom">
-<div class="atom-core"></div>
-</div>
-
-</div>
-
-<div class="product-body">
-
-<h2>Chemical Bonding Notes</h2>
-
-<p>
-Understand ionic, covalent and metallic bonding
-with simple explanations.
-</p>
-
-<div class="product-info">
-<span class="badge">PDF</span>
-<span class="badge">Notes</span>
-<span class="badge">Bonding</span>
-</div>
-
-<div class="product-bottom">
-
-<div class="price">$2.50</div>
-
-<div class="actions">
-<button class="details-btn"
-onclick="viewResource('Chemical Bonding Notes')">
-View
-</button>
-
-<button class="add-btn"
-onclick="addToCart('Chemical Bonding Notes',2.5)">
-Add
-</button>
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-<article
-class="product"
-data-name="Organic Chemistry Starter Pack"
-data-category="organic"
-data-price="3.5">
-
-<div class="product-image">
-
-<span class="tag">STARTER PACK</span>
-
-<div class="atom">
-<div class="atom-core"></div>
-</div>
-
-</div>
-
-<div class="product-body">
-
-<h2>Organic Chemistry Starter Pack</h2>
-
-<p>
-A beginner-friendly introduction to hydrocarbons,
-functional groups and organic reactions.
-</p>
-
-<div class="product-info">
-<span class="badge">PDF</span>
-<span class="badge">Study Pack</span>
-<span class="badge">Organic</span>
-</div>
-
-<div class="product-bottom">
-
-<div class="price">$3.50</div>
-
-<div class="actions">
-<button class="details-btn"
-onclick="viewResource('Organic Chemistry Starter Pack')">
-View
-</button>
-
-<button class="add-btn"
-onclick="addToCart('Organic Chemistry Starter Pack',3.5)">
-Add
-</button>
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-<article
-class="product"
-data-name="Mole Calculations Practice"
-data-category="calculations"
-data-price="2">
-
-<div class="product-image">
-
-<span class="tag">PRACTICE</span>
-
-<div class="atom">
-<div class="atom-core"></div>
-</div>
-
-</div>
-
-<div class="product-body">
-
-<h2>Mole Calculations Practice</h2>
-
-<p>
-Practice mole calculations, molar mass and chemical
-equation problems.
-</p>
-
-<div class="product-info">
-<span class="badge">PDF</span>
-<span class="badge">Practice</span>
-<span class="badge">Calculations</span>
-</div>
-
-<div class="product-bottom">
-
-<div class="price">$2.00</div>
-
-<div class="actions">
-<button class="details-btn"
-onclick="viewResource('Mole Calculations Practice')">
-View
-</button>
-
-<button class="add-btn"
-onclick="addToCart('Mole Calculations Practice',2)">
-Add
-</button>
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-</section>
-
-
-<div class="empty" id="empty">
-
-<strong>No resources found</strong>
-
-Try another search or category.
-
-</div>
+  <div class="no-results" id="noResults">
+    <div style="font-size:40px;margin-bottom:12px;">🔎</div>
+    <h3 style="margin-bottom:8px;color:var(--text);">
+      No resources found
+    </h3>
+    <p>Try another search or category.</p>
+  </div>
 
 </main>
 
 
-<!-- CART -->
+<!-- CART OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
 
-<aside class="cart-panel" id="cartPanel">
 
-<div class="cart-header">
+<!-- CART DRAWER -->
+<aside class="cart-drawer" id="cartDrawer">
 
-<h2>Your Cart</h2>
+  <div class="cart-head">
+    <h2>🛒 Your Cart</h2>
 
-<button class="close-cart" onclick="closeCart()">×</button>
+    <button class="close-cart" onclick="closeCart()">
+      ✕
+    </button>
+  </div>
 
-</div>
+  <div class="cart-items" id="cartItems"></div>
 
-<div id="cartItems"></div>
+  <div class="cart-footer">
 
-<div class="cart-total">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
 
-<span>Total</span>
+    <button class="checkout" onclick="checkout()">
+      Continue to Checkout
+    </button>
 
-<span id="cartTotal">$0.00</span>
+    <button class="clear-cart" onclick="clearCart()">
+      Clear Cart
+    </button>
 
-</div>
-
-<button class="checkout" onclick="checkout()">
-Continue to Checkout
-</button>
-
-<button class="clear-cart" onclick="clearCart()">
-Clear Cart
-</button>
+  </div>
 
 </aside>
 
 
+<div class="toast" id="toast"></div>
+
+
 <footer>
-
-© 2026 Chemistry Resources Co. — Learn chemistry. Understand everything.
-
+  © 2026 Chemistry Resources Co. — Learn chemistry. Understand everything.
 </footer>
 
 
 <script>
 
-let cart = [];
+const resources = [
+
+  {
+    id:"atomic-notes",
+    name:"Atomic Structure Notes",
+    category:"atomic",
+    categoryLabel:"Atomic Structure",
+    price:2.00,
+    tag:"POPULAR",
+    icon:"⚛️",
+    description:"Clear and concise notes covering the fundamentals of atomic structure."
+  },
+
+  {
+    id:"atomic-worksheet",
+    name:"Atomic Structure Worksheet",
+    category:"atomic",
+    categoryLabel:"Atomic Structure",
+    price:1.50,
+    tag:"WORKSHEET",
+    icon:"📝",
+    description:"Practice questions designed to test your understanding of atomic structure."
+  },
+
+  {
+    id:"exam-guide",
+    name:"Chemistry Exam Study Guide",
+    category:"calculations",
+    categoryLabel:"Study Guide",
+    price:4.00,
+    tag:"STUDY GUIDE",
+    icon:"📚",
+    description:"A compact study guide to help you prepare for chemistry examinations."
+  },
+
+  {
+    id:"bonding-notes",
+    name:"Chemical Bonding Notes",
+    category:"bonding",
+    categoryLabel:"Chemical Bonding",
+    price:2.50,
+    tag:"NOTES",
+    icon:"🔗",
+    description:"Understand ionic, covalent and metallic bonding with simple explanations."
+  },
+
+  {
+    id:"organic-starter",
+    name:"Organic Chemistry Starter Pack",
+    category:"organic",
+    categoryLabel:"Organic Chemistry",
+    price:3.50,
+    tag:"STARTER PACK",
+    icon:"🧪",
+    description:"Essential introductory resources for getting started with organic chemistry."
+  },
+
+  {
+    id:"mole-practice",
+    name:"Mole Calculations Practice",
+    category:"calculations",
+    categoryLabel:"Calculations",
+    price:2.00,
+    tag:"PRACTICE",
+    icon:"📊",
+    description:"Practice mole, mass and particle calculations with focused questions."
+  }
+
+];
+
+
 let activeCategory = "all";
 
 
-function addToCart(name,price){
+/* -------------------------
+   LOCAL STORAGE CART
+------------------------- */
 
-cart.push({
-name:name,
-price:price
+function getCart(){
+
+  try{
+
+    const saved = localStorage.getItem("chemistryCart");
+
+    return saved ? JSON.parse(saved) : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+function saveCart(cart){
+
+  localStorage.setItem(
+    "chemistryCart",
+    JSON.stringify(cart)
+  );
+
+}
+
+
+let cart = getCart();
+
+
+/* -------------------------
+   RENDER PRODUCTS
+------------------------- */
+
+function renderProducts(list){
+
+  const container =
+    document.getElementById("products");
+
+  container.innerHTML = "";
+
+  list.forEach(resource => {
+
+    const card = document.createElement("article");
+
+    card.className = "product";
+
+    card.innerHTML = `
+
+      <div class="product-top">
+
+        <div class="tag">
+          ${resource.tag}
+        </div>
+
+        <div class="product-icon">
+          ${resource.icon}
+        </div>
+
+      </div>
+
+      <div class="product-body">
+
+        <div class="category">
+          ${resource.categoryLabel}
+        </div>
+
+        <h3>
+          ${resource.name}
+        </h3>
+
+        <p class="description">
+          ${resource.description}
+        </p>
+
+        <div class="product-bottom">
+
+          <div class="price">
+            $${resource.price.toFixed(2)}
+          </div>
+
+          <div class="product-actions">
+
+            <button
+              class="btn btn-secondary"
+              onclick="viewResource('${resource.id}')"
+            >
+              View
+            </button>
+
+            <button
+              class="btn btn-primary"
+              onclick="addToCart('${resource.id}')"
+            >
+              Add
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+    container.appendChild(card);
+
+  });
+
+  document.getElementById("noResults").style.display =
+    list.length ? "none" : "block";
+
+}
+
+
+/* -------------------------
+   FILTER / SEARCH / SORT
+------------------------- */
+
+function filterProducts(){
+
+  const search =
+    document.getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const sort =
+    document.getElementById("sortSelect").value;
+
+
+  let list = resources.filter(resource => {
+
+    const matchesCategory =
+      activeCategory === "all" ||
+      resource.category === activeCategory;
+
+    const matchesSearch =
+      resource.name.toLowerCase().includes(search) ||
+      resource.description.toLowerCase().includes(search) ||
+      resource.categoryLabel.toLowerCase().includes(search);
+
+    return matchesCategory && matchesSearch;
+
+  });
+
+
+  if(sort === "low"){
+
+    list.sort((a,b) => a.price - b.price);
+
+  }
+
+  if(sort === "high"){
+
+    list.sort((a,b) => b.price - a.price);
+
+  }
+
+  if(sort === "az"){
+
+    list.sort((a,b) =>
+      a.name.localeCompare(b.name)
+    );
+
+  }
+
+
+  renderProducts(list);
+
+}
+
+
+/* -------------------------
+   CATEGORY BUTTONS
+------------------------- */
+
+document.querySelectorAll(".filter")
+.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    document.querySelectorAll(".filter")
+      .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    activeCategory =
+      button.dataset.category;
+
+    filterProducts();
+
+  });
+
 });
 
-updateCart();
 
-showToast(name+" added to your cart!");
+/* -------------------------
+   VIEW RESOURCE
+------------------------- */
 
-}
+function viewResource(id){
 
+  const resource =
+    resources.find(item => item.id === id);
 
-function updateCart(){
+  if(!resource) return;
 
-document.getElementById("cartCount").textContent=cart.length;
-
-const items=document.getElementById("cartItems");
-
-if(cart.length===0){
-
-items.innerHTML=
-"<p style='color:#9db0c7'>Your cart is empty.</p>";
-
-}else{
-
-items.innerHTML=cart.map((item,index)=>`
-
-<div class="cart-item">
-
-<strong>${item.name}</strong>
-
-<span>$${item.price.toFixed(2)}</span>
-
-<button
-style="float:right;background:none;border:0;color:#ff8f8f"
-onclick="removeItem(${index})">
-Remove
-</button>
-
-</div>
-
-`).join("");
-
-}
-
-let total=cart.reduce((sum,item)=>sum+item.price,0);
-
-document.getElementById("cartTotal").textContent=
-"$"+total.toFixed(2);
+  window.location.href =
+    "resource.html?resource=" +
+    encodeURIComponent(resource.id);
 
 }
 
 
-function removeItem(index){
+/* -------------------------
+   ADD TO CART
+------------------------- */
 
-cart.splice(index,1);
+function addToCart(id){
 
-updateCart();
+  const resource =
+    resources.find(item => item.id === id);
+
+  if(!resource) return;
+
+
+  const existing =
+    cart.find(item => item.id === id);
+
+
+  if(existing){
+
+    existing.quantity += 1;
+
+  }else{
+
+    cart.push({
+      id:resource.id,
+      quantity:1
+    });
+
+  }
+
+
+  saveCart(cart);
+
+  updateCartUI();
+
+  showToast(
+    resource.name + " added to cart"
+  );
 
 }
 
+
+/* -------------------------
+   REMOVE FROM CART
+------------------------- */
+
+function removeFromCart(id){
+
+  cart =
+    cart.filter(item => item.id !== id);
+
+  saveCart(cart);
+
+  updateCartUI();
+
+}
+
+
+/* -------------------------
+   CLEAR CART
+------------------------- */
 
 function clearCart(){
 
-cart=[];
+  if(cart.length === 0) return;
 
-updateCart();
+  cart = [];
+
+  saveCart(cart);
+
+  updateCartUI();
+
+  showToast("Cart cleared");
 
 }
 
 
+/* -------------------------
+   UPDATE CART UI
+------------------------- */
+
+function updateCartUI(){
+
+  const cartItems =
+    document.getElementById("cartItems");
+
+  const cartCount =
+    document.getElementById("cartCount");
+
+  const cartTotal =
+    document.getElementById("cartTotal");
+
+
+  let total = 0;
+  let quantityTotal = 0;
+
+
+  if(cart.length === 0){
+
+    cartItems.innerHTML = `
+
+      <div class="cart-empty">
+
+        <div style="font-size:42px;margin-bottom:12px;">
+          🛒
+        </div>
+
+        <h3 style="color:var(--text);margin-bottom:8px;">
+          Your cart is empty
+        </h3>
+
+        <p>
+          Add some chemistry resources to get started.
+        </p>
+
+      </div>
+
+    `;
+
+  }else{
+
+    cartItems.innerHTML = "";
+
+
+    cart.forEach(item => {
+
+      const resource =
+        resources.find(r => r.id === item.id);
+
+      if(!resource) return;
+
+
+      const subtotal =
+        resource.price * item.quantity;
+
+      total += subtotal;
+
+      quantityTotal += item.quantity;
+
+
+      const row =
+        document.createElement("div");
+
+      row.className = "cart-item";
+
+      row.innerHTML = `
+
+        <div class="cart-item-icon">
+          ${resource.icon}
+        </div>
+
+        <div class="cart-item-info">
+
+          <div class="cart-item-name">
+            ${resource.name}
+          </div>
+
+          <div class="cart-item-price">
+            $${resource.price.toFixed(2)}
+            × ${item.quantity}
+          </div>
+
+        </div>
+
+        <button
+          class="remove-item"
+          onclick="removeFromCart('${resource.id}')"
+        >
+          Remove
+        </button>
+      `;
+
+      cartItems.appendChild(row);
+
+    });
+
+  }
+
+
+  cartCount.textContent =
+    quantityTotal;
+
+  cartTotal.textContent =
+    "$" + total.toFixed(2);
+
+}
+
+
+/* -------------------------
+   CART OPEN / CLOSE
+------------------------- */
+
 function openCart(){
 
-document.getElementById("cartPanel").classList.add("open");
+  updateCartUI();
+
+  document
+    .getElementById("cartDrawer")
+    .classList.add("open");
+
+  document
+    .getElementById("overlay")
+    .classList.add("show");
 
 }
 
 
 function closeCart(){
 
-document.getElementById("cartPanel").classList.remove("open");
+  document
+    .getElementById("cartDrawer")
+    .classList.remove("open");
+
+  document
+    .getElementById("overlay")
+    .classList.remove("show");
 
 }
 
+
+/* -------------------------
+   ACCOUNT
+------------------------- */
+
+function goToAccount(){
+
+  const user =
+    localStorage.getItem("chemistryUser");
+
+  if(user){
+
+    window.location.href =
+      "account.html";
+
+  }else{
+
+    window.location.href =
+      "login.html";
+
+  }
+
+}
+
+
+/* -------------------------
+   CHECKOUT
+------------------------- */
 
 function checkout(){
 
-if(cart.length===0){
+  if(cart.length === 0){
 
-showToast("Your cart is empty.");
+    showToast("Your cart is empty");
 
-return;
+    return;
 
-}
-
-showToast("Checkout and payment will be connected next.");
-
-}
+  }
 
 
-function viewResource(name){
-
-showToast(name+" details page will be connected next.");
-
-}
+  const user =
+    localStorage.getItem("chemistryUser");
 
 
-function setCategory(category,button){
+  if(!user){
 
-activeCategory=category;
+    showToast("Please log in to continue");
 
-document.querySelectorAll(".category-btn")
-.forEach(btn=>btn.classList.remove("active"));
+    setTimeout(() => {
 
-button.classList.add("active");
+      window.location.href =
+        "login.html";
 
-filterProducts();
+    },700);
 
-}
+    return;
+
+  }
 
 
-function filterProducts(){
-
-const search=document
-.getElementById("searchInput")
-.value
-.toLowerCase();
-
-const products=[
-...document.querySelectorAll(".product")
-];
-
-let visible=0;
-
-products.forEach(product=>{
-
-const name=product.dataset.name.toLowerCase();
-const category=product.dataset.category;
-
-const matchesSearch=name.includes(search);
-
-const matchesCategory=
-activeCategory==="all" ||
-category===activeCategory;
-
-if(matchesSearch && matchesCategory){
-
-product.style.display="block";
-visible++;
-
-}else{
-
-product.style.display="none";
-
-}
-
-});
-
-document.getElementById("empty").style.display=
-visible===0 ? "block" : "none";
+  showToast(
+    "Checkout will be connected next"
+  );
 
 }
 
 
-function sortProducts(){
+/* -------------------------
+   TOAST
+------------------------- */
 
-const grid=document.getElementById("productGrid");
-
-const products=[
-...grid.querySelectorAll(".product")
-];
-
-const sort=document.getElementById("sortSelect").value;
-
-products.sort((a,b)=>{
-
-if(sort==="low"){
-return Number(a.dataset.price)-Number(b.dataset.price);
-}
-
-if(sort==="high"){
-return Number(b.dataset.price)-Number(a.dataset.price);
-}
-
-if(sort==="az"){
-return a.dataset.name.localeCompare(b.dataset.name);
-}
-
-return 0;
-
-});
-
-products.forEach(product=>grid.appendChild(product));
-
-filterProducts();
-
-}
-
+let toastTimer;
 
 function showToast(message){
 
-const old=document.querySelector(".toast");
+  const toast =
+    document.getElementById("toast");
 
-if(old) old.remove();
+  toast.textContent = message;
 
-const toast=document.createElement("div");
+  toast.classList.add("show");
 
-toast.className="toast";
+  clearTimeout(toastTimer);
 
-toast.textContent=message;
+  toastTimer =
+    setTimeout(() => {
 
-document.body.appendChild(toast);
+      toast.classList.remove("show");
 
-setTimeout(()=>{
-toast.remove();
-},2500);
+    },2200);
 
 }
 
 
-updateCart();
+/* -------------------------
+   INITIAL LOAD
+------------------------- */
+
+renderProducts(resources);
+
+updateCartUI();
 
 </script>
 
 </body>
 </html>
 ```
+
