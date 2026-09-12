@@ -1,0 +1,1670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Chemistry Resources Co.</title>
+
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0c1a2c;
+      --card:#102238;
+      --card2:#132943;
+      --text:#f5f9ff;
+      --muted:#9db0c7;
+      --primary:#55d6ff;
+      --accent:#8b7cff;
+      --green:#55e6a5;
+      --red:#ff7070;
+      --border:rgba(255,255,255,.09);
+      --shadow:0 20px 60px rgba(0,0,0,.25);
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      background:
+        radial-gradient(circle at 10% 0%,rgba(85,214,255,.08),transparent 30%),
+        radial-gradient(circle at 90% 10%,rgba(139,124,255,.08),transparent 30%),
+        var(--bg);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    /* NAV */
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 6%;
+      background:rgba(7,17,31,.82);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      font-size:18px;
+      white-space:nowrap;
+    }
+
+    .logo-atom{
+      position:relative;
+      width:40px;
+      height:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .logo-core{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:var(--primary);
+      box-shadow:0 0 18px rgba(85,214,255,.9);
+      z-index:3;
+    }
+
+    .logo-atom:before,
+    .logo-atom:after{
+      content:"";
+      position:absolute;
+      width:36px;
+      height:15px;
+      border:1.5px solid var(--primary);
+      border-radius:50%;
+      opacity:.8;
+    }
+
+    .logo-atom:before{
+      transform:rotate(45deg);
+    }
+
+    .logo-atom:after{
+      transform:rotate(-45deg);
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:26px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .nav-links a:hover{
+      color:var(--text);
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .nav-btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:9px 14px;
+      border-radius:10px;
+      font-size:13px;
+    }
+
+    .nav-btn:hover{
+      border-color:rgba(85,214,255,.4);
+      background:rgba(85,214,255,.08);
+    }
+
+    /* MAIN */
+
+    .container{
+      width:min(1200px,92%);
+      margin:0 auto;
+    }
+
+    main{
+      padding:48px 0 80px;
+    }
+
+    .page-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:20px;
+      margin-bottom:24px;
+    }
+
+    .eyebrow{
+      color:var(--primary);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+
+    h1{
+      font-size:clamp(30px,5vw,48px);
+      line-height:1.05;
+      margin-bottom:10px;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      max-width:650px;
+      line-height:1.6;
+    }
+
+    .header-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      border:none;
+      border-radius:11px;
+      padding:12px 17px;
+      font-weight:700;
+      transition:.2s ease;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--primary),#8eeaff);
+      color:#04101b;
+      box-shadow:0 10px 30px rgba(85,214,255,.15);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      color:var(--text);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.08);
+    }
+
+    .btn-danger{
+      background:rgba(255,112,112,.1);
+      border:1px solid rgba(255,112,112,.25);
+      color:#ff9b9b;
+    }
+
+    .btn-danger:hover{
+      background:rgba(255,112,112,.16);
+    }
+
+    .btn-small{
+      padding:9px 12px;
+      font-size:13px;
+    }
+
+    /* WARNING */
+
+    .warning{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:16px 18px;
+      margin-bottom:26px;
+      border-radius:14px;
+      background:rgba(255,193,7,.07);
+      border:1px solid rgba(255,193,7,.18);
+      color:#ffe49a;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .warning-icon{
+      font-size:20px;
+      flex:none;
+    }
+
+    /* STATS */
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-bottom:30px;
+    }
+
+    .stat{
+      background:linear-gradient(145deg,var(--card),rgba(16,34,56,.72));
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:13px;
+      margin-bottom:9px;
+    }
+
+    .stat-value{
+      font-size:30px;
+      font-weight:800;
+    }
+
+    .stat-value span{
+      color:var(--primary);
+    }
+
+    /* TOOLBAR */
+
+    .toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:20px;
+      flex-wrap:wrap;
+    }
+
+    .search-box{
+      position:relative;
+      flex:1;
+      min-width:240px;
+    }
+
+    .search-box input{
+      width:100%;
+      background:var(--card);
+      border:1px solid var(--border);
+      color:var(--text);
+      padding:13px 16px 13px 42px;
+      border-radius:12px;
+      outline:none;
+    }
+
+    .search-box input:focus{
+      border-color:rgba(85,214,255,.5);
+      box-shadow:0 0 0 3px rgba(85,214,255,.07);
+    }
+
+    .search-icon{
+      position:absolute;
+      left:15px;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--muted);
+    }
+
+    .toolbar-actions{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    /* RESOURCE GRID */
+
+    .resource-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:18px;
+    }
+
+    .resource-card{
+      background:linear-gradient(145deg,var(--card),var(--card2));
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+
+    .resource-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .resource-title-wrap{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      min-width:0;
+    }
+
+    .resource-icon{
+      width:48px;
+      height:48px;
+      border-radius:13px;
+      background:rgba(85,214,255,.08);
+      border:1px solid rgba(85,214,255,.15);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:25px;
+      flex:none;
+    }
+
+    .resource-id{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:4px;
+      word-break:break-all;
+    }
+
+    .field{
+      margin-bottom:14px;
+    }
+
+    .field label{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      margin-bottom:7px;
+      font-weight:600;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      background:rgba(0,0,0,.14);
+      border:1px solid var(--border);
+      border-radius:10px;
+      color:var(--text);
+      padding:11px 12px;
+      outline:none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(85,214,255,.45);
+    }
+
+    .field select option{
+      background:#102238;
+      color:#fff;
+    }
+
+    .field textarea{
+      min-height:100px;
+      resize:vertical;
+      line-height:1.5;
+    }
+
+    .two-fields{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .resource-actions{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--border);
+    }
+
+    /* EMPTY */
+
+    .empty{
+      display:none;
+      text-align:center;
+      padding:60px 20px;
+      border:1px dashed var(--border);
+      border-radius:18px;
+      color:var(--muted);
+    }
+
+    .empty-icon{
+      font-size:42px;
+      margin-bottom:12px;
+    }
+
+    .empty h3{
+      color:var(--text);
+      margin-bottom:8px;
+    }
+
+    /* MODAL */
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:200;
+      background:rgba(0,0,0,.7);
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .modal-backdrop.show{
+      display:flex;
+    }
+
+    .modal{
+      width:min(600px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:20px;
+      padding:24px;
+      box-shadow:0 30px 100px rgba(0,0,0,.5);
+    }
+
+    .modal-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:22px;
+    }
+
+    .modal-header h2{
+      font-size:22px;
+    }
+
+    .close{
+      width:36px;
+      height:36px;
+      border-radius:9px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      font-size:20px;
+    }
+
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    /* TOAST */
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:24px;
+      transform:translate(-50%,20px);
+      background:#132943;
+      border:1px solid var(--border);
+      color:var(--text);
+      padding:13px 18px;
+      border-radius:12px;
+      box-shadow:0 15px 50px rgba(0,0,0,.4);
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
+      z-index:500;
+      max-width:90%;
+      text-align:center;
+      font-size:14px;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    /* FOOTER */
+
+    footer{
+      border-top:1px solid var(--border);
+      padding:30px 0;
+      color:var(--muted);
+      font-size:13px;
+      text-align:center;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:800px){
+      .nav{
+        padding:0 4%;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .brand{
+        font-size:15px;
+      }
+
+      .logo-atom{
+        width:34px;
+        height:34px;
+      }
+
+      .logo-atom:before,
+      .logo-atom:after{
+        width:31px;
+      }
+
+      .page-header{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .resource-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:520px){
+      main{
+        padding-top:32px;
+      }
+
+      .container{
+        width:94%;
+      }
+
+      .nav-actions .account-btn{
+        display:none;
+      }
+
+      .header-actions{
+        width:100%;
+      }
+
+      .header-actions .btn{
+        flex:1;
+      }
+
+      .two-fields{
+        grid-template-columns:1fr;
+        gap:0;
+      }
+
+      .toolbar{
+        align-items:stretch;
+      }
+
+      .search-box{
+        min-width:100%;
+      }
+
+      .toolbar-actions{
+        width:100%;
+      }
+
+      .toolbar-actions .btn{
+        flex:1;
+      }
+
+      .resource-actions{
+        flex-direction:column;
+      }
+
+      .resource-actions .btn{
+        width:100%;
+      }
+
+      .modal{
+        padding:18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="brand">
+      <div class="logo-atom">
+        <div class="logo-core"></div>
+      </div>
+      Chemistry Resources Co.
+    </a>
+
+    <div class="nav-links">
+      <a href="admin.html">Dashboard</a>
+      <a href="shop.html">Shop</a>
+      <a href="account.html">Account</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="shop.html" class="nav-btn">View Shop</a>
+      <button class="nav-btn account-btn" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <!-- HEADER -->
+      <section class="page-header">
+        <div>
+          <div class="eyebrow">⚛️ Administration</div>
+          <h1>Admin Dashboard</h1>
+          <p class="subtitle">
+            Manage your Chemistry Resources Co. catalog, prices, categories,
+            descriptions and resource details.
+          </p>
+        </div>
+
+        <div class="header-actions">
+          <a href="shop.html" class="btn btn-secondary">View Shop</a>
+          <button class="btn btn-primary" onclick="openAddModal()">
+            + Add Resource
+          </button>
+        </div>
+      </section>
+
+      <!-- WARNING -->
+      <div class="warning">
+        <div class="warning-icon">⚠️</div>
+        <div>
+          <strong>Prototype admin mode.</strong><br>
+          Your changes are currently stored in this browser using localStorage.
+          This is not secure for a real online store yet. We will connect the
+          dashboard to a secure database and real admin authentication later.
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <section class="stats">
+        <div class="stat">
+          <div class="stat-label">Total Resources</div>
+          <div class="stat-value" id="totalResources">0</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">Average Price</div>
+          <div class="stat-value">$<span id="averagePrice">0.00</span></div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">Catalog Value</div>
+          <div class="stat-value">$<span id="catalogValue">0.00</span></div>
+        </div>
+      </section>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <div class="search-box">
+          <span class="search-icon">⌕</span>
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search resources..."
+            oninput="renderResources()"
+          >
+        </div>
+
+        <div class="toolbar-actions">
+          <button class="btn btn-primary btn-small" onclick="openAddModal()">
+            + Add Resource
+          </button>
+
+          <button class="btn btn-secondary btn-small" onclick="resetDemoData()">
+            Reset Demo Data
+          </button>
+        </div>
+      </div>
+
+      <!-- RESOURCE LIST -->
+      <section id="resourceGrid" class="resource-grid"></section>
+
+      <div id="emptyState" class="empty">
+        <div class="empty-icon">🔎</div>
+        <h3>No resources found</h3>
+        <p>Try another search or add a new resource.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    Chemistry Resources Co. • Admin Dashboard
+  </footer>
+
+  <!-- ADD RESOURCE MODAL -->
+  <div class="modal-backdrop" id="addModal">
+    <div class="modal">
+
+      <div class="modal-header">
+        <h2>Add Resource</h2>
+        <button class="close" onclick="closeAddModal()">×</button>
+      </div>
+
+      <form onsubmit="addResource(event)">
+
+        <div class="field">
+          <label>Resource Name</label>
+          <input
+            type="text"
+            id="addName"
+            placeholder="Example: Atomic Structure Notes"
+            required
+          >
+        </div>
+
+        <div class="two-fields">
+
+          <div class="field">
+            <label>Category</label>
+            <select id="addCategory">
+              <option value="atomic">Atomic Structure</option>
+              <option value="bonding">Chemical Bonding</option>
+              <option value="organic">Organic Chemistry</option>
+              <option value="calculations">Calculations</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Price (USD)</label>
+            <input
+              type="number"
+              id="addPrice"
+              min="0"
+              step="0.01"
+              placeholder="2.00"
+              required
+            >
+          </div>
+
+        </div>
+
+        <div class="two-fields">
+
+          <div class="field">
+            <label>Tag</label>
+            <input
+              type="text"
+              id="addTag"
+              placeholder="POPULAR"
+            >
+          </div>
+
+          <div class="field">
+            <label>Type</label>
+            <input
+              type="text"
+              id="addType"
+              placeholder="Study Notes"
+            >
+          </div>
+
+        </div>
+
+        <div class="field">
+          <label>Icon / Emoji</label>
+          <input
+            type="text"
+            id="addIcon"
+            placeholder="⚛️"
+            maxlength="10"
+          >
+        </div>
+
+        <div class="field">
+          <label>Description</label>
+          <textarea
+            id="addDescription"
+            placeholder="Describe what students will receive..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeAddModal()"
+          >
+            Cancel
+          </button>
+
+          <button type="submit" class="btn btn-primary">
+            Add Resource
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+
+    /* =========================================
+       CHEMISTRY RESOURCES CO.
+       ADMIN DASHBOARD
+       ========================================= */
+
+    const STORAGE_KEY = "chemistryResources";
+
+    const demoResources = [
+      {
+        id: "atomic-notes",
+        name: "Atomic Structure Notes",
+        category: "atomic",
+        categoryLabel: "Atomic Structure",
+        price: 2.00,
+        tag: "POPULAR",
+        type: "Study Notes",
+        icon: "⚛️",
+        description:
+          "Clear and easy-to-understand notes covering protons, neutrons, electrons, isotopes, electron configuration and atomic structure."
+      },
+      {
+        id: "atomic-worksheet",
+        name: "Atomic Structure Worksheet",
+        category: "atomic",
+        categoryLabel: "Atomic Structure",
+        price: 1.50,
+        tag: "WORKSHEET",
+        type: "Worksheet",
+        icon: "📝",
+        description:
+          "Practice questions designed to help students master atomic structure, isotopes, electron arrangement and related concepts."
+      },
+      {
+        id: "exam-guide",
+        name: "Chemistry Exam Study Guide",
+        category: "calculations",
+        categoryLabel: "Calculations",
+        price: 4.00,
+        tag: "STUDY GUIDE",
+        type: "Study Guide",
+        icon: "📚",
+        description:
+          "A compact chemistry revision guide with important concepts, formulas, exam tips and practice material."
+      },
+      {
+        id: "bonding-notes",
+        name: "Chemical Bonding Notes",
+        category: "bonding",
+        categoryLabel: "Chemical Bonding",
+        price: 2.50,
+        tag: "NOTES",
+        type: "Study Notes",
+        icon: "🔗",
+        description:
+          "Understand ionic, covalent and metallic bonding with simple explanations, diagrams and examples."
+      },
+      {
+        id: "organic-starter",
+        name: "Organic Chemistry Starter Pack",
+        category: "organic",
+        categoryLabel: "Organic Chemistry",
+        price: 3.50,
+        tag: "STARTER PACK",
+        type: "Resource Pack",
+        icon: "🧪",
+        description:
+          "A beginner-friendly introduction to organic chemistry including hydrocarbons, functional groups and basic reactions."
+      },
+      {
+        id: "mole-practice",
+        name: "Mole Calculations Practice",
+        category: "calculations",
+        categoryLabel: "Calculations",
+        price: 2.00,
+        tag: "PRACTICE",
+        type: "Practice Sheet",
+        icon: "📊",
+        description:
+          "Step-by-step practice for mole calculations, molar mass, equations and common chemistry calculation questions."
+      }
+    ];
+
+    /* =========================================
+       INITIALIZE DATA
+       ========================================= */
+
+    function getResources(){
+
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if(saved){
+
+        try{
+          const parsed = JSON.parse(saved);
+
+          if(Array.isArray(parsed)){
+            return parsed;
+          }
+
+        }catch(error){
+          console.log("Could not read saved resources.");
+        }
+      }
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(demoResources)
+      );
+
+      return JSON.parse(JSON.stringify(demoResources));
+    }
+
+
+    function saveResources(resources){
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(resources)
+      );
+    }
+
+
+    /* =========================================
+       CATEGORY LABELS
+       ========================================= */
+
+    const categoryLabels = {
+      atomic: "Atomic Structure",
+      bonding: "Chemical Bonding",
+      organic: "Organic Chemistry",
+      calculations: "Calculations",
+      other: "Other"
+    };
+
+
+    /* =========================================
+       ID GENERATOR
+       ========================================= */
+
+    function createId(name){
+
+      let base = name
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"");
+
+      if(!base){
+        base = "resource";
+      }
+
+      const resources = getResources();
+
+      let id = base;
+      let number = 2;
+
+      while(resources.some(resource => resource.id === id)){
+        id = base + "-" + number;
+        number++;
+      }
+
+      return id;
+    }
+
+
+    /* =========================================
+       ESCAPE HTML
+       ========================================= */
+
+    function escapeHtml(value){
+
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+    }
+
+
+    /* =========================================
+       RENDER RESOURCES
+       ========================================= */
+
+    function renderResources(){
+
+      const resources = getResources();
+
+      const search =
+        document
+          .getElementById("searchInput")
+          .value
+          .trim()
+          .toLowerCase();
+
+      const filtered = resources.filter(resource => {
+
+        const text = [
+          resource.name,
+          resource.categoryLabel,
+          resource.category,
+          resource.tag,
+          resource.type,
+          resource.description
+        ]
+        .join(" ")
+        .toLowerCase();
+
+        return text.includes(search);
+
+      });
+
+      const grid = document.getElementById("resourceGrid");
+      const empty = document.getElementById("emptyState");
+
+      grid.innerHTML = "";
+
+      if(filtered.length === 0){
+
+        empty.style.display = "block";
+
+      }else{
+
+        empty.style.display = "none";
+
+        filtered.forEach(resource => {
+          grid.appendChild(createResourceCard(resource));
+        });
+      }
+
+      updateStats(resources);
+    }
+
+
+    /* =========================================
+       RESOURCE CARD
+       ========================================= */
+
+    function createResourceCard(resource){
+
+      const card = document.createElement("article");
+
+      card.className = "resource-card";
+
+      card.innerHTML = `
+
+        <div class="resource-top">
+
+          <div class="resource-title-wrap">
+
+            <div class="resource-icon">
+              ${escapeHtml(resource.icon || "⚛️")}
+            </div>
+
+            <div>
+              <strong>
+                ${escapeHtml(resource.name)}
+              </strong>
+
+              <div class="resource-id">
+                ID: ${escapeHtml(resource.id)}
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Resource Name</label>
+
+          <input
+            class="edit-name"
+            type="text"
+            value="${escapeHtml(resource.name)}"
+          >
+
+        </div>
+
+
+        <div class="two-fields">
+
+          <div class="field">
+
+            <label>Category</label>
+
+            <select class="edit-category">
+
+              <option value="atomic"
+                ${resource.category === "atomic" ? "selected" : ""}>
+                Atomic Structure
+              </option>
+
+              <option value="bonding"
+                ${resource.category === "bonding" ? "selected" : ""}>
+                Chemical Bonding
+              </option>
+
+              <option value="organic"
+                ${resource.category === "organic" ? "selected" : ""}>
+                Organic Chemistry
+              </option>
+
+              <option value="calculations"
+                ${resource.category === "calculations" ? "selected" : ""}>
+                Calculations
+              </option>
+
+              <option value="other"
+                ${resource.category === "other" ? "selected" : ""}>
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Price (USD)</label>
+
+            <input
+              class="edit-price"
+              type="number"
+              min="0"
+              step="0.01"
+              value="${Number(resource.price || 0).toFixed(2)}"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="two-fields">
+
+          <div class="field">
+
+            <label>Tag</label>
+
+            <input
+              class="edit-tag"
+              type="text"
+              value="${escapeHtml(resource.tag || "")}"
+              placeholder="POPULAR"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>Type</label>
+
+            <input
+              class="edit-type"
+              type="text"
+              value="${escapeHtml(resource.type || "")}"
+              placeholder="Study Notes"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Icon / Emoji</label>
+
+          <input
+            class="edit-icon"
+            type="text"
+            maxlength="10"
+            value="${escapeHtml(resource.icon || "⚛️")}"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Description</label>
+
+          <textarea class="edit-description">${escapeHtml(resource.description || "")}</textarea>
+
+        </div>
+
+
+        <div class="resource-actions">
+
+          <button
+            class="btn btn-danger btn-small"
+            onclick="deleteResource('${escapeHtml(resource.id)}')"
+          >
+            Delete
+          </button>
+
+          <button
+            class="btn btn-primary btn-small save-resource"
+          >
+            Save Changes
+          </button>
+
+        </div>
+      `;
+
+
+      card
+        .querySelector(".save-resource")
+        .addEventListener("click",function(){
+
+          saveResource(
+            resource.id,
+            card
+          );
+
+        });
+
+
+      return card;
+    }
+
+
+    /* =========================================
+       SAVE RESOURCE
+       ========================================= */
+
+    function saveResource(id,card){
+
+      const resources = getResources();
+
+      const index =
+        resources.findIndex(resource => resource.id === id);
+
+      if(index === -1){
+        showToast("Resource not found.");
+        return;
+      }
+
+      const name =
+        card.querySelector(".edit-name").value.trim();
+
+      const category =
+        card.querySelector(".edit-category").value;
+
+      const price =
+        parseFloat(card.querySelector(".edit-price").value);
+
+      const tag =
+        card.querySelector(".edit-tag").value.trim();
+
+      const type =
+        card.querySelector(".edit-type").value.trim();
+
+      const icon =
+        card.querySelector(".edit-icon").value.trim();
+
+      const description =
+        card.querySelector(".edit-description").value.trim();
+
+
+      if(!name){
+        showToast("Please enter a resource name.");
+        return;
+      }
+
+      if(isNaN(price) || price < 0){
+        showToast("Please enter a valid price.");
+        return;
+      }
+
+      if(!description){
+        showToast("Please enter a description.");
+        return;
+      }
+
+
+      resources[index].name = name;
+      resources[index].category = category;
+      resources[index].categoryLabel =
+        categoryLabels[category] || "Other";
+      resources[index].price = price;
+      resources[index].tag = tag;
+      resources[index].type = type;
+      resources[index].icon = icon || "⚛️";
+      resources[index].description = description;
+
+
+      saveResources(resources);
+
+      renderResources();
+
+      showToast("Resource saved successfully.");
+    }
+
+
+    /* =========================================
+       DELETE RESOURCE
+       ========================================= */
+
+    function deleteResource(id){
+
+      const resources = getResources();
+
+      const resource =
+        resources.find(item => item.id === id);
+
+      if(!resource){
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          `Delete "${resource.name}"?\n\nThis will remove it from the admin catalog stored in this browser.`
+        );
+
+      if(!confirmed){
+        return;
+      }
+
+      const updated =
+        resources.filter(item => item.id !== id);
+
+      saveResources(updated);
+
+      renderResources();
+
+      showToast("Resource deleted.");
+    }
+
+
+    /* =========================================
+       ADD RESOURCE
+       ========================================= */
+
+    function addResource(event){
+
+      event.preventDefault();
+
+      const resources = getResources();
+
+      const name =
+        document.getElementById("addName").value.trim();
+
+      const category =
+        document.getElementById("addCategory").value;
+
+      const price =
+        parseFloat(
+          document.getElementById("addPrice").value
+        );
+
+      const tag =
+        document.getElementById("addTag").value.trim();
+
+      const type =
+        document.getElementById("addType").value.trim();
+
+      const icon =
+        document.getElementById("addIcon").value.trim();
+
+      const description =
+        document.getElementById("addDescription").value.trim();
+
+
+      if(!name){
+        showToast("Please enter a resource name.");
+        return;
+      }
+
+      if(isNaN(price) || price < 0){
+        showToast("Please enter a valid price.");
+        return;
+      }
+
+      if(!description){
+        showToast("Please enter a description.");
+        return;
+      }
+
+
+      const newResource = {
+
+        id:createId(name),
+
+        name:name,
+
+        category:category,
+
+        categoryLabel:
+          categoryLabels[category] || "Other",
+
+        price:price,
+
+        tag:tag || "NEW",
+
+        type:type || "Digital Resource",
+
+        icon:icon || "⚛️",
+
+        description:description
+
+      };
+
+
+      resources.push(newResource);
+
+      saveResources(resources);
+
+      closeAddModal();
+
+      document.querySelector("form").reset();
+
+      renderResources();
+
+      showToast("New resource added.");
+    }
+
+
+    /* =========================================
+       MODAL
+       ========================================= */
+
+    function openAddModal(){
+
+      document
+        .getElementById("addModal")
+        .classList.add("show");
+
+      setTimeout(() => {
+
+        document
+          .getElementById("addName")
+          .focus();
+
+      },100);
+    }
+
+
+    function closeAddModal(){
+
+      document
+        .getElementById("addModal")
+        .classList.remove("show");
+    }
+
+
+    document
+      .getElementById("addModal")
+      .addEventListener("click",function(event){
+
+        if(event.target === this){
+          closeAddModal();
+        }
+
+      });
+
+
+    /* =========================================
+       RESET DEMO DATA
+       ========================================= */
+
+    function resetDemoData(){
+
+      const confirmed =
+        confirm(
+          "Reset the catalog to the original six demo resources?"
+        );
+
+      if(!confirmed){
+        return;
+      }
+
+      saveResources(
+        JSON.parse(JSON.stringify(demoResources))
+      );
+
+      renderResources();
+
+      showToast("Demo catalog restored.");
+    }
+
+
+    /* =========================================
+       STATS
+       ========================================= */
+
+    function updateStats(resources){
+
+      const total =
+        resources.length;
+
+      const totalValue =
+        resources.reduce(
+          (sum,resource) =>
+            sum + Number(resource.price || 0),
+          0
+        );
+
+      const average =
+        total > 0
+          ? totalValue / total
+          : 0;
+
+
+      document
+        .getElementById("totalResources")
+        .textContent = total;
+
+
+      document
+        .getElementById("averagePrice")
+        .textContent =
+          average.toFixed(2);
+
+
+      document
+        .getElementById("catalogValue")
+        .textContent =
+          totalValue.toFixed(2);
+    }
+
+
+    /* =========================================
+       TOAST
+       ========================================= */
+
+    let toastTimer;
+
+    function showToast(message){
+
+      const toast =
+        document.getElementById("toast");
+
+      toast.textContent = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        },2500);
+    }
+
+
+    /* =========================================
+       LOGOUT
+       ========================================= */
+
+    function logout(){
+
+      localStorage.removeItem("chemistryUser");
+
+      window.location.href = "login.html";
+    }
+
+
+    /* =========================================
+       INITIAL LOAD
+       ========================================= */
+
+    document.addEventListener("DOMContentLoaded",function(){
+
+      /*
+        Prototype mode:
+        We allow the dashboard to open directly for now.
+        Real admin authentication will be connected later.
+      */
+
+      getResources();
+
+      renderResources();
+
+    });
+
+  </script>
+
+</body>
+</html>
