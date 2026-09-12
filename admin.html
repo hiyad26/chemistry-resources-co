@@ -1,5 +1,5 @@
+```html
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,19 +9,27 @@
 
   <style>
     :root{
-      --pink:#d94f83;
-      --pink-dark:#a93664;
-      --pink-soft:#f5d2df;
-      --pink-pale:#fff0f5;
-      --cream:#fffaf4;
-      --cream-2:#f8eee4;
+      --cream:#fffaf5;
+      --cream2:#fff3ea;
+      --cream3:#fce8df;
+
+      --pink:#e85d8f;
+      --pink-dark:#c83f72;
+      --pink-light:#f8a8c2;
+      --pink-soft:#fde1eb;
+
+      --text:#3b2630;
+      --muted:#876d77;
+
       --white:#ffffff;
-      --brown:#3d2930;
-      --muted:#866f77;
-      --border:#ead8dc;
-      --shadow:0 18px 45px rgba(105,48,70,.10);
-      --green:#3c9b70;
-      --red:#c84a61;
+
+      --green:#4c9b72;
+      --red:#d94d67;
+
+      --border:rgba(190,105,135,.18);
+
+      --shadow:0 18px 50px rgba(151,82,108,.12);
+      --shadow-hover:0 22px 55px rgba(151,82,108,.18);
     }
 
     *{
@@ -35,12 +43,28 @@
     }
 
     body{
-      font-family:Inter,Arial,Helvetica,sans-serif;
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
       background:
-        radial-gradient(circle at 5% 0%,rgba(217,79,131,.09),transparent 28%),
-        radial-gradient(circle at 95% 8%,rgba(245,210,223,.65),transparent 30%),
+        radial-gradient(
+          circle at 8% 0%,
+          rgba(248,168,194,.22),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 92% 8%,
+          rgba(232,93,143,.10),
+          transparent 28%
+        ),
         var(--cream);
-      color:var(--brown);
+
+      color:var(--text);
       min-height:100vh;
     }
 
@@ -60,23 +84,25 @@
       text-decoration:none;
     }
 
-    /* =========================
+    /* =====================================
        NAVIGATION
-       ========================= */
+       ===================================== */
 
     .nav{
       position:sticky;
       top:0;
       z-index:100;
-      height:72px;
+
+      height:74px;
 
       display:flex;
       align-items:center;
       justify-content:space-between;
 
-      padding:0 5%;
+      padding:0 6%;
 
-      background:rgba(255,250,244,.90);
+      background:rgba(255,250,245,.92);
+
       backdrop-filter:blur(18px);
 
       border-bottom:1px solid var(--border);
@@ -88,7 +114,7 @@
       gap:11px;
 
       font-weight:800;
-      font-size:17px;
+      font-size:18px;
 
       white-space:nowrap;
     }
@@ -115,68 +141,69 @@
       background:var(--pink);
 
       box-shadow:
-        0 0 0 5px rgba(217,79,131,.10),
-        0 0 18px rgba(217,79,131,.45);
+        0 0 0 5px rgba(232,93,143,.10);
 
-      z-index:3;
+      z-index:5;
     }
 
-    .logo-atom:before,
-    .logo-atom:after{
+    .logo-atom::before,
+    .logo-atom::after{
       content:"";
 
       position:absolute;
 
-      width:37px;
-      height:16px;
+      width:38px;
+      height:15px;
 
-      border:1.5px solid var(--pink);
+      border:1.7px solid var(--pink);
 
       border-radius:50%;
 
-      opacity:.8;
+      opacity:.9;
     }
 
-    .logo-atom:before{
+    .logo-atom::before{
       transform:rotate(45deg);
     }
 
-    .logo-atom:after{
+    .logo-atom::after{
       transform:rotate(-45deg);
     }
 
     .logo-electron{
       position:absolute;
 
-      width:5px;
-      height:5px;
-
-      background:var(--pink);
+      width:6px;
+      height:6px;
 
       border-radius:50%;
 
-      box-shadow:0 0 7px rgba(217,79,131,.7);
+      background:var(--pink-dark);
+
+      z-index:6;
     }
 
-    .electron-one{
-      top:7px;
-      left:18px;
+    .logo-electron.one{
+      top:8px;
+      right:8px;
     }
 
-    .electron-two{
-      bottom:7px;
-      right:12px;
+    .logo-electron.two{
+      bottom:8px;
+      left:8px;
     }
 
     .nav-links{
       display:flex;
-      align-items:center;
-      gap:25px;
+      gap:27px;
 
       color:var(--muted);
 
       font-size:14px;
-      font-weight:600;
+    }
+
+    .nav-links a{
+      transition:.2s;
     }
 
     .nav-links a:hover{
@@ -192,89 +219,92 @@
     .nav-btn{
       border:1px solid var(--border);
 
-      background:rgba(255,255,255,.65);
+      background:var(--white);
 
-      color:var(--brown);
+      color:var(--text);
 
       padding:9px 13px;
 
       border-radius:10px;
 
       font-size:13px;
-      font-weight:700;
+
+      transition:.2s;
     }
 
     .nav-btn:hover{
-      border-color:var(--pink-soft);
-      background:var(--pink-pale);
+      border-color:rgba(232,93,143,.35);
       color:var(--pink-dark);
+      background:var(--pink-soft);
     }
 
-    /* =========================
+    /* =====================================
        MAIN
-       ========================= */
-
-    main{
-      padding:48px 0 80px;
-    }
+       ===================================== */
 
     .container{
-      width:min(1180px,92%);
-      margin:0 auto;
+      width:min(1200px,92%);
+      margin:auto;
+    }
+
+    main{
+      padding:45px 0 80px;
     }
 
     .page-header{
       display:flex;
-      align-items:flex-end;
       justify-content:space-between;
+      align-items:flex-end;
 
-      gap:25px;
+      gap:20px;
 
-      margin-bottom:26px;
+      margin-bottom:24px;
     }
 
     .eyebrow{
       color:var(--pink-dark);
 
       font-size:11px;
-      font-weight:900;
+      font-weight:800;
 
-      letter-spacing:1.7px;
+      letter-spacing:1.5px;
+
       text-transform:uppercase;
 
-      margin-bottom:9px;
+      margin-bottom:8px;
     }
 
     h1{
-      font-size:clamp(31px,5vw,48px);
+      font-size:clamp(30px,5vw,48px);
+
       line-height:1.05;
 
-      margin-bottom:11px;
-
       letter-spacing:-1px;
+
+      margin-bottom:10px;
     }
 
     .subtitle{
       color:var(--muted);
 
-      max-width:650px;
+      max-width:700px;
 
       line-height:1.65;
-      font-size:15px;
     }
 
     .header-actions{
       display:flex;
-      gap:9px;
+      gap:10px;
       flex-wrap:wrap;
     }
 
-    /* =========================
+    /* =====================================
        BUTTONS
-       ========================= */
+       ===================================== */
 
     .btn{
       border:none;
+
       border-radius:11px;
 
       padding:12px 17px;
@@ -284,44 +314,47 @@
       transition:.2s ease;
     }
 
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
     .btn-primary{
-      background:var(--pink);
+      background:
+        linear-gradient(
+          135deg,
+          var(--pink),
+          var(--pink-dark)
+        );
 
       color:white;
 
       box-shadow:
-        0 9px 22px rgba(217,79,131,.20);
-    }
-
-    .btn-primary:hover{
-      background:var(--pink-dark);
-      transform:translateY(-1px);
+        0 10px 25px
+        rgba(200,63,114,.16);
     }
 
     .btn-secondary{
-      background:white;
+      background:var(--white);
 
       border:1px solid var(--border);
 
-      color:var(--brown);
-    }
-
-    .btn-secondary:hover{
-      background:var(--pink-pale);
-      border-color:var(--pink-soft);
       color:var(--pink-dark);
     }
 
-    .btn-danger{
-      background:#fff1f3;
+    .btn-secondary:hover{
+      background:var(--pink-soft);
+    }
 
-      border:1px solid #f2c8cf;
+    .btn-danger{
+      background:rgba(217,77,103,.08);
+
+      border:1px solid rgba(217,77,103,.22);
 
       color:var(--red);
     }
 
     .btn-danger:hover{
-      background:#ffe4e9;
+      background:rgba(217,77,103,.13);
     }
 
     .btn-small{
@@ -329,89 +362,9 @@
       font-size:13px;
     }
 
-    /* =========================
-       ATOMIC HERO DECORATION
-       ========================= */
-
-    .admin-intro{
-      position:relative;
-
-      overflow:hidden;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.94),
-          rgba(255,240,245,.95)
-        );
-
-      border:1px solid var(--border);
-
-      border-radius:24px;
-
-      padding:27px;
-
-      margin-bottom:25px;
-
-      box-shadow:var(--shadow);
-    }
-
-    .admin-intro:after{
-      content:"";
-
-      position:absolute;
-
-      width:180px;
-      height:180px;
-
-      right:-50px;
-      top:-70px;
-
-      border:1px solid rgba(217,79,131,.18);
-
-      border-radius:50%;
-    }
-
-    .admin-intro:before{
-      content:"";
-
-      position:absolute;
-
-      width:115px;
-      height:115px;
-
-      right:20px;
-      top:-35px;
-
-      border:1px solid rgba(217,79,131,.13);
-
-      border-radius:50%;
-
-      transform:rotate(45deg);
-    }
-
-    .intro-content{
-      position:relative;
-      z-index:2;
-      max-width:750px;
-    }
-
-    .intro-title{
-      font-size:22px;
-      font-weight:850;
-
-      margin-bottom:7px;
-    }
-
-    .intro-text{
-      color:var(--muted);
-      line-height:1.6;
-      font-size:14px;
-    }
-
-    /* =========================
+    /* =====================================
        WARNING
-       ========================= */
+       ===================================== */
 
     .warning{
       display:flex;
@@ -420,69 +373,80 @@
 
       align-items:flex-start;
 
-      padding:15px 17px;
+      padding:16px 18px;
 
-      margin-bottom:27px;
+      margin-bottom:26px;
 
       border-radius:14px;
 
-      background:#fff8df;
+      background:rgba(232,93,143,.06);
 
-      border:1px solid #f1df9e;
+      border:1px solid rgba(232,93,143,.15);
 
-      color:#705b22;
+      color:var(--muted);
 
-      line-height:1.55;
+      line-height:1.5;
 
-      font-size:13px;
+      font-size:14px;
+    }
+
+    .warning strong{
+      color:var(--text);
     }
 
     .warning-icon{
-      font-size:19px;
+      font-size:20px;
       flex:none;
     }
 
-    /* =========================
+    /* =====================================
        STATS
-       ========================= */
+       ===================================== */
 
     .stats{
       display:grid;
 
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns:
+        repeat(3,1fr);
 
-      gap:15px;
+      gap:16px;
 
       margin-bottom:30px;
     }
 
     .stat{
       position:relative;
+
       overflow:hidden;
 
-      background:rgba(255,255,255,.82);
+      background:
+        linear-gradient(
+          145deg,
+          var(--white),
+          var(--cream2)
+        );
 
       border:1px solid var(--border);
 
       border-radius:18px;
 
-      padding:21px;
+      padding:22px;
 
       box-shadow:var(--shadow);
     }
 
-    .stat:after{
+    .stat::after{
       content:"";
 
       position:absolute;
 
-      width:65px;
-      height:65px;
+      width:100px;
+      height:100px;
 
-      right:-25px;
-      bottom:-25px;
+      right:-40px;
+      top:-40px;
 
-      border:1px solid var(--pink-soft);
+      border:1px solid rgba(232,93,143,.12);
 
       border-radius:50%;
     }
@@ -490,35 +454,33 @@
     .stat-label{
       color:var(--muted);
 
-      font-size:12px;
-      font-weight:700;
+      font-size:13px;
 
-      margin-bottom:8px;
-
-      text-transform:uppercase;
-      letter-spacing:.5px;
+      margin-bottom:9px;
     }
 
     .stat-value{
-      font-size:29px;
-      font-weight:900;
+      font-size:30px;
+
+      font-weight:850;
     }
 
     .stat-value span{
-      color:var(--pink);
+      color:var(--pink-dark);
     }
 
-    /* =========================
+    /* =====================================
        TOOLBAR
-       ========================= */
+       ===================================== */
 
     .toolbar{
       display:flex;
 
       align-items:center;
+
       justify-content:space-between;
 
-      gap:13px;
+      gap:14px;
 
       margin-bottom:20px;
 
@@ -536,13 +498,13 @@
     .search-box input{
       width:100%;
 
-      background:white;
+      background:var(--white);
 
       border:1px solid var(--border);
 
-      color:var(--brown);
+      color:var(--text);
 
-      padding:13px 16px 13px 43px;
+      padding:13px 16px 13px 42px;
 
       border-radius:12px;
 
@@ -550,10 +512,11 @@
     }
 
     .search-box input:focus{
-      border-color:var(--pink);
+      border-color:rgba(232,93,143,.45);
 
       box-shadow:
-        0 0 0 3px rgba(217,79,131,.08);
+        0 0 0 3px
+        rgba(232,93,143,.07);
     }
 
     .search-icon{
@@ -565,34 +528,37 @@
       transform:translateY(-50%);
 
       color:var(--muted);
-
-      font-size:18px;
     }
 
     .toolbar-actions{
       display:flex;
+
       gap:9px;
+
       flex-wrap:wrap;
     }
 
-    /* =========================
+    /* =====================================
        RESOURCE GRID
-       ========================= */
+       ===================================== */
 
     .resource-grid{
       display:grid;
 
-      grid-template-columns:repeat(2,1fr);
+      grid-template-columns:
+        repeat(2,1fr);
 
       gap:18px;
     }
 
     .resource-card{
+      position:relative;
+
       background:
         linear-gradient(
           145deg,
-          rgba(255,255,255,.98),
-          rgba(255,248,244,.98)
+          var(--white),
+          var(--cream2)
         );
 
       border:1px solid var(--border);
@@ -603,25 +569,28 @@
 
       box-shadow:var(--shadow);
 
-      transition:.2s ease;
+      transition:.2s;
     }
 
     .resource-card:hover{
       transform:translateY(-2px);
 
-      box-shadow:
-        0 23px 50px rgba(105,48,70,.13);
+      box-shadow:var(--shadow-hover);
+
+      border-color:
+        rgba(232,93,143,.28);
     }
 
     .resource-top{
       display:flex;
 
       align-items:center;
+
       justify-content:space-between;
 
       gap:14px;
 
-      margin-bottom:19px;
+      margin-bottom:20px;
     }
 
     .resource-title-wrap{
@@ -635,16 +604,14 @@
     }
 
     .resource-icon{
-      position:relative;
-
       width:50px;
       height:50px;
 
-      border-radius:15px;
+      border-radius:14px;
 
-      background:var(--pink-pale);
+      background:var(--pink-soft);
 
-      border:1px solid var(--pink-soft);
+      border:1px solid rgba(232,93,143,.16);
 
       display:flex;
 
@@ -656,39 +623,39 @@
       flex:none;
     }
 
-    .resource-icon:after{
-      content:"";
-
-      position:absolute;
-
-      width:23px;
-      height:9px;
-
-      border:1px solid rgba(217,79,131,.35);
-
-      border-radius:50%;
-
-      transform:rotate(45deg);
-    }
-
-    .resource-name{
-      font-weight:850;
-      line-height:1.3;
-    }
-
     .resource-id{
       color:var(--muted);
 
-      font-size:10px;
+      font-size:11px;
 
       margin-top:4px;
 
       word-break:break-all;
     }
 
-    /* =========================
+    .full-pack-label{
+      display:inline-flex;
+
+      margin-top:7px;
+
+      padding:4px 8px;
+
+      border-radius:20px;
+
+      background:var(--pink-soft);
+
+      color:var(--pink-dark);
+
+      font-size:9px;
+
+      font-weight:800;
+
+      letter-spacing:.6px;
+    }
+
+    /* =====================================
        FIELDS
-       ========================= */
+       ===================================== */
 
     .field{
       margin-bottom:14px;
@@ -699,14 +666,11 @@
 
       color:var(--muted);
 
-      font-size:11px;
+      font-size:12px;
 
-      margin-bottom:6px;
+      margin-bottom:7px;
 
-      font-weight:800;
-
-      text-transform:uppercase;
-      letter-spacing:.35px;
+      font-weight:700;
     }
 
     .field input,
@@ -714,13 +678,13 @@
     .field textarea{
       width:100%;
 
-      background:white;
+      background:rgba(255,255,255,.8);
 
       border:1px solid var(--border);
 
       border-radius:10px;
 
-      color:var(--brown);
+      color:var(--text);
 
       padding:11px 12px;
 
@@ -730,15 +694,17 @@
     .field input:focus,
     .field select:focus,
     .field textarea:focus{
-      border-color:var(--pink);
+      border-color:rgba(232,93,143,.45);
 
       box-shadow:
-        0 0 0 3px rgba(217,79,131,.06);
+        0 0 0 3px
+        rgba(232,93,143,.05);
     }
 
     .field select option{
-      background:white;
-      color:var(--brown);
+      background:var(--white);
+
+      color:var(--text);
     }
 
     .field textarea{
@@ -752,15 +718,14 @@
     .two-fields{
       display:grid;
 
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:
+        1fr 1fr;
 
       gap:12px;
     }
 
     .resource-actions{
       display:flex;
-
-      align-items:center;
 
       justify-content:space-between;
 
@@ -773,39 +738,41 @@
       border-top:1px solid var(--border);
     }
 
-    /* =========================
+    /* =====================================
        EMPTY
-       ========================= */
+       ===================================== */
 
     .empty{
       display:none;
 
       text-align:center;
 
-      padding:65px 20px;
+      padding:60px 20px;
 
       border:1px dashed var(--border);
 
-      border-radius:20px;
+      border-radius:18px;
 
       color:var(--muted);
 
-      background:rgba(255,255,255,.55);
+      background:rgba(255,255,255,.35);
     }
 
     .empty-icon{
-      font-size:40px;
-      margin-bottom:11px;
+      font-size:42px;
+
+      margin-bottom:12px;
     }
 
     .empty h3{
-      color:var(--brown);
-      margin-bottom:7px;
+      color:var(--text);
+
+      margin-bottom:8px;
     }
 
-    /* =========================
+    /* =====================================
        MODAL
-       ========================= */
+       ===================================== */
 
     .modal-backdrop{
       position:fixed;
@@ -814,13 +781,14 @@
 
       z-index:200;
 
-      background:rgba(61,41,48,.48);
+      background:rgba(80,35,50,.35);
 
       backdrop-filter:blur(8px);
 
       display:none;
 
       align-items:center;
+
       justify-content:center;
 
       padding:20px;
@@ -841,45 +809,42 @@
 
       border:1px solid var(--border);
 
-      border-radius:22px;
+      border-radius:20px;
 
       padding:24px;
 
       box-shadow:
-        0 30px 90px rgba(61,41,48,.25);
+        0 30px 100px
+        rgba(80,35,50,.25);
     }
 
     .modal-header{
       display:flex;
 
       align-items:center;
+
       justify-content:space-between;
 
-      margin-bottom:21px;
+      margin-bottom:22px;
     }
 
     .modal-header h2{
-      font-size:23px;
+      font-size:22px;
     }
 
     .close{
       width:36px;
       height:36px;
 
-      border-radius:10px;
+      border-radius:9px;
 
       border:1px solid var(--border);
 
-      background:white;
+      background:var(--white);
 
-      color:var(--brown);
+      color:var(--pink-dark);
 
       font-size:20px;
-    }
-
-    .close:hover{
-      background:var(--pink-pale);
-      color:var(--pink-dark);
     }
 
     .modal-actions{
@@ -892,9 +857,9 @@
       margin-top:20px;
     }
 
-    /* =========================
+    /* =====================================
        TOAST
-       ========================= */
+       ===================================== */
 
     .toast{
       position:fixed;
@@ -902,9 +867,13 @@
       left:50%;
       bottom:24px;
 
-      transform:translate(-50%,20px);
+      transform:
+        translate(-50%,20px);
 
-      background:var(--brown);
+      background:var(--text);
+
+      border:1px solid
+        rgba(255,255,255,.08);
 
       color:white;
 
@@ -913,7 +882,8 @@
       border-radius:12px;
 
       box-shadow:
-        0 15px 40px rgba(61,41,48,.25);
+        0 15px 50px
+        rgba(80,35,50,.25);
 
       opacity:0;
 
@@ -927,18 +897,19 @@
 
       text-align:center;
 
-      font-size:13px;
+      font-size:14px;
     }
 
     .toast.show{
       opacity:1;
 
-      transform:translate(-50%,0);
+      transform:
+        translate(-50%,0);
     }
 
-    /* =========================
+    /* =====================================
        FOOTER
-       ========================= */
+       ===================================== */
 
     footer{
       border-top:1px solid var(--border);
@@ -947,14 +918,16 @@
 
       color:var(--muted);
 
-      font-size:12px;
+      font-size:13px;
 
       text-align:center;
+
+      background:var(--cream2);
     }
 
-    /* =========================
+    /* =====================================
        MOBILE
-       ========================= */
+       ===================================== */
 
     @media(max-width:800px){
 
@@ -967,21 +940,22 @@
       }
 
       .brand{
-        font-size:14px;
+        font-size:15px;
       }
 
       .logo-atom{
-        width:34px;
-        height:34px;
+        width:36px;
+        height:36px;
       }
 
-      .logo-atom:before,
-      .logo-atom:after{
-        width:31px;
+      .logo-atom::before,
+      .logo-atom::after{
+        width:33px;
       }
 
       .page-header{
         align-items:flex-start;
+
         flex-direction:column;
       }
 
@@ -992,13 +966,12 @@
       .resource-grid{
         grid-template-columns:1fr;
       }
-
     }
 
     @media(max-width:520px){
 
       main{
-        padding-top:30px;
+        padding-top:32px;
       }
 
       .container{
@@ -1007,10 +980,6 @@
 
       .nav-actions .account-btn{
         display:none;
-      }
-
-      .admin-intro{
-        padding:21px;
       }
 
       .header-actions{
@@ -1023,6 +992,7 @@
 
       .two-fields{
         grid-template-columns:1fr;
+
         gap:0;
       }
 
@@ -1044,7 +1014,6 @@
 
       .resource-actions{
         flex-direction:column;
-        align-items:stretch;
       }
 
       .resource-actions .btn{
@@ -1054,514 +1023,539 @@
       .modal{
         padding:18px;
       }
-
     }
   </style>
-
 </head>
 
 <body>
 
-  <!-- =========================
+  <!-- =====================================
        NAVIGATION
-       ========================= -->
+       ===================================== -->
 
   <nav class="nav">
 
-```
-<a href="index.html" class="brand">
+    <a href="index.html" class="brand">
 
-  <div class="logo-atom">
-    <div class="logo-core"></div>
+      <div class="logo-atom">
 
-    <div class="logo-electron electron-one"></div>
-    <div class="logo-electron electron-two"></div>
-  </div>
+        <div class="logo-core"></div>
 
-  Chemistry Resources Co.
+        <div class="logo-electron one"></div>
 
-</a>
+        <div class="logo-electron two"></div>
 
-
-<div class="nav-links">
-
-  <a href="admin.html">Dashboard</a>
-  <a href="shop.html">Shop</a>
-  <a href="account.html">Account</a>
-
-</div>
-
-
-<div class="nav-actions">
-
-  <a href="shop.html" class="nav-btn">
-    View Shop
-  </a>
-
-  <button
-    class="nav-btn account-btn"
-    onclick="logout()"
-  >
-    Logout
-  </button>
-
-</div>
-```
-
-  </nav>
-
-  <main>
-
-```
-<div class="container">
-
-  <!-- =========================
-       HEADER
-       ========================= -->
-
-  <section class="page-header">
-
-    <div>
-
-      <div class="eyebrow">
-        ⚛️ Administration
       </div>
 
-      <h1>
-        Chemistry Resource Lab
-      </h1>
+      Chemistry Resources Co.
 
-      <p class="subtitle">
-        Manage your IGCSE Chemistry resources, pricing,
-        categories and descriptions from one place.
-      </p>
+    </a>
+
+
+    <div class="nav-links">
+
+      <a href="admin.html">
+        Dashboard
+      </a>
+
+      <a href="shop.html">
+        Shop
+      </a>
+
+      <a href="account.html">
+        Account
+      </a>
 
     </div>
 
 
-    <div class="header-actions">
+    <div class="nav-actions">
 
       <a
         href="shop.html"
-        class="btn btn-secondary"
+        class="nav-btn"
       >
         View Shop
       </a>
 
       <button
-        class="btn btn-primary"
-        onclick="openAddModal()"
+        class="nav-btn account-btn"
+        onclick="logout()"
       >
-        + Add Resource
+        Logout
       </button>
 
     </div>
 
-  </section>
+  </nav>
 
 
-  <!-- =========================
-       INTRO CARD
-       ========================= -->
+  <!-- =====================================
+       MAIN
+       ===================================== -->
 
-  <section class="admin-intro">
+  <main>
 
-    <div class="intro-content">
+    <div class="container">
 
-      <div class="intro-title">
-        Your chemistry catalog
+
+      <!-- HEADER -->
+
+      <section class="page-header">
+
+        <div>
+
+          <div class="eyebrow">
+            ⚛️ Administration
+          </div>
+
+          <h1>
+            Admin Dashboard
+          </h1>
+
+          <p class="subtitle">
+            Manage your Chemistry Resources Co. catalog,
+            individual USD prices, categories, descriptions
+            and resource details.
+          </p>
+
+        </div>
+
+
+        <div class="header-actions">
+
+          <a
+            href="shop.html"
+            class="btn btn-secondary"
+          >
+            View Shop
+          </a>
+
+          <button
+            class="btn btn-primary"
+            onclick="openAddModal()"
+          >
+            + Add Resource
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- WARNING -->
+
+      <div class="warning">
+
+        <div class="warning-icon">
+          ⚠️
+        </div>
+
+        <div>
+
+          <strong>
+            Prototype admin mode.
+          </strong>
+
+          <br>
+
+          Your catalog changes are currently stored
+          in this browser using localStorage.
+          Real database storage and secure admin
+          authentication will be connected later.
+
+        </div>
+
       </div>
 
-      <p class="intro-text">
-        Add and edit resources here. Every resource can have
-        its own USD price, category, tag, type, icon and
-        student-facing description.
-      </p>
 
-    </div>
+      <!-- STATS -->
 
-  </section>
+      <section class="stats">
 
+        <div class="stat">
 
-  <!-- =========================
-       WARNING
-       ========================= -->
+          <div class="stat-label">
+            Total Resources
+          </div>
 
-  <div class="warning">
+          <div
+            class="stat-value"
+            id="totalResources"
+          >
+            0
+          </div>
 
-    <div class="warning-icon">
-      ⚠️
-    </div>
-
-    <div>
-
-      <strong>Prototype admin mode.</strong><br>
-
-      Changes are currently stored in this browser using
-      localStorage. Later, we can connect this dashboard
-      to a secure database and proper administrator login.
-
-    </div>
-
-  </div>
+        </div>
 
 
-  <!-- =========================
-       STATS
-       ========================= -->
+        <div class="stat">
 
-  <section class="stats">
+          <div class="stat-label">
+            Average Price
+          </div>
 
-    <div class="stat">
+          <div class="stat-value">
 
-      <div class="stat-label">
-        Total Resources
+            $
+
+            <span id="averagePrice">
+              0.00
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-label">
+            Catalog Value
+          </div>
+
+          <div class="stat-value">
+
+            $
+
+            <span id="catalogValue">
+              0.00
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- TOOLBAR -->
+
+      <div class="toolbar">
+
+        <div class="search-box">
+
+          <span class="search-icon">
+            ⌕
+          </span>
+
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search resources..."
+            oninput="renderResources()"
+          >
+
+        </div>
+
+
+        <div class="toolbar-actions">
+
+          <button
+            class="btn btn-primary btn-small"
+            onclick="openAddModal()"
+          >
+            + Add Resource
+          </button>
+
+
+          <button
+            class="btn btn-secondary btn-small"
+            onclick="resetDemoData()"
+          >
+            Restore Starter Catalog
+          </button>
+
+        </div>
+
       </div>
+
+
+      <!-- RESOURCE LIST -->
+
+      <section
+        id="resourceGrid"
+        class="resource-grid"
+      ></section>
+
 
       <div
-        class="stat-value"
-        id="totalResources"
-      >
-        0
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-label">
-        Average Price
-      </div>
-
-      <div class="stat-value">
-        $<span id="averagePrice">0.00</span>
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-label">
-        Catalog Value
-      </div>
-
-      <div class="stat-value">
-        $<span id="catalogValue">0.00</span>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       TOOLBAR
-       ========================= -->
-
-  <div class="toolbar">
-
-    <div class="search-box">
-
-      <span class="search-icon">
-        ⌕
-      </span>
-
-      <input
-        type="search"
-        id="searchInput"
-        placeholder="Search resources..."
-        oninput="renderResources()"
+        id="emptyState"
+        class="empty"
       >
 
-    </div>
+        <div class="empty-icon">
+          🔎
+        </div>
 
+        <h3>
+          No resources found
+        </h3>
 
-    <div class="toolbar-actions">
+        <p>
+          Try another search or add a new resource.
+        </p>
 
-      <button
-        class="btn btn-primary btn-small"
-        onclick="openAddModal()"
-      >
-        + Add Resource
-      </button>
+      </div>
 
-      <button
-        class="btn btn-secondary btn-small"
-        onclick="resetDemoData()"
-      >
-        Reset Demo Data
-      </button>
 
     </div>
-
-  </div>
-
-
-  <!-- =========================
-       RESOURCE LIST
-       ========================= -->
-
-  <section
-    id="resourceGrid"
-    class="resource-grid"
-  ></section>
-
-
-  <div
-    id="emptyState"
-    class="empty"
-  >
-
-    <div class="empty-icon">
-      🔎
-    </div>
-
-    <h3>
-      No resources found
-    </h3>
-
-    <p>
-      Try another search or add a new resource.
-    </p>
-
-  </div>
-
-</div>
-```
 
   </main>
 
+
   <footer>
-    Chemistry Resources Co. • Admin Dashboard
+
+    Chemistry Resources Co.
+    •
+    Admin Dashboard
+
   </footer>
 
-  <!-- =========================
+
+  <!-- =====================================
        ADD RESOURCE MODAL
-       ========================= -->
+       ===================================== -->
 
   <div
     class="modal-backdrop"
     id="addModal"
   >
 
-```
-<div class="modal">
+    <div class="modal">
 
-  <div class="modal-header">
 
-    <h2>
-      Add Resource
-    </h2>
+      <div class="modal-header">
 
-    <button
-      class="close"
-      onclick="closeAddModal()"
-    >
-      ×
-    </button>
+        <h2>
+          Add Resource
+        </h2>
+
+        <button
+          class="close"
+          onclick="closeAddModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form
+        id="addResourceForm"
+        onsubmit="addResource(event)"
+      >
+
+
+        <div class="field">
+
+          <label>
+            Resource Name
+          </label>
+
+          <input
+            type="text"
+            id="addName"
+            placeholder="Example: Electrolysis Notes"
+            required
+          >
+
+        </div>
+
+
+        <div class="two-fields">
+
+
+          <div class="field">
+
+            <label>
+              Category
+            </label>
+
+            <select id="addCategory">
+
+              <option value="atomic">
+                Atomic Structure
+              </option>
+
+              <option value="bonding">
+                Chemical Bonding
+              </option>
+
+              <option value="organic">
+                Organic Chemistry
+              </option>
+
+              <option value="calculations">
+                Calculations
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Price (USD)
+            </label>
+
+            <input
+              type="number"
+              id="addPrice"
+              min="0"
+              step="0.01"
+              placeholder="2.00"
+              required
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <div class="two-fields">
+
+
+          <div class="field">
+
+            <label>
+              Tag
+            </label>
+
+            <input
+              type="text"
+              id="addTag"
+              placeholder="NEW"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label>
+              Type
+            </label>
+
+            <input
+              type="text"
+              id="addType"
+              placeholder="Study Notes"
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Icon / Emoji
+          </label>
+
+          <input
+            type="text"
+            id="addIcon"
+            placeholder="⚛️"
+            maxlength="10"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            Description
+          </label>
+
+          <textarea
+            id="addDescription"
+            placeholder="Describe what students will receive..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="closeAddModal()"
+          >
+            Cancel
+          </button>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+            Add Resource
+          </button>
+
+        </div>
+
+
+      </form>
+
+    </div>
 
   </div>
 
 
-  <form onsubmit="addResource(event)">
-
-    <div class="field">
-
-      <label>
-        Resource Name
-      </label>
-
-      <input
-        type="text"
-        id="addName"
-        placeholder="Example: Atomic Structure Notes"
-        required
-      >
-
-    </div>
-
-
-    <div class="two-fields">
-
-      <div class="field">
-
-        <label>
-          Category
-        </label>
-
-        <select id="addCategory">
-
-          <option value="atomic">
-            Atomic Structure
-          </option>
-
-          <option value="bonding">
-            Chemical Bonding
-          </option>
-
-          <option value="organic">
-            Organic Chemistry
-          </option>
-
-          <option value="calculations">
-            Calculations
-          </option>
-
-          <option value="other">
-            Other
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Price (USD)
-        </label>
-
-        <input
-          type="number"
-          id="addPrice"
-          min="0"
-          step="0.01"
-          placeholder="2.00"
-          required
-        >
-
-      </div>
-
-    </div>
-
-
-    <div class="two-fields">
-
-      <div class="field">
-
-        <label>
-          Tag
-        </label>
-
-        <input
-          type="text"
-          id="addTag"
-          placeholder="POPULAR"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Type
-        </label>
-
-        <input
-          type="text"
-          id="addType"
-          placeholder="Study Notes"
-        >
-
-      </div>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Icon / Emoji
-      </label>
-
-      <input
-        type="text"
-        id="addIcon"
-        placeholder="⚛️"
-        maxlength="10"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        Description
-      </label>
-
-      <textarea
-        id="addDescription"
-        placeholder="Describe what students will receive..."
-        required
-      ></textarea>
-
-    </div>
-
-
-    <div class="modal-actions">
-
-      <button
-        type="button"
-        class="btn btn-secondary"
-        onclick="closeAddModal()"
-      >
-        Cancel
-      </button>
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-      >
-        Add Resource
-      </button>
-
-    </div>
-
-  </form>
-
-</div>
-```
-
-  </div>
-
-  <!-- =========================
-       TOAST
-       ========================= -->
+  <!-- TOAST -->
 
   <div
     id="toast"
     class="toast"
   ></div>
 
+
   <script>
 
-    /* =========================================
+    /* =====================================
        STORAGE
-       ========================================= */
+       ===================================== */
 
-    const STORAGE_KEY = "chemistryResources";
+    const STORAGE_KEY =
+      "chemistryResources";
 
 
-    /* =========================================
-       DEMO RESOURCES
-       ========================================= */
+    /* =====================================
+       STARTER CATALOG
+       ===================================== */
 
     const demoResources = [
 
       {
         id:"atomic-notes",
+
         name:"Atomic Structure Notes",
+
         category:"atomic",
+
         categoryLabel:"Atomic Structure",
+
         price:2.00,
+
         tag:"POPULAR",
+
         type:"Study Notes",
+
         icon:"⚛️",
+
         description:
           "Clear and easy-to-understand notes covering protons, neutrons, electrons, isotopes, electron configuration and atomic structure."
       },
@@ -1569,13 +1563,21 @@
 
       {
         id:"atomic-worksheet",
+
         name:"Atomic Structure Worksheet",
+
         category:"atomic",
+
         categoryLabel:"Atomic Structure",
+
         price:1.50,
+
         tag:"WORKSHEET",
+
         type:"Worksheet",
+
         icon:"📝",
+
         description:
           "Practice questions designed to help students master atomic structure, isotopes, electron arrangement and related concepts."
       },
@@ -1583,103 +1585,238 @@
 
       {
         id:"bonding-notes",
+
         name:"Chemical Bonding Notes",
+
         category:"bonding",
+
         categoryLabel:"Chemical Bonding",
+
         price:2.50,
+
         tag:"NOTES",
+
         type:"Study Notes",
+
         icon:"🔗",
+
         description:
           "Understand ionic, covalent and metallic bonding with simple explanations, diagrams and examples."
       },
 
 
       {
-        id:"organic-starter",
-        name:"Organic Chemistry Starter Pack",
-        category:"organic",
-        categoryLabel:"Organic Chemistry",
-        price:3.50,
-        tag:"STARTER PACK",
-        type:"Resource Pack",
-        icon:"🧪",
+        id:"bonding-worksheet",
+
+        name:"Chemical Bonding Worksheet",
+
+        category:"bonding",
+
+        categoryLabel:"Chemical Bonding",
+
+        price:1.75,
+
+        tag:"WORKSHEET",
+
+        type:"Worksheet",
+
+        icon:"📝",
+
         description:
-          "A beginner-friendly introduction to organic chemistry including hydrocarbons, functional groups and basic reactions."
+          "Practice questions covering ionic, covalent and metallic bonding, structures, properties and exam-style questions."
       },
 
 
       {
-        id:"mole-practice",
-        name:"Mole Calculations Practice",
-        category:"calculations",
-        categoryLabel:"Calculations",
-        price:2.00,
-        tag:"PRACTICE",
-        type:"Practice Sheet",
-        icon:"📊",
+        id:"organic-notes",
+
+        name:"Organic Chemistry Notes",
+
+        category:"organic",
+
+        categoryLabel:"Organic Chemistry",
+
+        price:3.00,
+
+        tag:"NOTES",
+
+        type:"Study Notes",
+
+        icon:"🧪",
+
         description:
-          "Step-by-step practice for mole calculations, molar mass, equations and common chemistry calculation questions."
+          "Clear IGCSE-level notes covering hydrocarbons, homologous series, functional groups and important organic reactions."
+      },
+
+
+      {
+        id:"organic-worksheet",
+
+        name:"Organic Chemistry Worksheet",
+
+        category:"organic",
+
+        categoryLabel:"Organic Chemistry",
+
+        price:2.00,
+
+        tag:"WORKSHEET",
+
+        type:"Worksheet",
+
+        icon:"📝",
+
+        description:
+          "Practice questions for hydrocarbons, alkanes, alkenes, functional groups and organic reactions."
+      },
+
+
+      {
+        id:"calculations",
+
+        name:"Chemistry Calculations Guide",
+
+        category:"calculations",
+
+        categoryLabel:"Calculations",
+
+        price:3.50,
+
+        tag:"GUIDE",
+
+        type:"Study Guide",
+
+        icon:"📊",
+
+        description:
+          "A practical guide to chemistry calculations including relative formula mass, moles, equations, concentrations and percentage yield."
       },
 
 
       {
         id:"exam-guide",
+
         name:"Chemistry Exam Study Guide",
+
         category:"other",
+
         categoryLabel:"Other",
+
         price:4.00,
+
         tag:"STUDY GUIDE",
+
         type:"Study Guide",
+
         icon:"📚",
+
         description:
-          "A compact chemistry revision guide with important concepts, formulas, exam tips and practice material."
+          "A compact IGCSE Chemistry revision guide containing key concepts, formulas, exam tips and important reminders."
+      },
+
+
+      {
+        id:"revision-pack",
+
+        name:"Chemistry Revision Pack",
+
+        category:"other",
+
+        categoryLabel:"Other",
+
+        price:6.00,
+
+        tag:"REVISION PACK",
+
+        type:"Resource Pack",
+
+        icon:"📚",
+
+        description:
+          "A larger chemistry revision collection designed for students preparing for their IGCSE Chemistry examinations."
       },
 
 
       {
         id:"full-pack",
-        name:"Complete IGCSE Chemistry Full Pack",
+
+        name:"Complete IGCSE Chemistry Pack",
+
         category:"other",
+
         categoryLabel:"Full Pack",
+
         price:25.00,
+
         tag:"FULL PACK",
+
         type:"Complete Resource Pack",
-        icon:"⚗️",
+
+        icon:"⚛️",
+
         description:
-          "The complete IGCSE Chemistry resource collection containing notes, worksheets, revision material, calculations and exam preparation resources."
+          "The complete IGCSE Chemistry resource collection, bringing together notes, worksheets, calculation practice, revision material and study guides in one pack."
+      },
+
+
+      {
+        id:"mole-practice",
+
+        name:"Mole Calculations Practice",
+
+        category:"calculations",
+
+        categoryLabel:"Calculations",
+
+        price:2.00,
+
+        tag:"PRACTICE",
+
+        type:"Practice Sheet",
+
+        icon:"📊",
+
+        description:
+          "Step-by-step practice for mole calculations, molar mass, equations and common chemistry calculation questions."
       }
 
     ];
 
 
-    /* =========================================
+    /* =====================================
        CATEGORY LABELS
-       ========================================= */
+       ===================================== */
 
     const categoryLabels = {
 
-      atomic:"Atomic Structure",
+      atomic:
+        "Atomic Structure",
 
-      bonding:"Chemical Bonding",
+      bonding:
+        "Chemical Bonding",
 
-      organic:"Organic Chemistry",
+      organic:
+        "Organic Chemistry",
 
-      calculations:"Calculations",
+      calculations:
+        "Calculations",
 
-      other:"Other"
+      other:
+        "Other"
 
     };
 
 
-    /* =========================================
+    /* =====================================
        GET RESOURCES
-       ========================================= */
+       ===================================== */
 
     function getResources(){
 
       const saved =
-        localStorage.getItem(STORAGE_KEY);
+        localStorage.getItem(
+          STORAGE_KEY
+        );
 
 
       if(saved){
@@ -1688,6 +1825,7 @@
 
           const parsed =
             JSON.parse(saved);
+
 
           if(Array.isArray(parsed)){
 
@@ -1707,35 +1845,47 @@
 
 
       localStorage.setItem(
+
         STORAGE_KEY,
-        JSON.stringify(demoResources)
+
+        JSON.stringify(
+          demoResources
+        )
+
       );
 
 
       return JSON.parse(
-        JSON.stringify(demoResources)
+        JSON.stringify(
+          demoResources
+        )
       );
 
     }
 
 
-    /* =========================================
-       SAVE
-       ========================================= */
+    /* =====================================
+       SAVE RESOURCES
+       ===================================== */
 
     function saveResources(resources){
 
       localStorage.setItem(
+
         STORAGE_KEY,
-        JSON.stringify(resources)
+
+        JSON.stringify(
+          resources
+        )
+
       );
 
     }
 
 
-    /* =========================================
+    /* =====================================
        CREATE ID
-       ========================================= */
+       ===================================== */
 
     function createId(name){
 
@@ -1743,13 +1893,20 @@
         name
           .toLowerCase()
           .trim()
-          .replace(/[^a-z0-9]+/g,"-")
-          .replace(/^-+|-+$/g,"");
+          .replace(
+            /[^a-z0-9]+/g,
+            "-"
+          )
+          .replace(
+            /^-+|-+$/g,
+            ""
+          );
 
 
       if(!base){
 
-        base="resource";
+        base =
+          "resource";
 
       }
 
@@ -1758,14 +1915,18 @@
         getResources();
 
 
-      let id=base;
+      let id =
+        base;
 
-      let number=2;
+
+      let number =
+        2;
 
 
       while(
         resources.some(
-          resource => resource.id === id
+          resource =>
+            resource.id === id
         )
       ){
 
@@ -1784,30 +1945,47 @@
     }
 
 
-    /* =========================================
+    /* =====================================
        ESCAPE HTML
-       ========================================= */
+       ===================================== */
 
     function escapeHtml(value){
 
-      return String(value ?? "")
+      return String(
+        value ?? ""
+      )
 
-        .replace(/&/g,"&amp;")
+      .replace(
+        /&/g,
+        "&amp;"
+      )
 
-        .replace(/</g,"&lt;")
+      .replace(
+        /</g,
+        "&lt;"
+      )
 
-        .replace(/>/g,"&gt;")
+      .replace(
+        />/g,
+        "&gt;"
+      )
 
-        .replace(/"/g,"&quot;")
+      .replace(
+        /"/g,
+        "&quot;"
+      )
 
-        .replace(/'/g,"&#039;");
+      .replace(
+        /'/g,
+        "&#039;"
+      );
 
     }
 
 
-    /* =========================================
+    /* =====================================
        RENDER
-       ========================================= */
+       ===================================== */
 
     function renderResources(){
 
@@ -1817,37 +1995,45 @@
 
       const search =
         document
-          .getElementById("searchInput")
+          .getElementById(
+            "searchInput"
+          )
           .value
           .trim()
           .toLowerCase();
 
 
       const filtered =
-        resources.filter(resource => {
+        resources.filter(
+          resource => {
 
-          const text = [
+            const text = [
 
-            resource.name,
+              resource.name,
 
-            resource.categoryLabel,
+              resource.categoryLabel,
 
-            resource.category,
+              resource.category,
 
-            resource.tag,
+              resource.tag,
 
-            resource.type,
+              resource.type,
 
-            resource.description
+              resource.description
 
-          ]
-          .join(" ")
-          .toLowerCase();
+            ]
+
+            .join(" ")
+
+            .toLowerCase();
 
 
-          return text.includes(search);
+            return text.includes(
+              search
+            );
 
-        });
+          }
+        );
 
 
       const grid =
@@ -1862,45 +2048,66 @@
         );
 
 
-      grid.innerHTML="";
+      grid.innerHTML =
+        "";
 
 
-      if(filtered.length === 0){
+      if(
+        filtered.length === 0
+      ){
 
-        empty.style.display="block";
+        empty.style.display =
+          "block";
 
       }else{
 
-        empty.style.display="none";
+        empty.style.display =
+          "none";
 
 
-        filtered.forEach(resource => {
+        filtered.forEach(
+          resource => {
 
-          grid.appendChild(
-            createResourceCard(resource)
-          );
+            grid.appendChild(
+              createResourceCard(
+                resource
+              )
+            );
 
-        });
+          }
+        );
 
       }
 
 
-      updateStats(resources);
+      updateStats(
+        resources
+      );
 
     }
 
 
-    /* =========================================
+    /* =====================================
        RESOURCE CARD
-       ========================================= */
+       ===================================== */
 
-    function createResourceCard(resource){
+    function createResourceCard(
+      resource
+    ){
 
       const card =
-        document.createElement("article");
+        document.createElement(
+          "article"
+        );
 
 
-      card.className="resource-card";
+      card.className =
+        "resource-card";
+
+
+      const isFullPack =
+        resource.id ===
+        "full-pack";
 
 
       card.innerHTML = `
@@ -1912,7 +2119,8 @@
             <div class="resource-icon">
 
               ${escapeHtml(
-                resource.icon || "⚛️"
+                resource.icon ||
+                "⚛️"
               )}
 
             </div>
@@ -1920,13 +2128,13 @@
 
             <div>
 
-              <div class="resource-name">
+              <strong>
 
                 ${escapeHtml(
                   resource.name
                 )}
 
-              </div>
+              </strong>
 
 
               <div class="resource-id">
@@ -1937,6 +2145,17 @@
                 )}
 
               </div>
+
+
+              ${
+                isFullPack
+                  ? `
+                    <div class="full-pack-label">
+                      COMPLETE PACK
+                    </div>
+                  `
+                  : ""
+              }
 
             </div>
 
@@ -1970,53 +2189,66 @@
               Category
             </label>
 
-            <select class="edit-category">
+            <select
+              class="edit-category"
+            >
 
               <option
                 value="atomic"
-                ${resource.category === "atomic"
-                  ? "selected"
-                  : ""}
+                ${
+                  resource.category ===
+                  "atomic"
+                    ? "selected"
+                    : ""
+                }
               >
                 Atomic Structure
               </option>
 
-
               <option
                 value="bonding"
-                ${resource.category === "bonding"
-                  ? "selected"
-                  : ""}
+                ${
+                  resource.category ===
+                  "bonding"
+                    ? "selected"
+                    : ""
+                }
               >
                 Chemical Bonding
               </option>
 
-
               <option
                 value="organic"
-                ${resource.category === "organic"
-                  ? "selected"
-                  : ""}
+                ${
+                  resource.category ===
+                  "organic"
+                    ? "selected"
+                    : ""
+                }
               >
                 Organic Chemistry
               </option>
 
-
               <option
                 value="calculations"
-                ${resource.category === "calculations"
-                  ? "selected"
-                  : ""}
+                ${
+                  resource.category ===
+                  "calculations"
+                    ? "selected"
+                    : ""
+                }
               >
                 Calculations
               </option>
 
-
               <option
                 value="other"
-                ${resource.category === "other"
-                  ? "selected"
-                  : ""}
+                ${
+                  resource.category ===
+                  "other"
+                    ? "selected"
+                    : ""
+                }
               >
                 Other
               </option>
@@ -2098,7 +2330,8 @@
             type="text"
             maxlength="10"
             value="${escapeHtml(
-              resource.icon || "⚛️"
+              resource.icon ||
+              "⚛️"
             )}"
           >
 
@@ -2114,651 +2347,773 @@
           <textarea
             class="edit-description"
           >${escapeHtml(
-            resource.description || ""
+            resource.description ||
+            ""
           )}</textarea>
 
-```
-    </div>
+        </div>
 
 
-    <div class="resource-actions">
+        <div class="resource-actions">
 
-      <button
-        class="btn btn-danger btn-small"
-        onclick="deleteResource('${escapeHtml(
-          resource.id
-        )}')"
-      >
-        Delete
-      </button>
-
-
-      <button
-        class="btn btn-primary btn-small save-resource"
-      >
-        Save Changes
-      </button>
-
-    </div>
-
-  `;
+          <button
+            class="btn btn-danger btn-small"
+            onclick="deleteResource(
+              '${escapeHtml(
+                resource.id
+              )}'
+            )"
+          >
+            Delete
+          </button>
 
 
-  card
-    .querySelector(
-      ".save-resource"
-    )
-    .addEventListener(
-      "click",
-      function(){
+          <button
+            class="btn btn-primary btn-small save-resource"
+          >
+            Save Changes
+          </button>
 
-        saveResource(
-          resource.id,
-          card
+        </div>
+
+      `;
+
+
+      card
+        .querySelector(
+          ".save-resource"
+        )
+        .addEventListener(
+          "click",
+          function(){
+
+            saveResource(
+              resource.id,
+              card
+            );
+
+          }
         );
 
-      }
-    );
 
-
-  return card;
-
-}
-
-
-/* =========================================
-   SAVE RESOURCE
-   ========================================= */
-
-function saveResource(id,card){
-
-  const resources =
-    getResources();
-
-
-  const index =
-    resources.findIndex(
-      resource =>
-        resource.id === id
-    );
-
-
-  if(index === -1){
-
-    showToast(
-      "Resource not found."
-    );
-
-    return;
-
-  }
-
-
-  const name =
-    card
-      .querySelector(".edit-name")
-      .value
-      .trim();
-
-
-  const category =
-    card
-      .querySelector(".edit-category")
-      .value;
-
-
-  const price =
-    parseFloat(
-      card
-        .querySelector(".edit-price")
-        .value
-    );
-
-
-  const tag =
-    card
-      .querySelector(".edit-tag")
-      .value
-      .trim();
-
-
-  const type =
-    card
-      .querySelector(".edit-type")
-      .value
-      .trim();
-
-
-  const icon =
-    card
-      .querySelector(".edit-icon")
-      .value
-      .trim();
-
-
-  const description =
-    card
-      .querySelector(".edit-description")
-      .value
-      .trim();
-
-
-  if(!name){
-
-    showToast(
-      "Please enter a resource name."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    isNaN(price) ||
-    price < 0
-  ){
-
-    showToast(
-      "Please enter a valid price."
-    );
-
-    return;
-
-  }
-
-
-  if(!description){
-
-    showToast(
-      "Please enter a description."
-    );
-
-    return;
-
-  }
-
-
-  resources[index].name =
-    name;
-
-
-  resources[index].category =
-    category;
-
-
-  resources[index].categoryLabel =
-    categoryLabels[category] ||
-    "Other";
-
-
-  resources[index].price =
-    price;
-
-
-  resources[index].tag =
-    tag;
-
-
-  resources[index].type =
-    type;
-
-
-  resources[index].icon =
-    icon || "⚛️";
-
-
-  resources[index].description =
-    description;
-
-
-  saveResources(resources);
-
-
-  renderResources();
-
-
-  showToast(
-    "Resource saved successfully."
-  );
-
-}
-
-
-/* =========================================
-   DELETE
-   ========================================= */
-
-function deleteResource(id){
-
-  const resources =
-    getResources();
-
-
-  const resource =
-    resources.find(
-      item => item.id === id
-    );
-
-
-  if(!resource){
-
-    return;
-
-  }
-
-
-  const confirmed =
-    confirm(
-      `Delete "${resource.name}"?\n\nThis will remove it from the catalog stored in this browser.`
-    );
-
-
-  if(!confirmed){
-
-    return;
-
-  }
-
-
-  const updated =
-    resources.filter(
-      item => item.id !== id
-    );
-
-
-  saveResources(updated);
-
-
-  renderResources();
-
-
-  showToast(
-    "Resource deleted."
-  );
-
-}
-
-
-/* =========================================
-   ADD RESOURCE
-   ========================================= */
-
-function addResource(event){
-
-  event.preventDefault();
-
-
-  const resources =
-    getResources();
-
-
-  const name =
-    document
-      .getElementById("addName")
-      .value
-      .trim();
-
-
-  const category =
-    document
-      .getElementById("addCategory")
-      .value;
-
-
-  const price =
-    parseFloat(
-      document
-        .getElementById("addPrice")
-        .value
-    );
-
-
-  const tag =
-    document
-      .getElementById("addTag")
-      .value
-      .trim();
-
-
-  const type =
-    document
-      .getElementById("addType")
-      .value
-      .trim();
-
-
-  const icon =
-    document
-      .getElementById("addIcon")
-      .value
-      .trim();
-
-
-  const description =
-    document
-      .getElementById("addDescription")
-      .value
-      .trim();
-
-
-  if(!name){
-
-    showToast(
-      "Please enter a resource name."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    isNaN(price) ||
-    price < 0
-  ){
-
-    showToast(
-      "Please enter a valid price."
-    );
-
-    return;
-
-  }
-
-
-  if(!description){
-
-    showToast(
-      "Please enter a description."
-    );
-
-    return;
-
-  }
-
-
-  const newResource = {
-
-    id:createId(name),
-
-    name:name,
-
-    category:category,
-
-    categoryLabel:
-      categoryLabels[category] ||
-      "Other",
-
-    price:price,
-
-    tag:
-      tag || "NEW",
-
-    type:
-      type || "Digital Resource",
-
-    icon:
-      icon || "⚛️",
-
-    description:
-      description
-
-  };
-
-
-  resources.push(
-    newResource
-  );
-
-
-  saveResources(
-    resources
-  );
-
-
-  closeAddModal();
-
-
-  document
-    .querySelector("#addModal form")
-    .reset();
-
-
-  renderResources();
-
-
-  showToast(
-    "New resource added."
-  );
-
-}
-
-
-/* =========================================
-   MODAL
-   ========================================= */
-
-function openAddModal(){
-
-  document
-    .getElementById("addModal")
-    .classList
-    .add("show");
-
-
-  setTimeout(
-    () => {
-
-      document
-        .getElementById("addName")
-        .focus();
-
-    },
-    100
-  );
-
-}
-
-
-function closeAddModal(){
-
-  document
-    .getElementById("addModal")
-    .classList
-    .remove("show");
-
-}
-
-
-document
-  .getElementById("addModal")
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === this
-      ){
-
-        closeAddModal();
-
-      }
+      return card;
 
     }
-  );
 
 
-/* =========================================
-   RESET
-   ========================================= */
+    /* =====================================
+       SAVE RESOURCE
+       ===================================== */
 
-function resetDemoData(){
+    function saveResource(
+      id,
+      card
+    ){
 
-  const confirmed =
-    confirm(
-      "Reset the catalog to the original demo resources?"
-    );
-
-
-  if(!confirmed){
-
-    return;
-
-  }
+      const resources =
+        getResources();
 
 
-  saveResources(
-    JSON.parse(
-      JSON.stringify(
-        demoResources
-      )
-    )
-  );
+      const index =
+        resources.findIndex(
+          resource =>
+            resource.id === id
+        );
 
 
-  renderResources();
+      if(index === -1){
+
+        showToast(
+          "Resource not found."
+        );
+
+        return;
+
+      }
 
 
-  showToast(
-    "Demo catalog restored."
-  );
-
-}
-
-
-/* =========================================
-   STATS
-   ========================================= */
-
-function updateStats(resources){
-
-  const total =
-    resources.length;
+      const name =
+        card
+          .querySelector(
+            ".edit-name"
+          )
+          .value
+          .trim();
 
 
-  const totalValue =
-    resources.reduce(
-      (sum,resource) =>
-        sum +
+      const category =
+        card
+          .querySelector(
+            ".edit-category"
+          )
+          .value;
+
+
+      const price =
+        parseFloat(
+          card
+            .querySelector(
+              ".edit-price"
+            )
+            .value
+        );
+
+
+      const tag =
+        card
+          .querySelector(
+            ".edit-tag"
+          )
+          .value
+          .trim();
+
+
+      const type =
+        card
+          .querySelector(
+            ".edit-type"
+          )
+          .value
+          .trim();
+
+
+      const icon =
+        card
+          .querySelector(
+            ".edit-icon"
+          )
+          .value
+          .trim();
+
+
+      const description =
+        card
+          .querySelector(
+            ".edit-description"
+          )
+          .value
+          .trim();
+
+
+      if(!name){
+
+        showToast(
+          "Please enter a resource name."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        isNaN(price) ||
+        price < 0
+      ){
+
+        showToast(
+          "Please enter a valid USD price."
+        );
+
+        return;
+
+      }
+
+
+      if(!description){
+
+        showToast(
+          "Please enter a description."
+        );
+
+        return;
+
+      }
+
+
+      resources[index].name =
+        name;
+
+
+      resources[index].category =
+        category;
+
+
+      resources[index].categoryLabel =
+        categoryLabels[
+          category
+        ] ||
+        "Other";
+
+
+      /*
+        Full Pack keeps its special
+        category label.
+      */
+
+      if(
+        id === "full-pack"
+      ){
+
+        resources[index].categoryLabel =
+          "Full Pack";
+
+      }
+
+
+      resources[index].price =
         Number(
-          resource.price || 0
-        ),
-      0
-    );
+          price.toFixed(2)
+        );
 
 
-  const average =
-    total > 0
-      ? totalValue / total
-      : 0;
+      resources[index].tag =
+        tag;
 
 
-  document
-    .getElementById(
-      "totalResources"
-    )
-    .textContent =
-      total;
+      resources[index].type =
+        type;
 
 
-  document
-    .getElementById(
-      "averagePrice"
-    )
-    .textContent =
-      average.toFixed(2);
+      resources[index].icon =
+        icon ||
+        "⚛️";
 
 
-  document
-    .getElementById(
-      "catalogValue"
-    )
-    .textContent =
-      totalValue.toFixed(2);
-
-}
+      resources[index].description =
+        description;
 
 
-/* =========================================
-   TOAST
-   ========================================= */
-
-let toastTimer;
+      saveResources(
+        resources
+      );
 
 
-function showToast(message){
-
-  const toast =
-    document.getElementById(
-      "toast"
-    );
+      renderResources();
 
 
-  toast.textContent =
-    message;
+      showToast(
+        "Resource saved successfully."
+      );
+
+    }
 
 
-  toast.classList.add(
-    "show"
-  );
+    /* =====================================
+       DELETE
+       ===================================== */
+
+    function deleteResource(
+      id
+    ){
+
+      const resources =
+        getResources();
 
 
-  clearTimeout(
-    toastTimer
-  );
+      const resource =
+        resources.find(
+          item =>
+            item.id === id
+        );
 
 
-  toastTimer =
-    setTimeout(
-      () => {
+      if(!resource){
 
-        toast.classList.remove(
+        return;
+
+      }
+
+
+      const confirmed =
+        confirm(
+          `Delete "${resource.name}"?\n\nThis will remove it from the catalog stored in this browser.`
+        );
+
+
+      if(!confirmed){
+
+        return;
+
+      }
+
+
+      const updated =
+        resources.filter(
+          item =>
+            item.id !== id
+        );
+
+
+      saveResources(
+        updated
+      );
+
+
+      renderResources();
+
+
+      showToast(
+        "Resource deleted."
+      );
+
+    }
+
+
+    /* =====================================
+       ADD RESOURCE
+       ===================================== */
+
+    function addResource(
+      event
+    ){
+
+      event.preventDefault();
+
+
+      const resources =
+        getResources();
+
+
+      const name =
+        document
+          .getElementById(
+            "addName"
+          )
+          .value
+          .trim();
+
+
+      const category =
+        document
+          .getElementById(
+            "addCategory"
+          )
+          .value;
+
+
+      const price =
+        parseFloat(
+          document
+            .getElementById(
+              "addPrice"
+            )
+            .value
+        );
+
+
+      const tag =
+        document
+          .getElementById(
+            "addTag"
+          )
+          .value
+          .trim();
+
+
+      const type =
+        document
+          .getElementById(
+            "addType"
+          )
+          .value
+          .trim();
+
+
+      const icon =
+        document
+          .getElementById(
+            "addIcon"
+          )
+          .value
+          .trim();
+
+
+      const description =
+        document
+          .getElementById(
+            "addDescription"
+          )
+          .value
+          .trim();
+
+
+      if(!name){
+
+        showToast(
+          "Please enter a resource name."
+        );
+
+        return;
+
+      }
+
+
+      if(
+        isNaN(price) ||
+        price < 0
+      ){
+
+        showToast(
+          "Please enter a valid USD price."
+        );
+
+        return;
+
+      }
+
+
+      if(!description){
+
+        showToast(
+          "Please enter a description."
+        );
+
+        return;
+
+      }
+
+
+      const newResource = {
+
+        id:
+          createId(
+            name
+          ),
+
+        name:
+          name,
+
+        category:
+          category,
+
+        categoryLabel:
+          categoryLabels[
+            category
+          ] ||
+          "Other",
+
+        price:
+          Number(
+            price.toFixed(2)
+          ),
+
+        tag:
+          tag ||
+          "NEW",
+
+        type:
+          type ||
+          "Digital Resource",
+
+        icon:
+          icon ||
+          "⚛️",
+
+        description:
+          description
+
+      };
+
+
+      resources.push(
+        newResource
+      );
+
+
+      saveResources(
+        resources
+      );
+
+
+      closeAddModal();
+
+
+      document
+        .getElementById(
+          "addResourceForm"
+        )
+        .reset();
+
+
+      renderResources();
+
+
+      showToast(
+        "New resource added."
+      );
+
+    }
+
+
+    /* =====================================
+       MODAL
+       ===================================== */
+
+    function openAddModal(){
+
+      document
+        .getElementById(
+          "addModal"
+        )
+        .classList.add(
           "show"
         );
 
-      },
-      2500
+
+      setTimeout(
+        function(){
+
+          document
+            .getElementById(
+              "addName"
+            )
+            .focus();
+
+        },
+        100
+      );
+
+    }
+
+
+    function closeAddModal(){
+
+      document
+        .getElementById(
+          "addModal"
+        )
+        .classList.remove(
+          "show"
+        );
+
+    }
+
+
+    document
+      .getElementById(
+        "addModal"
+      )
+      .addEventListener(
+        "click",
+        function(event){
+
+          if(
+            event.target ===
+            this
+          ){
+
+            closeAddModal();
+
+          }
+
+        }
+      );
+
+
+    /* =====================================
+       RESTORE STARTER CATALOG
+       ===================================== */
+
+    function resetDemoData(){
+
+      const confirmed =
+        confirm(
+          "Restore the complete starter catalog?\n\nThis will replace your current browser catalog with the starter resources and prices."
+        );
+
+
+      if(!confirmed){
+
+        return;
+
+      }
+
+
+      saveResources(
+        JSON.parse(
+          JSON.stringify(
+            demoResources
+          )
+        )
+      );
+
+
+      renderResources();
+
+
+      showToast(
+        "Starter catalog restored."
+      );
+
+    }
+
+
+    /* =====================================
+       STATS
+       ===================================== */
+
+    function updateStats(
+      resources
+    ){
+
+      const total =
+        resources.length;
+
+
+      const totalValue =
+        resources.reduce(
+          function(
+            sum,
+            resource
+          ){
+
+            return sum +
+              Number(
+                resource.price ||
+                0
+              );
+
+          },
+          0
+        );
+
+
+      const average =
+        total > 0
+          ? totalValue / total
+          : 0;
+
+
+      document
+        .getElementById(
+          "totalResources"
+        )
+        .textContent =
+          total;
+
+
+      document
+        .getElementById(
+          "averagePrice"
+        )
+        .textContent =
+          average.toFixed(2);
+
+
+      document
+        .getElementById(
+          "catalogValue"
+        )
+        .textContent =
+          totalValue.toFixed(2);
+
+    }
+
+
+    /* =====================================
+       TOAST
+       ===================================== */
+
+    let toastTimer;
+
+
+    function showToast(
+      message
+    ){
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      toast.textContent =
+        message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toastTimer =
+        setTimeout(
+          function(){
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          2500
+        );
+
+    }
+
+
+    /* =====================================
+       LOGOUT
+       ===================================== */
+
+    function logout(){
+
+      localStorage.removeItem(
+        "chemistryUser"
+      );
+
+
+      window.location.href =
+        "login.html";
+
+    }
+
+
+    /* =====================================
+       LIVE SYNC
+       ===================================== */
+
+    window.addEventListener(
+      "storage",
+      function(event){
+
+        if(
+          event.key ===
+          STORAGE_KEY
+        ){
+
+          renderResources();
+
+        }
+
+      }
     );
 
-}
 
+    /* =====================================
+       INITIAL LOAD
+       ===================================== */
 
-/* =========================================
-   LOGOUT
-   ========================================= */
+    document.addEventListener(
+      "DOMContentLoaded",
+      function(){
 
-function logout(){
+        getResources();
 
-  localStorage.removeItem(
-    "chemistryUser"
-  );
+        renderResources();
 
-
-  window.location.href =
-    "login.html";
-
-}
-
-
-/* =========================================
-   INITIAL LOAD
-   ========================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function(){
-
-    getResources();
-
-    renderResources();
-
-  }
-);
-```
+      }
+    );
 
   </script>
 
 </body>
 </html>
+```
+
 
