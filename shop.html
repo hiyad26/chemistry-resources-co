@@ -627,10 +627,6 @@ button{
     0 25px 55px rgba(105,48,70,.14);
 }
 
-.resource-card.hidden{
-  display:none;
-}
-
 
 /* =========================
    RESOURCE VISUAL
@@ -814,6 +810,42 @@ button{
   color:var(--brown);
 
   margin-bottom:7px;
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading-state{
+  grid-column:1 / -1;
+
+  text-align:center;
+
+  padding:70px 20px;
+
+  color:var(--muted);
+}
+
+.loading-atom{
+  width:50px;
+  height:50px;
+
+  margin:0 auto 15px;
+
+  animation:spinAtom 2.5s linear infinite;
+}
+
+@keyframes spinAtom{
+
+  from{
+    transform:rotate(0deg);
+  }
+
+  to{
+    transform:rotate(360deg);
+  }
+
 }
 
 
@@ -1070,8 +1102,8 @@ footer{
 
       <h2>Resource library</h2>
 
-      <p>
-        Choose a topic or browse everything.
+      <p id="resourceCount">
+        Loading resources...
       </p>
 
     </div>
@@ -1152,7 +1184,7 @@ footer{
        FULL PACK
   ========================= -->
 
-  <section class="full-pack">
+  <section class="full-pack" id="fullPack">
 
     <div class="full-pack-content">
 
@@ -1160,11 +1192,11 @@ footer{
         BEST VALUE
       </span>
 
-      <h2>
+      <h2 id="fullPackName">
         Complete IGCSE Chemistry Pack
       </h2>
 
-      <p>
+      <p id="fullPackDescription">
         Get the complete collection of IGCSE Chemistry
         notes, worksheets, revision resources and study
         materials together in one package.
@@ -1173,6 +1205,7 @@ footer{
       <a
         href="resource.html?resource=full-pack"
         class="pack-btn"
+        id="fullPackLink"
       >
         View Full Pack →
       </a>
@@ -1182,7 +1215,7 @@ footer{
 
     <div class="full-pack-price">
 
-      <strong>
+      <strong id="fullPackPrice">
         $25.00
       </strong>
 
@@ -1202,581 +1235,25 @@ footer{
 
   <div class="resource-grid" id="resourceGrid">
 
+    <div class="loading-state">
 
-    <!-- ATOMIC NOTES -->
+      <div class="atom loading-atom">
 
-    <article
-      class="resource-card"
-      data-category="atomic"
-      data-name="atomic structure notes"
-    >
+        <div class="nucleus"></div>
 
-      <div class="resource-visual">
+        <div class="orbit one"></div>
+        <div class="orbit two"></div>
+        <div class="orbit"></div>
 
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
+        <div class="electron e1"></div>
+        <div class="electron e2"></div>
+        <div class="electron e3"></div>
 
       </div>
 
+      Loading resources...
 
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          ATOMIC STRUCTURE
-        </span>
-
-        <h3>
-          Atomic Structure Notes
-        </h3>
-
-        <p>
-          Clear notes covering protons, neutrons, electrons,
-          isotopes, electron configuration and atomic structure.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $2.00 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=atomic-notes"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- ATOMIC WORKSHEET -->
-
-    <article
-      class="resource-card"
-      data-category="atomic"
-      data-name="atomic structure worksheet"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          WORKSHEET
-        </span>
-
-        <h3>
-          Atomic Structure Worksheet
-        </h3>
-
-        <p>
-          Practice questions covering atomic structure,
-          isotopes and electron arrangement.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $1.50 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=atomic-worksheet"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- BONDING -->
-
-    <article
-      class="resource-card"
-      data-category="bonding"
-      data-name="chemical bonding notes"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          BONDING
-        </span>
-
-        <h3>
-          Chemical Bonding Notes
-        </h3>
-
-        <p>
-          Understand ionic, covalent and metallic bonding
-          with clear explanations and diagrams.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $2.50 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=bonding-notes"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- BONDING WORKSHEET -->
-
-    <article
-      class="resource-card"
-      data-category="bonding"
-      data-name="chemical bonding worksheet"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          WORKSHEET
-        </span>
-
-        <h3>
-          Chemical Bonding Worksheet
-        </h3>
-
-        <p>
-          Practice ionic, covalent and metallic bonding
-          questions with exam-style exercises.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $1.75 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=bonding-worksheet"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- ORGANIC -->
-
-    <article
-      class="resource-card"
-      data-category="organic"
-      data-name="organic chemistry notes"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          ORGANIC
-        </span>
-
-        <h3>
-          Organic Chemistry Notes
-        </h3>
-
-        <p>
-          Study hydrocarbons, homologous series,
-          functional groups and important reactions.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $3.00 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=organic-notes"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- ORGANIC WORKSHEET -->
-
-    <article
-      class="resource-card"
-      data-category="organic"
-      data-name="organic chemistry worksheet"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          WORKSHEET
-        </span>
-
-        <h3>
-          Organic Chemistry Worksheet
-        </h3>
-
-        <p>
-          Practice organic chemistry questions covering
-          structures, reactions and hydrocarbons.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $2.00 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=organic-worksheet"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- CALCULATIONS -->
-
-    <article
-      class="resource-card"
-      data-category="calculations"
-      data-name="chemistry calculations guide"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          CALCULATIONS
-        </span>
-
-        <h3>
-          Chemistry Calculations Guide
-        </h3>
-
-        <p>
-          Moles, equations, formula calculations,
-          concentration and important chemistry maths.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $3.50 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=calculations"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- EXAM GUIDE -->
-
-    <article
-      class="resource-card"
-      data-category="other"
-      data-name="chemistry exam study guide"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          STUDY GUIDE
-        </span>
-
-        <h3>
-          Chemistry Exam Study Guide
-        </h3>
-
-        <p>
-          A compact revision guide covering important
-          concepts, formulas and exam preparation tips.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $4.00 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=exam-guide"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
-
-
-    <!-- REVISION PACK -->
-
-    <article
-      class="resource-card"
-      data-category="other"
-      data-name="chemistry revision pack"
-    >
-
-      <div class="resource-visual">
-
-        <div class="atom card-atom">
-
-          <div class="nucleus"></div>
-
-          <div class="orbit one"></div>
-          <div class="orbit two"></div>
-          <div class="orbit"></div>
-
-          <div class="electron e1"></div>
-          <div class="electron e2"></div>
-          <div class="electron e3"></div>
-
-        </div>
-
-      </div>
-
-
-      <div class="resource-body">
-
-        <span class="resource-tag">
-          REVISION
-        </span>
-
-        <h3>
-          Chemistry Revision Pack
-        </h3>
-
-        <p>
-          A collection of revision material designed for
-          focused preparation before chemistry exams.
-        </p>
-
-
-        <div class="resource-footer">
-
-          <div class="price">
-            $6.00 <small>USD</small>
-          </div>
-
-          <a
-            href="resource.html?resource=revision-pack"
-            class="view-resource"
-          >
-            View →
-          </a>
-
-        </div>
-
-      </div>
-
-    </article>
-
+    </div>
 
   </div>
 
@@ -1817,28 +1294,519 @@ footer{
 <script>
 
 /*
-=========================================
-CATEGORY + SEARCH FILTER
-=========================================
+==================================================
+SHARED RESOURCE CATALOG
+==================================================
+
+The Admin Dashboard stores resources here:
+
+localStorage key:
+chemistryResources
+
+This shop reads the exact same catalog.
+
+Therefore:
+
+Admin price change
+       ↓
+chemistryResources
+       ↓
+Shop automatically updates
+
+==================================================
 */
 
-const filterButtons =
-  document.querySelectorAll(".filter-btn");
+const STORAGE_KEY = "chemistryResources";
 
-const resourceCards =
-  document.querySelectorAll(".resource-card");
 
-const searchInput =
-  document.getElementById("searchInput");
+/*
+==================================================
+CATEGORY LABELS
+==================================================
+*/
 
-const emptyState =
-  document.getElementById("emptyState");
+const categoryLabels = {
 
+  atomic: "Atomic Structure",
+
+  bonding: "Chemical Bonding",
+
+  organic: "Organic Chemistry",
+
+  calculations: "Calculations",
+
+  other: "Other Topics"
+
+};
+
+
+/*
+==================================================
+FALLBACK CATALOG
+==================================================
+
+Used only if admin.html has never been opened
+and the browser does not yet have chemistryResources.
+==================================================
+*/
+
+const fallbackResources = [
+
+  {
+    id:"atomic-notes",
+    name:"Atomic Structure Notes",
+    category:"atomic",
+    price:2.00,
+    tag:"ATOMIC STRUCTURE",
+    type:"Study Notes",
+    icon:"⚛️",
+    description:
+      "Clear notes covering protons, neutrons, electrons, isotopes, electron configuration and atomic structure."
+  },
+
+  {
+    id:"atomic-worksheet",
+    name:"Atomic Structure Worksheet",
+    category:"atomic",
+    price:1.50,
+    tag:"WORKSHEET",
+    type:"Worksheet",
+    icon:"📝",
+    description:
+      "Practice questions covering atomic structure, isotopes and electron arrangement."
+  },
+
+  {
+    id:"bonding-notes",
+    name:"Chemical Bonding Notes",
+    category:"bonding",
+    price:2.50,
+    tag:"BONDING",
+    type:"Study Notes",
+    icon:"🔗",
+    description:
+      "Understand ionic, covalent and metallic bonding with clear explanations and diagrams."
+  },
+
+  {
+    id:"bonding-worksheet",
+    name:"Chemical Bonding Worksheet",
+    category:"bonding",
+    price:1.75,
+    tag:"WORKSHEET",
+    type:"Worksheet",
+    icon:"📝",
+    description:
+      "Practice ionic, covalent and metallic bonding questions with exam-style exercises."
+  },
+
+  {
+    id:"organic-notes",
+    name:"Organic Chemistry Notes",
+    category:"organic",
+    price:3.00,
+    tag:"ORGANIC",
+    type:"Study Notes",
+    icon:"🧪",
+    description:
+      "Study hydrocarbons, homologous series, functional groups and important reactions."
+  },
+
+  {
+    id:"organic-worksheet",
+    name:"Organic Chemistry Worksheet",
+    category:"organic",
+    price:2.00,
+    tag:"WORKSHEET",
+    type:"Worksheet",
+    icon:"📝",
+    description:
+      "Practice organic chemistry questions covering structures, reactions and hydrocarbons."
+  },
+
+  {
+    id:"calculations",
+    name:"Chemistry Calculations Guide",
+    category:"calculations",
+    price:3.50,
+    tag:"CALCULATIONS",
+    type:"Study Guide",
+    icon:"📊",
+    description:
+      "Moles, equations, formula calculations, concentration and important chemistry maths."
+  },
+
+  {
+    id:"exam-guide",
+    name:"Chemistry Exam Study Guide",
+    category:"other",
+    price:4.00,
+    tag:"STUDY GUIDE",
+    type:"Study Guide",
+    icon:"📚",
+    description:
+      "A compact revision guide covering important concepts, formulas and exam preparation tips."
+  },
+
+  {
+    id:"revision-pack",
+    name:"Chemistry Revision Pack",
+    category:"other",
+    price:6.00,
+    tag:"REVISION",
+    type:"Resource Pack",
+    icon:"📖",
+    description:
+      "A collection of revision material designed for focused preparation before chemistry exams."
+  },
+
+  {
+    id:"full-pack",
+    name:"Complete IGCSE Chemistry Full Pack",
+    category:"other",
+    price:25.00,
+    tag:"FULL PACK",
+    type:"Complete Pack",
+    icon:"🎓",
+    description:
+      "The complete IGCSE Chemistry resource collection in one affordable pack."
+  }
+
+];
+
+
+/*
+==================================================
+GET RESOURCES
+==================================================
+*/
+
+function getResources(){
+
+  const saved =
+    localStorage.getItem(STORAGE_KEY);
+
+
+  if(!saved){
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(fallbackResources)
+    );
+
+    return [...fallbackResources];
+
+  }
+
+
+  try{
+
+    const resources =
+      JSON.parse(saved);
+
+
+    if(Array.isArray(resources)){
+
+      return resources;
+
+    }
+
+  }catch(error){
+
+    console.error(
+      "Could not read chemistryResources:",
+      error
+    );
+
+  }
+
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(fallbackResources)
+  );
+
+
+  return [...fallbackResources];
+
+}
+
+
+/*
+==================================================
+HTML ESCAPE
+==================================================
+*/
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/*
+==================================================
+CREATE RESOURCE CARD
+==================================================
+*/
+
+function createResourceCard(resource){
+
+  const category =
+    resource.category || "other";
+
+
+  const categoryName =
+    categoryLabels[category] ||
+    "Other Topics";
+
+
+  const tag =
+    resource.tag ||
+    categoryName;
+
+
+  const icon =
+    resource.icon ||
+    "🧪";
+
+
+  const description =
+    resource.description ||
+    "IGCSE Chemistry learning resource.";
+
+
+  const price =
+    Number(resource.price) || 0;
+
+
+  return `
+
+    <article
+      class="resource-card"
+      data-category="${escapeHtml(category)}"
+      data-name="${escapeHtml(
+        `${resource.name} ${categoryName} ${tag} ${description}`
+          .toLowerCase()
+      )}"
+    >
+
+
+      <div class="resource-visual">
+
+        <div class="atom card-atom">
+
+          <div class="nucleus"></div>
+
+          <div class="orbit one"></div>
+          <div class="orbit two"></div>
+          <div class="orbit"></div>
+
+          <div class="electron e1"></div>
+          <div class="electron e2"></div>
+          <div class="electron e3"></div>
+
+        </div>
+
+      </div>
+
+
+      <div class="resource-body">
+
+        <span class="resource-tag">
+          ${escapeHtml(tag)}
+        </span>
+
+        <h3>
+          ${escapeHtml(resource.name)}
+        </h3>
+
+        <p>
+          ${escapeHtml(description)}
+        </p>
+
+
+        <div class="resource-footer">
+
+          <div class="price">
+            $${price.toFixed(2)}
+            <small>USD</small>
+          </div>
+
+          <a
+            href="resource.html?resource=${encodeURIComponent(resource.id)}"
+            class="view-resource"
+          >
+            View →
+          </a>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/*
+==================================================
+FULL PACK
+==================================================
+*/
+
+function renderFullPack(resources){
+
+  const fullPack =
+    resources.find(
+      resource => resource.id === "full-pack"
+    );
+
+
+  const fullPackSection =
+    document.getElementById("fullPack");
+
+
+  if(!fullPack){
+
+    fullPackSection.style.display = "none";
+
+    return;
+
+  }
+
+
+  fullPackSection.style.display = "";
+
+
+  document.getElementById("fullPackName")
+    .textContent =
+      fullPack.name ||
+      "Complete IGCSE Chemistry Full Pack";
+
+
+  document.getElementById("fullPackDescription")
+    .textContent =
+      fullPack.description ||
+      "The complete IGCSE Chemistry resource collection.";
+
+
+  document.getElementById("fullPackPrice")
+    .textContent =
+      `$${(Number(fullPack.price) || 0).toFixed(2)}`;
+
+
+  document.getElementById("fullPackLink")
+    .href =
+      `resource.html?resource=${encodeURIComponent(fullPack.id)}`;
+
+}
+
+
+/*
+==================================================
+RENDER RESOURCES
+==================================================
+*/
+
+function renderResources(){
+
+  const grid =
+    document.getElementById("resourceGrid");
+
+
+  const resources =
+    getResources();
+
+
+  renderFullPack(resources);
+
+
+  const normalResources =
+    resources.filter(
+      resource => resource.id !== "full-pack"
+    );
+
+
+  if(normalResources.length === 0){
+
+    grid.innerHTML = `
+      <div class="loading-state">
+        No resources have been added yet.
+      </div>
+    `;
+
+    updateResourceCount(0);
+
+    return;
+
+  }
+
+
+  grid.innerHTML =
+    normalResources
+      .map(createResourceCard)
+      .join("");
+
+
+  updateResourceCount(
+    normalResources.length
+  );
+
+
+  renderProducts();
+
+}
+
+
+/*
+==================================================
+RESOURCE COUNT
+==================================================
+*/
+
+function updateResourceCount(count){
+
+  const element =
+    document.getElementById("resourceCount");
+
+
+  element.textContent =
+    `${count} resource${count === 1 ? "" : "s"} available`;
+
+}
+
+
+/*
+==================================================
+FILTER + SEARCH
+==================================================
+*/
 
 let selectedCategory = "all";
 
 
 function renderProducts(){
+
+  const cards =
+    document.querySelectorAll(".resource-card");
+
+
+  const searchInput =
+    document.getElementById("searchInput");
+
+
+  const emptyState =
+    document.getElementById("emptyState");
+
 
   const search =
     searchInput.value
@@ -1849,12 +1817,13 @@ function renderProducts(){
   let visibleCount = 0;
 
 
-  resourceCards.forEach(card => {
+  cards.forEach(card => {
 
     const category =
       card.dataset.category;
 
-    const name =
+
+    const searchableText =
       card.dataset.name || "";
 
 
@@ -1865,18 +1834,18 @@ function renderProducts(){
 
     const searchMatch =
       !search ||
-      name.includes(search);
+      searchableText.includes(search);
 
 
     if(categoryMatch && searchMatch){
 
-      card.classList.remove("hidden");
+      card.style.display = "";
 
       visibleCount++;
 
     }else{
 
-      card.classList.add("hidden");
+      card.style.display = "none";
 
     }
 
@@ -1897,55 +1866,64 @@ function renderProducts(){
 
 
 /*
-=========================================
-CATEGORY BUTTONS
-=========================================
+==================================================
+FILTER BUTTONS
+==================================================
 */
+
+const filterButtons =
+  document.querySelectorAll(".filter-btn");
+
 
 filterButtons.forEach(button => {
 
-  button.addEventListener("click", () => {
+  button.addEventListener(
+    "click",
+    () => {
 
-    filterButtons.forEach(btn => {
+      filterButtons.forEach(btn => {
 
-      btn.classList.remove("active");
+        btn.classList.remove("active");
 
-    });
-
-
-    button.classList.add("active");
-
-
-    selectedCategory =
-      button.dataset.category;
+      });
 
 
-    renderProducts();
+      button.classList.add("active");
 
-  });
+
+      selectedCategory =
+        button.dataset.category;
+
+
+      renderProducts();
+
+    }
+  );
 
 });
 
 
 /*
-=========================================
+==================================================
 SEARCH
-=========================================
+==================================================
 */
 
-searchInput.addEventListener(
-  "input",
-  renderProducts
-);
+document
+  .getElementById("searchInput")
+  .addEventListener(
+    "input",
+    renderProducts
+  );
 
 
 /*
-=========================================
+==================================================
 CATEGORY FROM URL
-=========================================
+==================================================
 */
 
-(function(){
+function applyUrlCategory(){
 
   const params =
     new URLSearchParams(
@@ -1959,30 +1937,64 @@ CATEGORY FROM URL
 
   if(!category){
 
-    renderProducts();
-
     return;
 
   }
 
 
-  const categoryButton =
+  const button =
     document.querySelector(
-      `[data-category="${category}"]`
+      `[data-category="${CSS.escape(category)}"]`
     );
 
 
-  if(categoryButton){
+  if(button){
 
-    categoryButton.click();
-
-  }else{
-
-    renderProducts();
+    button.click();
 
   }
 
-})();
+}
+
+
+/*
+==================================================
+UPDATE WHEN ADMIN CHANGES CATALOG
+==================================================
+*/
+
+window.addEventListener(
+  "storage",
+  event => {
+
+    if(
+      event.key === STORAGE_KEY
+    ){
+
+      renderResources();
+
+    }
+
+  }
+);
+
+
+/*
+==================================================
+INITIALIZE
+==================================================
+*/
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    renderResources();
+
+    applyUrlCategory();
+
+  }
+);
 
 </script>
 
